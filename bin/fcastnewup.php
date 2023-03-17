@@ -23,10 +23,9 @@
 		$suppcode 		= substr($line,12,5);
 		$subsuppcode	= substr($line,17,11);
 		$subsuppname	= substr($line,28,40);
-		$partno         = substr($line,68,15); 
-                $pname          = substr($line,83,15);
-                $partname       = str_replace("'","",$pname);
-		$leadtime       = substr($line,98,8);
+		$partno       = substr($line,68,15);
+		$partname     = substr($line,83,15);
+		$leadtime     = substr($line,98,8);
 		$dqty1       	= substr($line,106,9);
 		$dqty2       	= substr($line,115,9);
 		$dqty3       	= substr($line,124,9);

@@ -8,9 +8,6 @@
 	//	delete data
 	$rs = $db->Execute("delete from bpstemp;");
 	$rs->Close();	
-echo 'test';
-
-        echo '<br />Big Part temp dihapus...';
 	
 	//	read text file
 	$fh = fopen('/var/www/html/uploads/pbh01web.txt','r');
@@ -21,8 +18,7 @@ echo 'test';
 		$tm 		= substr($line,12,2);
 		$suppcode	= substr($line,14,8);
 		$partno		= substr($line,22,15);
-		$pname	        = substr($line,37,15);
-                $partname       = str_replace("'","",$pname);
+		$partname	= substr($line,37,15);
 		$balqty		= substr($line,52,9);
 		$qty1       = substr($line,61,9);
 		$qty2       = substr($line,70,9);
@@ -55,22 +51,27 @@ echo 'test';
 		$qty29    	= substr($line,313,9);
 		$qty30    	= substr($line,322,9);
 		$qty31    	= substr($line,331,9);
-		$scold          = substr($line,340,9);
+		$scold      = substr($line,340,9);
 		$scnew    	= substr($line,349,12);
 		
 		//	insert to temp tabel
-		
-		$rstemp = $db->Execute("insert into bpstemp(transdate, hd, tm, suppcode, partno, partname, balqty,qty1,qty2,qty3,qty4,qty5,qty6,qty7,qty8,qty9,qty10,qty11, qty12, qty13, qty14, qty15, qty16, qty17, qty18, qty19, qty20,qty21, qty22, qty23, qty24, qty25, qty26, qty27, qty28, qty29, qty30,qty31, scold, scnew) select '{$transdate}', '{$hd}', '{$tm}', '{$suppcode}', '{$partno}', '{$partname}', '{$balqty}','{$qty1}', '{$qty2}', '{$qty3}', '{$qty4}', '{$qty5}', '{$qty6}', '{$qty7}', '{$qty8}', '{$qty9}', '{$qty10}','{$qty11}', '{$qty12}', '{$qty13}', '{$qty14}', '{$qty15}', '{$qty16}', '{$qty17}', '{$qty18}', '{$qty19}', '{$qty20}','{$qty21}', '{$qty22}', '{$qty23}', '{$qty24}', '{$qty25}', '{$qty26}', '{$qty27}', '{$qty28}', '{$qty29}', '{$qty30}','{$qty31}','{$scold}','{$scnew}';");
-
-$rstemp->Close();
+		$rs = $db->Execute("insert into bpstemp(transdate, hd, tm, suppcode, partno, partname, balqty, 	qty1, qty2, qty3, qty4, qty5, qty6, qty7, qty8, qty9, qty10, 
+																										qty11, qty12, qty13, qty14, qty15, qty16, qty17, qty18, qty19, qty20,
+																										qty21, qty22, qty23, qty24, qty25, qty26, qty27, qty28, qty29, qty30,
+																										qty31, scold, scnew)
+							select '{$transdate}', '{$hd}', '{$tm}', '{$suppcode}', '{$partno}', '{$partname}', '{$balqty}',	'{$qty1}', '{$qty2}', '{$qty3}', '{$qty4}', '{$qty5}', '{$qty6}', '{$qty7}', '{$qty8}', '{$qty9}', '{$qty10}',
+																																'{$qty11}', '{$qty12}', '{$qty13}', '{$qty14}', '{$qty15}', '{$qty16}', '{$qty17}', '{$qty18}', '{$qty19}', '{$qty20}',
+																																'{$qty21}', '{$qty22}', '{$qty23}', '{$qty24}', '{$qty25}', '{$qty26}', '{$qty27}', '{$qty28}', '{$qty29}', '{$qty30}',
+																																'{$qty31}', '{$scold}', '{$scnew}';");
+		$rs->Close();
 	}
 	fclose($fh);
-	echo '<br/>sudah insert bpstemp...';
+	
 	// Check bps is updated
     $rscek = $db->Execute("Select transdate,qty1 from bpstemp where hd='H' and tm='H' limit 1;");
 	$transdate = substr($rscek->fields[0],0,10);
 	$bpstglbln = $rscek->fields[1];
-	echo '<br />transdate : ' . $transdate;
+	echo 'transdate : ' . $transdate;
 	echo '<br />';
 	$bpstgl = substr($bpstglbln,0,2);
 	$bpsbln = substr($bpstglbln,3,2);
@@ -81,13 +82,9 @@ $rstemp->Close();
     $rscek->Close();
     
     // insert into tdsdate to prevent double insert into tds;
-
-
-$rsdate = $db->Execute("insert into bpsdate(bpsdate,transdate) values('{$bpsdate}','{$transdate}');");
-$rsdate->Close();
+$rs = $db->Execute("insert into bpsdate(bpsdate,transdate) values('{$bpsdate}','{$transdate}');");
+$rs->Close();
 // continue insert into tds whenever no error;
-
-
 $rs = $db->Execute("insert into bps(transdate,hd,tm,suppcode,partno,partname,balqty, 
   qty1,qty2,qty3,qty4,qty5,qty6,qty7,qty8,qty9,qty10,qty11,qty12,qty13,qty14,qty15,qty16,
   qty17,qty18,qty19,qty20,qty21,qty22,qty23,qty24,qty25,qty26,qty27,qty28,qty29,qty30,
@@ -100,6 +97,5 @@ echo '<br />';
 echo 'Insert bps from pbh01web.txt success<br />';
 	
 	//	connection close
-
 	$db->Close();
 ?>

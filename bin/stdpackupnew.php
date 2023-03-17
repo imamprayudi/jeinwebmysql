@@ -21,8 +21,7 @@
 		set_time_limit(0);
 		$suppcode 		= trim(substr($line,0,7));
 		$partnumber 	= trim(substr($line,8,20));
-		$pname 		= trim(substr($line,29,30));
-                $partname       = str_replace("'","",$pname);
+		$partname 		= trim(substr($line,29,30));
 		$stdpack 		= trim(substr($line,60,10));
 		$kategori 		= trim(substr($line,71,15));
 		$replikasi 		= trim(substr($line,87,14));

@@ -20,8 +20,7 @@
                 // set_time_limit(0);
 		$suppcode 		= trim($i['0']);
 		$partnumber 	= trim($i['1']);
-		$pname 		= trim($i['2']);
-                $partname       = str_replace("'","",$pname);
+		$partname 		= trim($i['2']);
 		$stdpack 		= trim($i['3']);
 		$kategori 		= trim($i['4']);
 		$replikasi 		= trim($i['5']);

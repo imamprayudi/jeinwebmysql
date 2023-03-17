@@ -22,8 +22,7 @@
     $actioncode = substr($line,97,10);
     $pono = substr($line,110,15);
     $partno = substr($line,128,20);
-    $pname = substr($line,151,20);
-    $partname = str_replace("'","",$pname);
+    $partname = substr($line,151,20);
     $newqty = substr($line,173,10);
     $newdate = substr($line,185,10);
     $price = substr($line,221,10);

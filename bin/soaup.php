@@ -47,8 +47,7 @@
       $posq = substr($line,46,2);
       $invoice = substr($line,48,15);
       $partno = substr($line,63,15);
-      $pname = substr($line,78,20);
-      $partname = str_replace("'","",$pname);
+      $partname = substr($line,78,20);
       $qty = substr($line,98,8);
       $price = substr($line,106,10);
       $amount = substr($line,116,15);
