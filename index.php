@@ -32,7 +32,7 @@ $(document).ready(function()
 
 <div class="kaki">
   <br /><br /><br /><br />
-  <h2>PT JVC ELECTRONICS INDONESIA<br /></h2>
+  <h2>PT JVCKENWOOD ELECTRONICS INDONESIA<br /></h2>
   <h3>JL.Surya Lestari Kav.I-16B Suryacipta City of Industry Desa Kutamekar Kecamatan Ciampel Kabupaten Karawang Jawa Barat 41363, INDONESIA.</h3>
 </div>
 </body>

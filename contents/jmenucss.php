@@ -4,7 +4,6 @@
    <li><a href='#'><span>Orders</span></a>
       <ul>
          <li><a href='jforecast.php'><span>Forecast</span></a></li>
-		 <li><a href='jforecastarc.php'><span>Forecast Archived</span></a></li>
          <li><a href='jpo.php'><span>Purchase Order</span></a></li>
          <li><a href='jpoc.php'><span>Purchase Order Change</span></a></li>
          <li><a href='jordbal.php'><span>Order Balance</span></a></li>
@@ -23,7 +22,6 @@
          <li><a href='jmatiss.php'><span>Issued Detail</span></a></li>
       </ul>
    </li>
-
    <li><a href='#'><span>Statement of Account</span></a>
       <ul>
          <li><a href='jsoa.php'><span>Detail</span></a></li>
@@ -31,16 +29,13 @@
          <li><a href='jsoaend.php'><span>End</span></a></li>
       </ul>
    </li>
-
-   <li><a href='#'><span>Delivery</span></a>
+    <li><a href='#'><span>Delivery</span></a>
       <ul>
          <li><a href='jverify.php'><span>Delivery Instruction</span></a></li>
          <li><a href='../suppqr/stdsupp.php'><span>Std Packing Maintenance</span></a></li>
          <li><a href='../suppqr/jmnl_barcode.php'><span>Print Barcode Label</span></a></li>
       </ul>
-   </li>
-
-
+    </li>
    <li><a href='jdestroy.php'><span>Logout</span></a></li>
 </ul>
 </div>

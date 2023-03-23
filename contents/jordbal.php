@@ -44,7 +44,7 @@ $rs = $db->Execute("select * from usersupp where UserId = '" . $myid . "' order 
 include("jmenucss.php");
 echo '<br />';
 echo '<img src="../assets/gambar/jvc.gif" alt="JVC KENWOOD CORPORATION" style="float:left;width:220px;height:35px;">';
-echo 'PT.JVC ELECTRONICS INDONESIA ';
+echo 'PT.JVCKENWOOD ELECTRONICS INDONESIA ';
 echo '<br />';
 echo 'ORDER BALANCE';
 echo '<br /><br />';

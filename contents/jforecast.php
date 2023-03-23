@@ -41,14 +41,10 @@ function setText()
   document.getElementById("sfcl").innerHTML = '<div><p><br /><br />Loading....<img src="../assets/gambar/loading.gif" alt="Loading" height="25" width="25" align="middle" /></p></div>'; 
   ShowForecast(strsupp,strtipe);
 }
-
 </script>
 </head>
 <body>
-
-
 <?php
-
 session_start();
 if(isset($_SESSION['usr']))
   {
@@ -63,7 +59,6 @@ if(isset($_SESSION['usr']))
    window.location.href = '../index.php';
 </script>
    <?php  
- 
   }
 
 include("koneksimysql.php");
@@ -71,18 +66,16 @@ $rs = $db->Execute("select * from usersupp where UserId = '" . $myid . "' order 
 include("jmenucss.php");
 echo '<br />';
 echo '<img src="../assets/gambar/jvc.gif" alt="JVC KENWOOD CORPORATION" style="float:left;width:220px;height:35px;">';
-echo 'PT.JVC ELECTRONICS INDONESIA ';
+echo 'PT.JVCKENWOOD ELECTRONICS INDONESIA ';
 echo '<br />';
 echo 'PART PURCHASE LONG FORECAST';
 echo '<br /><br />';
 echo '<form action="">';
 echo 'Supplier : &nbsp;&nbsp;';
 echo '<select name="supp" id="idsupp">';
-
 while (!$rs->EOF) {
   echo '<option value="' . $rs->fields[1] . '">' . $rs->fields[2] . ' - ' . $rs->fields[1] . '</option>';
   $rs->MoveNext();
-
 }
 echo '</select>';
 echo '&nbsp;&nbsp;';
@@ -100,6 +93,5 @@ $db->Close();
 <div id="fdata">
 </div><div id="sfcl">
 </div>
-
 </body>
 </html>

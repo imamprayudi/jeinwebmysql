@@ -17,7 +17,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title> JEIN - Barcode Receiving Online </title>
+		<title> JKEI - Barcode Receiving Online </title>
 		<link rel="shortcut icon" href= "icons/receiving.ico"/>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,7 +31,7 @@
 						<td valign="bottom"> <img class="logo" src="img/jvc-logo.png"> </td>
 						<td valign="bottom">
 							<div class="description">
-								<p> PT. JVC ELECTRONICS INDONESIA </p>
+								<p> PT. JVCKENWOOD ELECTRONICS INDONESIA </p>
 								<p> JL.SURYA LESTARI KAV.I-16B </p>
 								<p> KOTA INDUSTRI SURYA CIPTA, </p>
 								<p> TELUK JAMBE KARAWANG, </p>

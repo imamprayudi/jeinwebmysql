@@ -35,7 +35,7 @@ include("jmenusuppcss.php");
 echo '<div id="section">';
 echo '<br />';
 echo '<img src="../assets/gambar/jvc.gif" alt="JVC KENWOOD CORPORATION" style="float:left;width:220px;height:35px;">';
-echo 'PT.JVC ELECTRONICS INDONESIA ';
+echo 'PT.JVCKENWOOD ELECTRONICS INDONESIA ';
 echo '<br />';
 echo 'PRINT BARCODE LABEL';
 echo '<br /><br />';
