@@ -18,6 +18,7 @@
     */
     /* koneksi ke mysql */
     $db = ADONewConnection("mysql");
-	$db->Connect('localhost', 'root', 'Git@1410', 'ediweb');
+	// $db->Connect('localhost', 'root', 'Git@1410', 'ediweb');
+	$db->Connect('10.230.30.125', 'sa', 'JvcSql@123', 'ediweb');
     
 ?>
