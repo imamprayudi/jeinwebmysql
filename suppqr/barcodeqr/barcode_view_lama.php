@@ -14,7 +14,7 @@
 </table>
 <br><br>
 <?php
-	include 'koneksimysql.php';
+	include '../con_svrdbn.php';
 	date_default_timezone_set('Asia/Jakarta');
 
 	if(isset($_GET['partno']))

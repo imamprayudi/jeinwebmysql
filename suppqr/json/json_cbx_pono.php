@@ -1,7 +1,5 @@
 <?php
-	include('koneksimysql.php');
-	
-	
+	include('../connection_odbc_mssql.php');
 	
 	$suppcode	= isset($_REQUEST['suppcode']) ? trim( str_replace("'", "#", $_REQUEST['suppcode']) ) : "";
 	$partnumber	= isset($_REQUEST['partno']) ? trim( str_replace("'", "#", $_REQUEST['partno']) ) : "";

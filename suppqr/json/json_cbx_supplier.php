@@ -1,12 +1,11 @@
 <?php
-	include('koneksimysql.php');
+	include('../connection_odbc_mssql.php');
 	
 	
 	
-	 $supp	= isset($_REQUEST['supp']) ? trim( str_replace("'", "#", $_REQUEST['supp']) ) : "xx";
+	$supp	= isset($_REQUEST['supp']) ? trim( str_replace("'", "#", $_REQUEST['supp']) ) : "xx";
 	
-	$rs 	= $db->Execute("select suppcode, suppname from supplier where suppcode = '" . $supp . "' order by suppname");
-  // $rs 	= $db->Execute("select suppcode, suppname from supplier order by suppname");
+	$rs 	= $db->Execute("select suppcode, suppname from supplier where suppcode = $supp order by suppname");
 	$return = array();
 
 	for ($i = 0; !$rs->EOF; $i++) {

@@ -11,15 +11,21 @@ else
 }
 
 $supp = $_GET['sid'];
-$suppcode = $supp / 14102703 ;
+$suppcode = intval($supp) / 14102703 ;
 $tgl  = $_GET['tglid'];
 
-include('koneksimysql.php');
+include('koneksi.php');
 
-// ----- remarks for mssql -----
-// $sql = "select idno,convert(varchar(10),rdate,23) as rdate,pono,partno,partname,newqty,convert(varchar(10),newdate,23) as newdate, price, model, potype from mailpo where (supplier = '" . $suppcode . "') and (rdate='" . $tgl ."')";
-// -----------------------------
-$sql = "select idno,rdate,pono,partno,partname,newqty,newdate, price, model, potype from mailpo where (supplier = '" . $suppcode . "') and (rdate='" . $tgl ."')";
+/* ----- remarks for mssql ----- */ 
+$sql = "select idno,convert(varchar(10),rdate,23) as rdate,pono,partno,
+  partname,newqty,convert(varchar(10),newdate,23) as newdate, str(price,10,5), model, 
+  potype from mailpo where (supplier = '" . $suppcode . "') and (rdate='" . $tgl ."')";
+
+/* ----- remarks for mysql
+$sql = "select idno,rdate,pono,partno,partname,newqty,newdate, price, model, 
+  potype from mailpo where (supplier = '" . $suppcode . "') and (rdate='" . $tgl ."')";
+*/
+
 $rs 		= $db->Execute($sql);
 $fname = "po" . $suppcode . ".csv";
 header("Content-type: text/csv");

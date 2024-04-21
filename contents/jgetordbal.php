@@ -1,28 +1,7 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<title>Order Balance</title>
-<link href="../assets/css/jein.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-<?php
-session_start();
-if(isset($_SESSION['usr']))
-{
-  $myid = $_SESSION["usr"];
-}  
-else
-{
-  echo "session time out";
-  ?> 
-  <script> 
-    window.location.href = '../index.php';
-  </script>
   <?php  
-}
 
-include("koneksimysql.php");
-echo '<div class="datagrid">';
+include("koneksi.php");
+
 if ($_POST)
 {
   $supp = $_POST['suppid'];
@@ -50,20 +29,27 @@ if ($_POST)
 	
 }
  
-$rs = $db->Execute("select * from ordbal where suppcode = '" . $supp . "' order by " . $orderby);
+$rs = $db->Execute("select transdate,suppcode,partnumber,partname,orderqty,reqdate,ponumber,
+  posq,orderbalance,supprest,model,issuedate,potype,statuspart,remark,statusread 
+  from ordbal where suppcode = '" . $supp . "' order by " . $orderby);
 $ada = $rs->RecordCount();
-if ($ada == 0)
-{
-  echo '<br />Data Nothing ....';
+if ($ada == 0) {
+  // echo 'Data Nothing ....';
+  ?>
+    <div class="mt-4 container col-12 text-center text-danger">
+      <h2>Data Nothing ....</h2>
+    </div>
+  <?php
+  die();
 }
-else
-{	
-  $supp = $supp * 14102703 ;
-  echo '&nbsp;&nbsp;&nbsp;';
-  echo '<a target="_blank" href="jordbaldl.php?sid=' . $supp . '">DOWNLOAD DATA TO CSV FORMAT</a>';
-  echo '<br /><br />';
-  echo '<table id="tblfcl">';
-  echo '<tr>';
+  $supp = intval($supp) * 14102703 ;
+  // echo '&nbsp;&nbsp;&nbsp;';
+  echo '<div class="mt-2">';
+  echo '<a target="_blank" class="btn btn-info text-center mb-2" href="jordbaldl.php?sid=' . $supp . '">DOWNLOAD DATA TO CSV FORMAT</a>';
+
+  echo '<table id="tblfcl" class="table table-responsive table-bordered table-striped  font-monospace">';
+  // echo '<tr>';
+  echo "<thead class='table-primary'>";
   echo '<th>NO</th>';
   echo '<th>PART NUMBER</th>';
   echo '<th>PART NAME</th>';
@@ -76,8 +62,10 @@ else
   echo '<th>MODEL</th>';
   echo '<th>ISSUE <br />DATE</th>';
   echo '<th>PO <br />TYPE</th>';
-	echo '</tr>';
+	// echo '</tr>';
+	echo '</thead>';
   $nomor = 0;
+  echo "<tbody>";
   while (!$rs->EOF)
   {
     $nomor++; 
@@ -99,8 +87,9 @@ else
 		echo '</tr>';
 	  $rs->MoveNext();
   }
-	echo '</table>';
-}
+  echo "</tbody>";
+  echo '</table>';
+
 ?>
 </div>
 </body>

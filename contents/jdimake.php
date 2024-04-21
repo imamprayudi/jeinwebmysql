@@ -60,8 +60,9 @@ if ($suppdec == 'J1')
 	  {
 	    $proses = 0;
 	    echo "<br>data sequence sebelumnya tdk ada....<br>"; 
-	    header("Location:jdimaketgl.php?p=Data Delivery Instruction untuk sequence sebelumnya belum ada !!!...");
-	  }
+	    // header("Location:jdimaketgl.php?p=Data Delivery Instruction untuk sequence sebelumnya belum ada !!!...");
+      echo "<script>window.location = 'jdimaketgl.php?p=Data Delivery Instruction untuk sequence sebelumnya belum ada !!!...'</script>";
+    }
 	  else
 	  {
 	    $proses = 1;
@@ -72,7 +73,8 @@ if ($suppdec == 'J1')
   {
     echo "<br>prosesnyanya = 1<br>";
 	  //---------------- hapus tabel diget sebelum insert -------------------
-	  $sqldeldiget 	= "delete from diget where (supp = '{$vsupp}') and (tgl = '{$vblntglthn}') and (sq='{$vsq}')";
+    $sqldeldiget 	= "delete from diget where (supp = '{$vsupp}') and 
+      (tgl = '{$vblntglthn}') and (sq='{$vsq}')";
 	  $rsdeldiget		= $db->Execute($sqldeldiget);
 	  echo $sqldeldiget;
 	  $rsdeldiget->Close();
@@ -96,7 +98,9 @@ if ($suppdec == 'J1')
     // --------------- end of hapus digetsum ----------------------
 				
     //------------------- ins data ke table getsum -----------------
-    $sqlinsgetsum 	= "insert into digetsum(supp,partno,qty) select max(supp) as supp,partno,sum(qty) as qty from diget where ( supp = '{$obsupp}' ) and (tgl >= '{$tglcek}')  group by partno order by partno";
+    $sqlinsgetsum 	= "insert into digetsum(supp,partno,qty) select max(supp) as 
+      supp,partno,sum(qty) as qty from diget where ( supp = '{$obsupp}' ) and 
+      (tgl >= '{$tglcek}')  group by partno order by partno";
     echo '<br>';
     echo $sqlinsgetsum;
     $rsinsgetsum	= $db->Execute($sqlinsgetsum);
@@ -114,7 +118,9 @@ if ($suppdec == 'J1')
 	  // ambil summary per partno dari data yg sudah di upload
 	  // dan kemudian input ke tabel diupload
 	  //----------------------------------------------------------
-    $sqldiup	= "insert into diupload(supp,partno,qty) select max(supp) as supp,partno,sum(qty) as qty from di where ( supp = '{$obsupp}' ) and (tgld >= '{$tglcek}') and ( status <> '0' ) group by partno order by partno";
+    $sqldiup	= "insert into diupload(supp,partno,qty) select max(supp) as 
+      supp,partno,sum(qty) as qty from di where ( supp = '{$obsupp}' ) and 
+      (tgld >= '{$tglcek}') and ( status <> '0' ) group by partno order by partno";
     echo '<br>';
     echo $sqldiup;
     $rsdiup		= $db->Execute($sqldiup);
@@ -133,7 +139,9 @@ if ($suppdec == 'J1')
     // cari balance qty antara di yg sudah diupload dengan di original
     // kemudian insert data ke table dibal
     //------------------------------------------------------------------
-    $sqldibal	= "select digetsum.supp,digetsum.partno,digetsum.qty - diupload.qty as qty from digetsum INNER JOIN diupload ON digetsum.partno = diupload.partno where (digetsum.supp = '{$obsupp}') order by digetsum.partno";
+    $sqldibal	= "select digetsum.supp,digetsum.partno,digetsum.qty - diupload.qty 
+      as qty from digetsum INNER JOIN diupload ON digetsum.partno = diupload.partno 
+      where (digetsum.supp = '{$obsupp}') order by digetsum.partno";
     echo '<br>';
     echo $sqldibal;
     $rsdibal	= $db->Execute($sqldibal);
@@ -142,7 +150,8 @@ if ($suppdec == 'J1')
       $rsdibalsupp 		= $rsdibal->fields[0];
       $rsdibalpartno 	= $rsdibal->fields[1];
       $rsdibalqty 		= $rsdibal->fields[2];
-      $sqlinsdibal	= "insert into dibal(supp,partno,balqty) values('{$rsdibalsupp}','{$rsdibalpartno}','{$rsdibalqty}')";
+      $sqlinsdibal	= "insert into dibal(supp,partno,balqty) values('{$rsdibalsupp}',
+        '{$rsdibalpartno}','{$rsdibalqty}')";
 	    $rsinsdibal	= $db->Execute($sqlinsdibal);
       $rsinsdibal->Close();	
 	    $rsdibal->MoveNext();
@@ -160,7 +169,9 @@ if ($suppdec == 'J1')
     //-----------------  end of delete virtual order balance --------------
 
     //---------------- copy record from ordbalact to ordbalvir --------------------------------
-    $sqlinsvob 		= "insert into ordbalvir select * from ordbalact where suppcode = '{$vsupp}'";
+    $sqlinsvob 		= "insert into ordbalvir select transdate, suppcode, partnumber, partname, " . 
+      "orderqty, reqdate, ponumber, posq, orderbalance, supprest, model, issuedate, potype, " . 
+      "statuspart, remark, statusread from ordbalact where suppcode = '{$vsupp}'";
     echo '<br>';
     echo $sqlinsvob;
     $rsdelvob		= $db->Execute($sqlinsvob);
@@ -176,7 +187,9 @@ if ($suppdec == 'J1')
     //-----------------------------------------------------------------------------------------
 	
     // mencari orderbalance dikurangi di yg sudah upload
-    $sqlobvir 	= "select di.supp,di.po,ordbalvir.orderbalance - di.qty as balqty from ordbalvir inner join di on ordbalvir.ponumber = di.po where (di.status <> '0') and (di.supp = '{$vsupp}') and (di.tgld >= '{$tglcek}') order by partno,disq";
+    $sqlobvir 	= "select di.supp,di.po,ordbalvir.orderbalance - di.qty as balqty from 
+      ordbalvir inner join di on ordbalvir.ponumber = di.po where (di.status <> '0') and 
+      (di.supp = '{$vsupp}') and (di.tgld >= '{$tglcek}') order by partno,disq";
     echo '<br>';
     echo $sqlobvir;
     $rsobvir	= $db->Execute($sqlobvir);
@@ -185,7 +198,8 @@ if ($suppdec == 'J1')
       $recobvir0 	= $rsobvir->fields[0];
       $recobvir1 	= $rsobvir->fields[1];
       $recobvir2 	= $rsobvir->fields[2];
-      $sqlinsobup 	= "insert into ordbalactupd(supp,po,balqty) values('{$recobvir0}','{$recobvir1}','{$recobvir2}')";
+      $sqlinsobup 	= "insert into ordbalactupd(supp,po,balqty) values('{$recobvir0}',
+        '{$recobvir1}','{$recobvir2}')";
       $rsinsobup	= $db->Execute(sqlinsobup);
       $rsinsobup->Close();
       $rsobvir->MoveNext();
@@ -195,7 +209,7 @@ if ($suppdec == 'J1')
 	  $rsobvir->Close();
 
     // mencari po yg sudah dipakai
-    $sqlobupd = "select * from ordbalactupd where supp = '{$vsupp}'";
+    $sqlobupd = "select supp,po,balqty from ordbalactupd where supp = '{$vsupp}'";
     echo '<br>';
     echo $sqlobupd;
     $rsobupd  = $db->Execute($sqlobupd);
@@ -230,7 +244,10 @@ if ($suppdec == 'J1')
     if ($vsq == '1')
     {
       // cari tanggal dari header
-      $sql = "select * from TDSACT where SuppCode = '{$vsupp}' and HD = 'H' order by PartNo";
+      $sql = "select transdate,hd,tm,suppcode,partno,partname,balqty,qty1,qty2,qty3,qty4,
+      qty5,qty6,qty7,qty8,qty9,qty10,qty11,qty12,qty13,qty14,qty15,qty16,
+      qty17,qty18,qty19,qty20,qty21,qty22,qty23,qty24,qty25,qty26,qty27,
+      qty28,qty29,qty30,qty31,qty32 from TDSACT where SuppCode = '{$vsupp}' and HD = 'H' order by PartNo";
 	    echo '<br>';
 	    echo $sql;
       $rs  = $db->Execute($sql);
@@ -264,7 +281,10 @@ if ($suppdec == 'J1')
   
       //------------------------------------------------------------------------
       // MAKE DIGET
-      $sqlbps = "select * from tdsact where SuppCode = '{$vsupp}' and HD='D' order by PartNo";
+      $sqlbps = "select transdate,hd,tm,suppcode,partno,partname,balqty,qty1,qty2,qty3,qty4,
+      qty5,qty6,qty7,qty8,qty9,qty10,qty11,qty12,qty13,qty14,qty15,qty16,
+      qty17,qty18,qty19,qty20,qty21,qty22,qty23,qty24,qty25,qty26,qty27,
+      qty28,qty29,qty30,qty31,qty32 from tdsact where SuppCode = '{$vsupp}' and HD='D' order by PartNo";
 	    echo '<br>';
 	    echo $sqlbps;
 	    $rsbps = $db->Execute($sqlbps);
@@ -300,7 +320,8 @@ if ($suppdec == 'J1')
         {
           $ppartno = $rsbps->fields[4];
           $ppartname = $rsbps->fields[5];
-          $sqlinsdiget = "insert into diget(supp,tgl,sq,partno,qty,jamdel,jamsq) values('{$vsupp}','{$vblntglthn}','{$vsq}','{$ppartno}','{$kolomtotal}','{$jamdel}','1')";
+          $sqlinsdiget = "insert into diget(supp,tgl,sq,partno,qty,jamdel,jamsq) 
+            values('{$vsupp}','{$vblntglthn}','{$vsq}','{$ppartno}','{$kolomtotal}','{$jamdel}','1')";
 	        echo '<br>'.$sqlinsdiget;
 	        $rsinsdiget  = $db->Execute($sqlinsdiget);
 	        $rsinsdiget->Close();
@@ -315,7 +336,7 @@ if ($suppdec == 'J1')
     } // end of if ($vsq == '1')
   
     //------------  update diget jika ada balance --------------------------
-    $sqldibal = "select * from dibal where ( supp = '{$vsupp}' ) and ( balqty <> 0 )";
+    $sqldibal = "select supp,partno,balqty from dibal where ( supp = '{$vsupp}' ) and ( balqty <> 0 )";
     $rsdibal  = $db->Execute($sqldibal);
     while(!$rsdibal->EOF)
     {
@@ -325,19 +346,22 @@ if ($suppdec == 'J1')
       echo "balance = " . $balpartno . "," . $bal;
       echo "<br>";
       //cek part di diget
-      $sqlcekdiget = "select count(*) as ada from diget where ( supp = '{$vsupp}' ) and ( partno = '{$balpartno}' ) and (tgl = '{$vblntglthn}') and (sq = '{$vsq}')";
+      $sqlcekdiget = "select count(*) as ada from diget where ( supp = '{$vsupp}' ) and 
+         ( partno = '{$balpartno}' ) and (tgl = '{$vblntglthn}') and (sq = '{$vsq}')";
       $rscekdiget  = $db->Execute($sqlcekdiget);
       $adapart = $rscekdiget->fields[0];
       $rscekdiget->Close();
 	    if ($adapart == 0)
       {
-        $sqldiadd = "insert into diget(supp,tgl,sq,partno,qty) values('$vsupp','$vblntglthn','$vsq','$balpartno',$bal)";
+        $sqldiadd = "insert into diget(supp,tgl,sq,partno,qty) 
+          values('$vsupp','$vblntglthn','$vsq','$balpartno',$bal)";
         $rsdiadd  = $db->Execute($sqldiadd);
 	      $rsdiadd->Close();    
       }
       else
       {
-        $sqldiadd = "update diget set qty = qty + $bal where ( supp = '$vsupp' ) and ( partno = '$balpartno') and ( tgl = '$vblntglthn' ) and ( sq = '$vsq')";   
+        $sqldiadd = "update diget set qty = qty + $bal where ( supp = '$vsupp' ) 
+          and ( partno = '$balpartno') and ( tgl = '$vblntglthn' ) and ( sq = '$vsq')";   
         $rsdiadd  = $db->Execute($sqldiadd);
 	      $rsdiadd->Close();    
       }
@@ -350,7 +374,8 @@ if ($suppdec == 'J1')
     // variable hitung big part vs order balance
     
     //----------------- buat DI di ambil record dari diget ------------------------
-    $sqldiget = "select supp,tgl,sq,partno,qty,jamdel,jamsq from diget where (supp = '{$vsupp}') and (tgl='{$vblntglthn}') and (sq='${vsq}') order by sq,partno,jamsq";
+    $sqldiget = "select supp,tgl,sq,partno,qty,jamdel,jamsq from diget where (supp = '{$vsupp}') 
+      and (tgl='{$vblntglthn}') and (sq='${vsq}') order by sq,partno,jamsq";
     $rsdiget  = $db->Execute($sqldiget);
     while(!$rsdiget->EOF)
     {
@@ -361,7 +386,9 @@ if ($suppdec == 'J1')
       $b = $rsdiget->fields[4] ; //quantity bigpart
       $cekkecil = 0 ; //cek jika sudah < 0 tdk proses ob selanjutnya       
       $jumord = 0; //jumlah order balance yg diambil
-      $sqlordbal = "select PartNumber,convert(varchar,ReqDate,1),PONumber,OrderBalance from ordbalvir where SuppCode = '{$vsupp}' and PartNumber = '{$getpartno}' order by PartNumber,ReqDate";
+      $sqlordbal = "select PartNumber,convert(varchar,ReqDate,1),PONumber,OrderBalance 
+        from ordbalvir where SuppCode = '{$vsupp}' and PartNumber = '{$getpartno}' 
+        order by PartNumber,ReqDate";
       $rsob = $db->Execute($sqlordbal);
       while(!$rsob->EOF)
       {
@@ -372,7 +399,9 @@ if ($suppdec == 'J1')
         {
           $supptglpo = trim($vsupp) . $vthn . $vbln . $vtgl . trim($vsq) . $rsob->fields[2];
           // insert record
-          $sqlinsdi = "insert into di(supptglpo,supp,tgli,po,partno,qty,tgld,invoice,status,ditime,disq) values('{$supptglpo}','{$vsupp}','{$rsob->fields[1]}','{$rsob->fields[2]}','{$getpartno}','{$b}','{$vblntglthn}','','0','{$getjamdel}','{$vsq}')";
+          $sqlinsdi = "insert into di(supptglpo,supp,tgli,po,partno,qty,tgld,invoice,status,
+            ditime,disq) values('{$supptglpo}','{$vsupp}','{$rsob->fields[1]}','{$rsob->fields[2]}',
+            '{$getpartno}','{$b}','{$vblntglthn}','','0','{$getjamdel}','{$vsq}')";
           $rsinsdi  = $db->Execute($sqlinsdi);
 		      $rsinsdi->Close();
         }
@@ -380,14 +409,17 @@ if ($suppdec == 'J1')
         {
           $supptglpo = trim($vsupp) . $vthn . $vbln . $vtgl . trim($vsq) . $rsob->fields[2];
           // insert record
-          $sqlinsdi = "insert into di(supptglpo,supp,tgli,po,partno,qty,tgld,invoice,status,ditime,disq) values('{$supptglpo}','{$vsupp}','{$rsob->fields[1]}','{$rsob->fields[2]}','{$getpartno}','{$rsob->fields[3]}','{$vblntglthn}','','0','{$getjamdel}','{$vsq}')";
+          $sqlinsdi = "insert into di(supptglpo,supp,tgli,po,partno,qty,tgld,invoice,status,
+            ditime,disq) values('{$supptglpo}','{$vsupp}','{$rsob->fields[1]}',
+            '{$rsob->fields[2]}','{$getpartno}','{$rsob->fields[3]}','{$vblntglthn}',
+            '','0','{$getjamdel}','{$vsq}')";
           $rsinsdi  = $db->Execute($sqlinsdi);
 		      $rsinsdi->Close();
         } 
 	      //  rumus ini diletakkan paling bawah :
         $b = $b - $o;
 	      $rsob->MoveNext();
-      } // while($rowob = mssql_fetch_array($rsob))
+      } 
 	    $rsdiget->MoveNext();
       $rsob->Close();
     }  // end of while diget
@@ -395,8 +427,10 @@ if ($suppdec == 'J1')
     //--------------------- end of buat DI -------------------------------------
 
     $suppacak = ($vsupp * 1997) + 712;
-    header("Location:jdiinv.php?s=$suppacak&t=$vtglbln");
-  
+    // yudi 30/07/2019
+    // header("Location:jdiinv.php?s=$suppacak&t=$vtglbln");
+    // pakai header bermasalah diganti dengan javascript
+    echo "<script>window.location = 'jdiinv.php?s=$suppacak&t=$vtglbln'</script>";
   }	//	end of jika proses == 1      
 }	// ----------- end of jenis supplier = J1  -------------------------------
 
@@ -429,7 +463,8 @@ if ($suppdec == 'J2')
     {
       $proses = 0;
       echo "<br>data sequence sebelumnya tdk ada....<br>"; 
-      header("Location:jdimaketgl.php?p=Data Delivery Instruction untuk sequence sebelumnya belum ada !!!...");
+      // header("Location:jdimaketgl.php?p=Data Delivery Instruction untuk sequence sebelumnya belum ada !!!...");
+      echo "<script>window.location = 'dimaketgl.php?p=Data Delivery Instruction untuk sequence sebelumnya belum ada !!!...'</script>";
     }
     else
     {
@@ -457,7 +492,9 @@ if ($suppdec == 'J2')
 	  $rsdelgetsum->Close();
     // --------------- end of hapus digetsum ----------------------
 	  //---------------- ins data ke table getsum -------------------
-    $sqlinsgetsum = "insert into digetsum(supp,partno,qty) select max(supp) as supp,partno,sum(qty) as qty from diget where ( supp = '{$obsupp}' ) and (tgl >= '{$tglcek}')  group by partno order by partno";
+    $sqlinsgetsum = "insert into digetsum(supp,partno,qty) select max(supp) as 
+      supp,partno,sum(qty) as qty from diget where ( supp = '{$obsupp}' ) and 
+      (tgl >= '{$tglcek}')  group by partno order by partno";
     $rsinsgetsum  = $db->Execute($sqlinsgetsum);
 	  $rsinsgetsum->Close();
     //--------------- end of ins data ke table getsum  ---------
@@ -472,7 +509,9 @@ if ($suppdec == 'J2')
     // ambil summary per partno dari data yg sudah di upload
     // dan kemudian input ke tabel diupload
     //----------------------------------------------------------
-    $sqldiup = "insert into diupload(supp,partno,qty) select max(supp) as supp,partno,sum(qty) as qty from di where ( supp = '{$obsupp}' ) and (tgld >= '{$tglcek}') and ( status <> '0' ) group by partno order by partno";
+    $sqldiup = "insert into diupload(supp,partno,qty) select max(supp) as 
+      supp,partno,sum(qty) as qty from di where ( supp = '{$obsupp}' ) and 
+      (tgld >= '{$tglcek}') and ( status <> '0' ) group by partno order by partno";
     $rsdiup  = $db->Execute($sqldiup);
 	  $rsdiup->Close();
     //--------------- end of ins data ke table upload ----------
@@ -487,14 +526,17 @@ if ($suppdec == 'J2')
     // cari balance qty antara di yg sudah diupload dengan di original
     // kemudian insert data ke table dibal
     //------------------------------------------------------------------ 
-    $sqldibal = "select digetsum.supp,digetsum.partno,digetsum.qty - diupload.qty as balqty from digetsum INNER JOIN diupload ON digetsum.partno = diupload.partno order by digetsum.partno";
+    $sqldibal = "select digetsum.supp,digetsum.partno,digetsum.qty - diupload.qty 
+      as balqty from digetsum INNER JOIN diupload ON digetsum.partno = diupload.partno 
+      order by digetsum.partno";
     $rsdibal  = $db->Execute($sqldibal);
     while (!$rsdibal->EOF)
     {
       $balsupp   = $rsdibal->fields[0];
       $balpartno = $rsdibal->fields[1];
       $balqty    = $rsdibal->fields[2];
-      $sqlinsdibal = "insert into dibal(supp,partno,balqty) values('{$balsupp}','{$balpartno}','{$balqty}')";
+      $sqlinsdibal = "insert into dibal(supp,partno,balqty) values('{$balsupp}',
+        '{$balpartno}','{$balqty}')";
       $rsinsdibal  = $db->Execute($sqlinsdibal);
       $rsdibal->MoveNext();
     }
@@ -507,7 +549,11 @@ if ($suppdec == 'J2')
 	  $rsdelvob->Close();
     //-----------------  end of delete virtual order balance --------------
     // copy record from ordbalact to ordbalvir
-    $sqlinsvob = "insert into ordbalvir select * from ordbalact where suppcode = '{$vsupp}'";
+    $sqlinsvob = "insert into ordbalvir(transdate,suppcode,partnumber,partname,orderqty,
+      reqdate,ponumber,posq,orderbalance,supprest,model,issuedate,potype,statuspart,remark,
+      statusread) select transdate,suppcode,partnumber,partname,orderqty,
+      reqdate,ponumber,posq,orderbalance,supprest,model,issuedate,potype,statuspart,remark,
+      statusread from ordbalact where suppcode = '{$vsupp}'";
     $rsinsvob  = $db->Execute($sqlinsvob);
 	  $rsinsvob->Close();
     // hapus ordbalactupd
@@ -515,11 +561,14 @@ if ($suppdec == 'J2')
     $rsdelobup  = $db->Execute($sqldelobup);
 	  $rsdelobup->Close();
     // mencari orderbalance dikurangi di yg sudah upload
-    $sqlobvir = "select di.supp,di.po,ordbalvir.orderbalance - di.qty as balqty from ordbalvir inner join di on ordbalvir.ponumber = di.po where (di.status <> '0') and (di.supp = '{$vsupp}') and (di.tgld >= '{$tglcek}') order by partno,disq";
+    $sqlobvir = "select di.supp,di.po,ordbalvir.orderbalance - di.qty as balqty from 
+      ordbalvir inner join di on ordbalvir.ponumber = di.po where (di.status <> '0') 
+      and (di.supp = '{$vsupp}') and (di.tgld >= '{$tglcek}') order by partno,disq";
     $rsobvir  = $db->Execute($sqlobvir);
     while (!$rsobvir->EOF)
     {
-      $sqlinsobup = "insert into ordbalactupd(supp,po,balqty) values('{$rsobvir->fields[0]}','{$rsobvir->fields[1]}','{$rsobvir->fields[2]}')";
+      $sqlinsobup = "insert into ordbalactupd(supp,po,balqty) values('{$rsobvir->fields[0]}',
+        '{$rsobvir->fields[1]}','{$rsobvir->fields[2]}')";
       $rsinsobup  = $db->Execute($sqlinsobup);
       $rsinsobup->Close();
       $rsobvir->Movenext();
@@ -528,7 +577,7 @@ if ($suppdec == 'J2')
 	  $rsobvir->Close();
 	
 	  // mencari po yg sudah dipakai
-    $sqlobupd = "select * from ordbalactupd where supp = '{$vsupp}'";
+    $sqlobupd = "select supp,po,balqty from ordbalactupd where supp = '{$vsupp}'";
     $rsobupd  = $db->Execute($sqlobupd);
     while(!$rsobupd->EOF)
     {
@@ -556,7 +605,10 @@ if ($suppdec == 'J2')
     if ( $vsq == '1' || $vsq == '2' )
     {
       // cari tanggal dari header
-      $sql="select * from TDSACT where SuppCode = '{$vsupp}' and HD = 'H' order by PartNo";
+      $sql="select transdate,hd,tm,suppcode,partno,partname,balqty,qty1,qty2,qty3,qty4,
+      qty5,qty6,qty7,qty8,qty9,qty10,qty11,qty12,qty13,qty14,qty15,qty16,
+      qty17,qty18,qty19,qty20,qty21,qty22,qty23,qty24,qty25,qty26,qty27,
+      qty28,qty29,qty30,qty31,qty32 from TDSACT where SuppCode = '{$vsupp}' and HD = 'H' order by PartNo";
       $row=$db->Execute($sql);
       $test = 'kosong';
       $cek = $vtglj2;
@@ -586,7 +638,10 @@ if ($suppdec == 'J2')
 	    $row->Close();
 	    //------------------------------------------------------------------------
       // MAKE DIGET
-      $sqlbps = "select * from tdsact where SuppCode = '{$vsupp}' and HD='D' order by PartNo";
+      $sqlbps = "select transdate,hd,tm,suppcode,partno,partname,balqty,qty1,qty2,qty3,qty4,
+      qty5,qty6,qty7,qty8,qty9,qty10,qty11,qty12,qty13,qty14,qty15,qty16,
+      qty17,qty18,qty19,qty20,qty21,qty22,qty23,qty24,qty25,qty26,qty27,
+      qty28,qty29,qty30,qty31,qty32 from tdsact where SuppCode = '{$vsupp}' and HD='D' order by PartNo";
       $rowbps = $db->Execute($sqlbps);	  
       while(!$rowbps->EOF)
       {
@@ -619,7 +674,9 @@ if ($suppdec == 'J2')
         {
           $ppartno = $rowbps->fields[4];
           $ppartname = $rowbps->fields[5];
-          $sqlinsdiget = "insert into diget(supp,tgl,sq,partno,qty,jamdel,jamsq) values('{$vsupp}','{$vblntglthn}','{$vsq}','{$ppartno}','{$kolomtotal}','{$jamdel}','{$vsq}')";
+          $sqlinsdiget = "insert into diget(supp,tgl,sq,partno,qty,jamdel,jamsq) 
+            values('{$vsupp}','{$vblntglthn}','{$vsq}','{$ppartno}','{$kolomtotal}',
+            '{$jamdel}','{$vsq}')";
           $rsinsdiget=$db->Execute($sqlinsdiget);
         }
 		    $rowbps->MoveNext();
@@ -630,27 +687,30 @@ if ($suppdec == 'J2')
     } // end of if ( $vsq == '1' || $vsq == '2' )
     // ---------------- batas proses diget jika sq = '1' / sq = '2' ---------
     //------------  update diget jika ada balance --------------------------
-    $sqldibal = "select * from dibal where ( supp = '{$vsupp}' ) and ( balqty <> 0 )";
+    $sqldibal = "select supp,partno,balqty from dibal where ( supp = '{$vsupp}' ) and ( balqty <> 0 )";
     $recdibal = $db->Execute($sqldibal);
 	  while(!$recdibal->EOF)
     {
       $balpartno = $recdibal->fields[1];
       $bal = $recdibal->fields[2];
       //cek part di diget
-      $sqlcekdiget = "select count(*) as ada from diget where ( supp = '{$vsupp}' ) and ( partno = '{$balpartno}' ) and (tgl = '{$vblntglthn}') and (sq = '{$vsq}')";
+      $sqlcekdiget = "select count(*) as ada from diget where ( supp = '{$vsupp}' ) 
+        and ( partno = '{$balpartno}' ) and (tgl = '{$vblntglthn}') and (sq = '{$vsq}')";
       $reccekdiget = $db->Execute($sqlcekdiget);
       $reccekdiget->Close();
       $adapart = $reccekdiget[0];
 	  
       if($adapart == 0)
       {
-        $sqldiadd = "insert into diget(supp,tgl,sq,partno,qty) values('{$vsupp}','{$vblntglthn}','{$vsq}','{$balpartno}','{$bal}')";
+        $sqldiadd = "insert into diget(supp,tgl,sq,partno,qty) 
+          values('{$vsupp}','{$vblntglthn}','{$vsq}','{$balpartno}','{$bal}')";
         $rsdiadd  = $db->Execute($sqldiadd);
         $rsdiadd->Close();
       }
       else
       {
-        $sqldiadd = "update diget set qty = qty + $bal where ( supp = '$vsupp' ) and ( partno = '$balpartno') and ( tgl = '$vblntglthn' ) and ( sq = '$vsq')";   
+        $sqldiadd = "update diget set qty = qty + $bal where ( supp = '$vsupp' ) and 
+          ( partno = '$balpartno') and ( tgl = '$vblntglthn' ) and ( sq = '$vsq')";   
         $rsdiadd  = $db->Execute($sqldiadd);
       }
 	    $recdibal->MoveNext();
@@ -662,7 +722,8 @@ if ($suppdec == 'J2')
 	
 	  // variable hitung big part vs order balance	
 	  //----------------- buat DI di ambil record dari diget ------------------------
-    $sqldiget = "select supp,tgl,sq,partno,qty,jamdel,jamsq from diget where (supp = '{$vsupp}') and (tgl='{$vblntglthn}') and (sq='{$vsq}') order by sq,partno,jamsq";
+    $sqldiget = "select supp,tgl,sq,partno,qty,jamdel,jamsq from diget where 
+      (supp = '{$vsupp}') and (tgl='{$vblntglthn}') and (sq='{$vsq}') order by sq,partno,jamsq";
     $recdiget = $db->Execute($sqldiget);
     while(!$recdiget->EOF)
     {
@@ -673,7 +734,9 @@ if ($suppdec == 'J2')
       $b = $recdiget->fields[4] ; //quantity bigpart
       $cekkecil = 0 ; //cek jika sudah < 0 tdk proses ob selanjutnya       
       $jumord = 0; //jumlah order balance yg diambil
-      $sqlordbal = "select PartNumber,convert(varchar,ReqDate,1),PONumber,OrderBalance from ordbalvir where SuppCode = '{$vsupp}' and PartNumber = '{$getpartno}' order by PartNumber,ReqDate";
+      $sqlordbal = "select PartNumber,convert(varchar,ReqDate,1),PONumber,OrderBalance 
+        from ordbalvir where SuppCode = '{$vsupp}' and PartNumber = '{$getpartno}' 
+        order by PartNumber,ReqDate";
       $rowob = $db->Execute($sqlordbal);
       while(!$rowob->EOF)
       {
@@ -684,14 +747,18 @@ if ($suppdec == 'J2')
         {
           $supptglpo = trim($vsupp) . $vthn . $vbln . $vtgl . trim($vsq) . $rowob->fields[2];
           // insert record
-          $sqlinsdi = "insert into di(supptglpo,supp,tgli,po,partno,qty,tgld,invoice,status,ditime,disq) values('{$supptglpo}','{$vsupp}','{$rowob->fields[1]}','{$rowob->fields[2]}','{$getpartno}','{$b}','{$vblntglthn}','','0','{$getjamdel}','{$vsq}')";
+          $sqlinsdi = "insert into di(supptglpo,supp,tgli,po,partno,qty,tgld,invoice,status,
+            ditime,disq) values('{$supptglpo}','{$vsupp}','{$rowob->fields[1]}',
+            '{$rowob->fields[2]}','{$getpartno}','{$b}','{$vblntglthn}','','0','{$getjamdel}','{$vsq}')";
           $rsinsdi  = $db->Execute($sqlinsdi);
         }
         if ($b > $o)
         {
           $supptglpo = trim($vsupp) . $vthn . $vbln . $vtgl . trim($vsq) . $rowob->fields[2];
           // insert record
-          $sqlinsdi = "insert into di(supptglpo,supp,tgli,po,partno,qty,tgld,invoice,status,ditime,disq) values('{$supptglpo}','{$vsupp}','{$rowob->fields[1]}','{$rowob->fields[2]}','{$getpartno}','{$rowob->fields[3]}','{$vblntglthn}','','0','{$getjamdel}','{$vsq}')";
+          $sqlinsdi = "insert into di(supptglpo,supp,tgli,po,partno,qty,tgld,invoice,status,ditime,disq)
+            values('{$supptglpo}','{$vsupp}','{$rowob->fields[1]}','{$rowob->fields[2]}','{$getpartno}',
+            '{$rowob->fields[3]}','{$vblntglthn}','','0','{$getjamdel}','{$vsq}')";
           $rsinsdi  = $db->Execute($sqlinsdi);
         }    
         //  rumus ini diletakkan paling bawah :
@@ -705,8 +772,8 @@ if ($suppdec == 'J2')
     $recdiget->Close();
     //--------------------- end of buat DI -------------------------------------
     $suppacak = ($vsupp * 1997) + 712;
-    header("Location:jdiinv.php?s=$suppacak&t=$vtglbln");
-	
+    // header("Location:jdiinv.php?s=$suppacak&t=$vtglbln");
+	  echo "<script>window.location = 'jdiinv.php?s=$suppacak&t=$vtglbln'</script>";
   } // end of if ($proses == 1 )
 } // end of if ($suppdec == 'J2')
 
@@ -735,7 +802,8 @@ if ($suppdec == 'N' || $suppdec == 'Y')
   if($sdhget > 0)
   {
     echo "<br>data sudah data...<br>"; 
-    header("Location:jdimaketgl.php?p=Data Delivery Instruction untuk tanggal tsb sudah ada, silahkan pilih menu Edit Delivery Instruction untuk melanjutkan...");
+    // header("Location:jdimaketgl.php?p=Data Delivery Instruction untuk tanggal tsb sudah ada, silahkan pilih menu Edit Delivery Instruction untuk melanjutkan...");
+    echo "<script>window.location = 'jdimaketgl.php?p=Data Delivery Instruction untuk tanggal tsb sudah ada, silahkan pilih menu Edit Delivery Instruction untuk melanjutkan...'</script>";  
   }
   
   if ($sdhget==0)
@@ -746,7 +814,11 @@ if ($suppdec == 'N' || $suppdec == 'Y')
     $rsdelvob->Close();
 
 	  // copy record from ordbalact to ordbalvir
-    $sqlinsvob = "insert into ordbalvir select * from ordbalact where suppcode = '{$vsupp}'";
+    $sqlinsvob = "insert into ordbalvir(transdate,suppcode,partnumber,partname,orderqty,
+    reqdate,ponumber,posq,orderbalance,supprest,model,issuedate,potype,statuspart,remark,
+    statusread) select transdate,suppcode,partnumber,partname,orderqty,
+      reqdate,ponumber,posq,orderbalance,supprest,model,issuedate,potype,statuspart,remark,
+      statusread from ordbalact where suppcode = '{$vsupp}'";
     $rsinsvob  = $db->Execute($sqlinsvob);
 	  $rsinsvob->Close();
 	
@@ -757,11 +829,14 @@ if ($suppdec == 'N' || $suppdec == 'Y')
 	  $rsdelobup->Close();
 	
 	  // mencari orderbalance dikurangi di yg sudah upload
-    $sqlobvir = "select di.supp,di.po,ordbalvir.orderbalance - di.qty as balqty from ordbalvir inner join di on ordbalvir.ponumber = di.po where (di.status <> '0') and (di.supp = '{$vsupp}') and (di.tgld >= '{$tglcek}')";
+    $sqlobvir = "select di.supp,di.po,ordbalvir.orderbalance - di.qty as balqty from 
+      ordbalvir inner join di on ordbalvir.ponumber = di.po where (di.status <> '0') 
+      and (di.supp = '{$vsupp}') and (di.tgld >= '{$tglcek}')";
     $recobvir  = $db->Execute($sqlobvir);
     while (!$recobvir->EOF)
     {
-      $sqlinsobup = "insert into ordbalactupd(supp,po,balqty) values('{$recobvir->fields[0]}','{$recobvir->fields[1]}','{$recobvir->fields[2]}')";
+      $sqlinsobup = "insert into ordbalactupd(supp,po,balqty) 
+        values('{$recobvir->fields[0]}','{$recobvir->fields[1]}','{$recobvir->fields[2]}')";
       $rsinsobup  = $db->Execute($sqlinsobup);
       $rsinsobup->Close();	
 	    $recobvir->MoveNext();
@@ -770,7 +845,7 @@ if ($suppdec == 'N' || $suppdec == 'Y')
 	  $recobvir->Close();
 	
     // mencari po yg sudah dipakai
-    $sqlobupd = "select * from ordbalactupd where supp = '{$vsupp}'";
+    $sqlobupd = "select supp,po,balqty from ordbalactupd where supp = '{$vsupp}'";
     $recobupd = $db->Execute($sqlobupd);
     while(!$recobupd->EOF)
     {
@@ -798,7 +873,8 @@ if ($suppdec == 'N' || $suppdec == 'Y')
     $sqldelnob = "delete from di where (supptglpo like '{$vdel}') and (status = '0')";
     $rsdelnob  = $db->Execute($sqldelnob);
     $rsdelnob->Close();
-	  $sqlnob="select SuppCode,PartNumber,OrderBalance,convert(varchar,ReqDate,1),PONumber  from ordbalvir where SuppCode = '{$vsupp}' order by ReqDate, PartNumber,PONumber";
+    $sqlnob="select SuppCode,PartNumber,OrderBalance,convert(varchar,ReqDate,1),PONumber 
+      from ordbalvir where SuppCode = '{$vsupp}' order by ReqDate, PartNumber,PONumber";
     $rownob=$db->Execute($sqlnob);
 	  while(!$rownob->EOF)
     {
@@ -812,7 +888,9 @@ if ($suppdec == 'N' || $suppdec == 'Y')
         $supptglpo =  trim($rownob->fields[0]) . $vthn . $vbln . $vtgl . $vsq . $rownob->fields[4] ;
         $sqlDateTime = $rownob->fields[3];
         $tgldel = $vbln . "/" . $vtgl . "/" . $vthn;
-        $sqlinsnob = "insert into di(supptglpo,supp,tgli,po,partno,qty,tgld,invoice,status) values('{$supptglpo}','{$vsupp}','{$sqlDateTime}','{$rownob->fields[4]}','{$rownob->fields[1]}','{$rownob->fields[2]}','{$tgldel}','','0')";
+        $sqlinsnob = "insert into di(supptglpo,supp,tgli,po,partno,qty,tgld,invoice,status) 
+          values('{$supptglpo}','{$vsupp}','{$sqlDateTime}','{$rownob->fields[4]}',
+          '{$rownob->fields[1]}','{$rownob->fields[2]}','{$tgldel}','','0')";
         $rsinsnob  = $db->Execute($sqlinsnob);
 		    $rsinsnob->Close();
       } 
@@ -823,7 +901,8 @@ if ($suppdec == 'N' || $suppdec == 'Y')
 	  echo '<br>';
     echo '<a href="jditgl.php">edit di</a>';
     $suppacak = ( $vsupp * 1997 ) + 712;
-    header("Location:jdiinv.php?s=$suppacak&t=$vtglbln");
+    // header("Location:jdiinv.php?s=$suppacak&t=$vtglbln");
+    echo "<script>window.location = 'jdiinv.php?s=$suppacak&t=$vtglbln'</script>";
 	} // end of $sdhget==0  
 }	// end of ($suppdec == 'N' || $suppdec == 'Y')
 

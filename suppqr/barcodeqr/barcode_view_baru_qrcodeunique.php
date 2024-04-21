@@ -207,7 +207,7 @@ if(isset($_GET['partno']))
 						echo '<tr><td>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="1 - Label Stamping Metal Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -244,7 +244,7 @@ if(isset($_GET['partno']))
 						echo '<tr><td>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="1 - Label Stamping Metal Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -282,7 +282,7 @@ if(isset($_GET['partno']))
 						echo '<tr><td>';
 							echo '<table border=1 cellspacing=0 width=300>';
 								echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="1 - Label Stamping Metal Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-								echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td></tr>';
+								echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td></tr>';
 								echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 								echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 								echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -319,7 +319,7 @@ if(isset($_GET['partno']))
 							echo '<td align=right>';
 							echo '<table border=1 cellspacing=0 width=300>';
 								echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="1 - Label Stamping Metal Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-								echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+								echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 								echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 								echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 								echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -356,7 +356,7 @@ if(isset($_GET['partno']))
 							echo '<td align=right>';
 							echo '<table border=1 cellspacing=0 width=300>';
 								echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="1 - Label Stamping Metal Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-								echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+								echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 								echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 								echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 								echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -406,7 +406,7 @@ if(isset($_GET['partno']))
 								}
 								echo '<table border=1 cellspacing=0 width=300>';
 									echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="1 - Label Stamping Metal Part/' . $a . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-									echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+									echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 									echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 									echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 									echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -449,7 +449,7 @@ if(isset($_GET['partno']))
 									}
 									echo '<table border=1 cellspacing=0 width=300>';
 										echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="1 - Label Stamping Metal Part/' . $a . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-										echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+										echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 										echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 										echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 										echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -492,7 +492,7 @@ if(isset($_GET['partno']))
 									}
 									echo '<table border=1 cellspacing=0 width=300>';
 										echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="1 - Label Stamping Metal Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-										echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+										echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 										echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 										echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 										echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -530,7 +530,7 @@ if(isset($_GET['partno']))
 							echo '<td align=right >';
 							echo '<table border=1 cellspacing=0 width=300>';
 								echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="1 - Label Stamping Metal Part/' . $b_kanan1 . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-								echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+								echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 								echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 								echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 								echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -610,7 +610,7 @@ if(isset($_GET['partno']))
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="2 - Label Injection Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
 							echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT.JVCKENWOOD ELECTRONICS INDONESIA</p2></td> </tr>';
 							echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
 							echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
@@ -649,7 +649,7 @@ if(isset($_GET['partno']))
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="2 - Label Injection Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
 							echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT.JVCKENWOOD ELECTRONICS INDONESIA</p2></td> </tr>';
 							echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
 							echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
@@ -689,7 +689,7 @@ if(isset($_GET['partno']))
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="2 - Label Injection Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
 							echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT.JVCKENWOOD ELECTRONICS INDONESIA</p2></td> </tr>';
 							echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
 							echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
@@ -728,7 +728,7 @@ if(isset($_GET['partno']))
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="2 - Label Injection Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
 							echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT.JVCKENWOOD ELECTRONICS INDONESIA</p2></td> </tr>';
 							echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
 							echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
@@ -766,7 +766,7 @@ if(isset($_GET['partno']))
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="2 - Label Injection Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
 							echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT.JVCKENWOOD ELECTRONICS INDONESIA</p2></td> </tr>';
 							echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
 							echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
@@ -817,7 +817,7 @@ if(isset($_GET['partno']))
 								echo '<table border=1 cellspacing=0 width=300>';
 									echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="2 - Label Injection Part/' . $a . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
 									echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-									echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT.JVCKENWOOD ELECTRONICS INDONESIA</p2></td> </tr>';
 									echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 									echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
 									echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
@@ -862,7 +862,7 @@ if(isset($_GET['partno']))
 									echo '<table border=1 cellspacing=0 width=300>';
 										echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="2 - Label Injection Part/' . $a . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
 										echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-										echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+										echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT.JVCKENWOOD ELECTRONICS INDONESIA</p2></td> </tr>';
 										echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 										echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
 										echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
@@ -906,7 +906,7 @@ if(isset($_GET['partno']))
 									echo '<table border=1 cellspacing=0 width=300>';
 										echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="2 - Label Injection Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
 										echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-										echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></tr>';
+										echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT.JVCKENWOOD ELECTRONICS INDONESIA</p2></tr>';
 										echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 										echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
 										echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
@@ -946,7 +946,7 @@ if(isset($_GET['partno']))
 							echo '<table border=1 cellspacing=0 width=300>';
 								echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="2 - Label Injection Part/' . $b_kanan2 . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
 								echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-								echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+								echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT.JVCKENWOOD ELECTRONICS INDONESIA</p2></td> </tr>';
 								echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 								echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
 								echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
@@ -1026,7 +1026,7 @@ if(isset($_GET['partno']))
 						echo '<tr><td>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="3 - Label Printing Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -1066,7 +1066,7 @@ if(isset($_GET['partno']))
 						echo '<tr><td>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="3 - Label Printing Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -1106,7 +1106,7 @@ if(isset($_GET['partno']))
 					echo '<tr><td>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="3 - Label Printing Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -1145,7 +1145,7 @@ if(isset($_GET['partno']))
 						echo '<td align=right>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="3 - Label Printing Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -1183,7 +1183,7 @@ if(isset($_GET['partno']))
 						echo '<td align=right>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="3 - Label Printing Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -1286,7 +1286,7 @@ if(isset($_GET['partno']))
 						  echo '<table border=1 cellspacing=0 width=300>';
 						  echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="3 - Label Printing Part/' . $d1 . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
 					}
-						  echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+						  echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 						  echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 						  echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 						  echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -1382,7 +1382,7 @@ if(isset($_GET['partno']))
 							echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="3 - Label Printing Part/' . $d2 . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
 						}
 
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -1484,7 +1484,7 @@ if(isset($_GET['partno']))
 									echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="3 - Label Printing Part/' . $namafile3 . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
 						}
 
-									echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+									echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 									echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 									echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 									echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -1525,7 +1525,7 @@ if(isset($_GET['partno']))
 							echo '<td align=right >';
 							echo '<table border=1 cellspacing=0 width=300>';
 								echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="3 - Label Printing Part/' . $a_kanan . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-								echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+								echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 								echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 								echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 								echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -1603,7 +1603,7 @@ if(isset($_GET['partno']))
 						echo '<tr><td>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="4 - Label Wire Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Invoice No.</p></td> <td align=center><p>'.$invno.'</p></td> </tr>';
@@ -1641,7 +1641,7 @@ if(isset($_GET['partno']))
 						echo '<tr><td>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="4 - Label Wire Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Invoice No.</p></td> <td align=center><p>'.$invno.'</p></td> </tr>';
@@ -1679,7 +1679,7 @@ if(isset($_GET['partno']))
 					echo '<tr><td>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="4 - Label Wire Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Invoice No.</p></td> <td align=center><p>'.$invno.'</p></td> </tr>';
@@ -1716,7 +1716,7 @@ if(isset($_GET['partno']))
 						echo '<td align=right>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="4 - Label Wire Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Invoice No.</p></td> <td align=center><p>'.$invno.'</p></td> </tr>';
@@ -1754,7 +1754,7 @@ if(isset($_GET['partno']))
 						echo '<td align=right>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="4 - Label Wire Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Invoice No.</p></td> <td align=center><p>'.$invno.'</p></td> </tr>';
@@ -1804,7 +1804,7 @@ if(isset($_GET['partno']))
 								}
 								echo '<table border=1 cellspacing=0 width=300>';
 									echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="4 - Label Wire Part/' . $a . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-									echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+									echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 									echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 									echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 									echo '<tr> <td align=center><p>Invoice No.</p></td> <td align=center><p>'.$invno.'</p></td> </tr>';
@@ -1849,7 +1849,7 @@ if(isset($_GET['partno']))
 									}
 									echo '<table border=1 cellspacing=0 width=300>';
 										echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="4 - Label Wire Part/' . $a . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-										echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+										echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 										echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 										echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 										echo '<tr> <td align=center><p>Invoice No.</p></td> <td align=center><p>'.$invno.'</p></td> </tr>';
@@ -1893,7 +1893,7 @@ if(isset($_GET['partno']))
 									}
 									echo '<table border=1 cellspacing=0 width=300>';
 										echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="4 - Label Wire Part/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-										echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+										echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 										echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 										echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 										echo '<tr> <td align=center><p>Invoice No.</p></td> <td align=center><p>'.$invno.'</p></td> </tr>';
@@ -1932,7 +1932,7 @@ if(isset($_GET['partno']))
 							echo '<td align=right >';
 							echo '<table border=1 cellspacing=0 width=300>';
 								echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="4 - Label Wire Part/' . $b_kanan4 . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-								echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+								echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 								echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 								echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 								echo '<tr> <td align=center><p>Invoice No.</p></td> <td align=center><p>'.$invno.'</p></td> </tr>';

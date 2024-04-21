@@ -57,7 +57,17 @@
 		$deldate    = $_REQUEST['deldate'];
 		$proddate   = $_REQUEST['proddate'];
 		
-		$rs2 = $db->Execute("select * from stdpack where partnumber= '". $partno ."'");
+		$rs2 = $db->Execute("select [suppcode]
+							,[partnumber]
+							,[partname]
+							,[stdpack]
+							,[kategori]
+							,[replikasi]
+							,[lokasi]
+							,[stdpack_supp]
+							,[input_user]
+							,[input_date] 
+							from stdpack where partnumber= '". $partno ."'");
 		$partnm = $rs2->fields[2];
 		$rs2->Close();
 		

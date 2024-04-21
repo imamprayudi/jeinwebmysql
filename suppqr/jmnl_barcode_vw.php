@@ -3,9 +3,6 @@
 	****	modify by Mohamad Yunus
 	****	on 25 Jan 2017
 	****	revise: single QR Code
-	****  modify by Imam Prayudi
-	****  on 27 Feb 2020
-	****  koneksi ke mysql
 	*/
 
 session_start();
@@ -15,11 +12,11 @@ $session_userid = $_SESSION['usr'];
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title> JEIN - PRINT LABEL BARCODE VIEW </title>
+		<title> JKEI - PRINT LABEL BARCODE VIEW </title>
 		<link href="../assets/css/styles.css" rel="stylesheet" type="text/css">
         <script src="../assets/js/jquery.js"></script>
 		<link rel="shortcut icon" href= "assets/gambar/receiving.ico"/>
-		<link rel="stylesheet" type="text/css" href="../assets/css/styles.css">
+		<link rel="stylesheet" type="text/css" href="../assets/css/style.css">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	</head>
 	
@@ -31,14 +28,14 @@ $session_userid = $_SESSION['usr'];
 echo '<div id="section">';
 echo '<br />';
 echo '<img src="../assets/gambar/jvc.gif" alt="JVC KENWOOD CORPORATION" style="float:left;width:220px;height:35px;">';
-echo 'PT.JVC ELECTRONICS INDONESIA ';
+echo 'PT.JVCKENWOOD ELECTRONICS INDONESIA ';
 echo '<br />';
 echo 'PRINT LABEL BARCODE VIEW';
 echo '<br /><br />';
 echo '</div>';
 echo '<div id="section">';
-include('koneksimysql.php');
-//include('con_qrinvoice.php');
+include('con_svrdbn.php');
+include('con_qrinvoice.php');
 
 $partno 	= trim($_REQUEST['part']);
 $suppname 	= trim($_REQUEST['suppname']);
@@ -51,12 +48,16 @@ $proddate   = $_REQUEST['proddate'];
 $rs2 = $db->Execute("select partname from stdpack where partnumber= '". $partno ."'");
 $partnm = $rs2->fields[0];
 $rs2->Close();
+		
 $rs3 = $db->Execute("select kategori from supplier where suppcode= '". $vsupp ."'");
 $kategori = $rs3->fields[0];
 $rs3->Close();
-$rs4 = $db->Execute("select case imincl when '1' then 'Direct' else 'Inspection' end as sts_insp from stdpack where partnumber = '". $partno ."'");	
+		
+$rs4 = $db_qrinvoice->Execute("select case imincl when '1' then 'Direct' else 'Inspection' 
+  end as sts_insp from sa96t where iprod = '". $partno ."'");
 $sts_inspection = $rs4->fields[0];
 $rs4->Close();
+				
 echo '<table border=0 cellpadding=0 cellspacing=0>';
 echo '<tr valign="top">';
 echo '<td width=450>';
@@ -101,7 +102,8 @@ echo '<td width=150 valign=top>QTY</td>';
 echo '<td><input type="text" name="qty" id="qty" value="'. $qty .'" readonly=""></td>';
 echo '</tr>';
 //Query	
-$rs = $db->Execute("select stdpack_supp, lokasi from stdpack where partnumber= '". $partno ."' and suppcode= '". $vsupp ."'");
+$rs = $db->Execute("select stdpack_supp, lokasi from stdpack where partnumber= '". $partno ."' 
+  and suppcode= '". $vsupp ."'");
 $pack 	= $rs->fields[0];
 $lokasi = trim($rs->fields[1]);
 $rs->Close();
@@ -176,7 +178,6 @@ if($kategori == 2){
 				<br>
 				<font style="font-size:8pt;"> click image to print barcode</font>
 				</td>';
-
 	echo '<td align="center" width=250><b>Format Print Barcode Outter Box</b> <br><br>
 				<a target="_blank" href="barcode128/barcode_view_baru.php?lokasi='.$lokasi.'&partno=' . $partno . '&po=' . $po . '&pack=' . $pack . '&qtystd=' . $qtystd . '&qtybal=' . $qtybal . '&suppname=' . $suppname2 . '&supp=' . $vsupp . '&qty=' . $qty . '&partnm=' . $partnm . '&mtrl=' . $mtrl . '&deldate=' . $deldate . '&proddate=' . $proddate . '&shift=' . $shift . '&qcc=' . $qcc . '&kategori=' . $kategori . '&ulcode=' . $ulcode . '&stsinsp=' . $sts_inspection . '">
 				<img height="250px" src="img/outterbox.png" />

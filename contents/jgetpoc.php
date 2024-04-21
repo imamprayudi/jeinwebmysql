@@ -22,17 +22,17 @@ else
   <?php  
 }
 
-include("koneksimysql.php");
+include("koneksi.php");
 if ($_POST)
 {
   $supp = $_POST['suppid'];
   $tgl1  = $_POST['tgl1id'];
   $tgl2  = $_POST['tgl2id'];
-  $tgl1 =  date('Y-m-d' , strtotime($tgl1));
-  $tgl2 = date('Y-m-d' , strtotime($tgl2));
 }
 
-$rs = $db->Execute("select * from mailpocst where ( supplier = '" . $supp . "') and ( transdate between '" . $tgl1 ."' and '" . $tgl2 . "') order by transdate");
+$rs = $db->Execute("select transdate,supplier,status,confirmation,confirmdate,
+  rejectreason from mailpocst where ( supplier = '" . $supp . "') 
+  and ( transdate between '" . $tgl1 ."' and '" . $tgl2 . "') order by transdate");
 $ada = $rs->RecordCount();
 if ($ada == 0)
 {

@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>BARCODE PRINT</title>
-<link href="../../assets/css/styles.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body bgcolor="#ffffff">
 <?php
@@ -95,7 +95,7 @@ if(isset($_GET['partno']))
     include('class/BCGcode128.barcode.php'); 
 
     // Loading Font
-    $font = new BCGFont('class/font/Arial.ttf', 12);    
+    $font = new BCGFont('./class/font/Arial.ttf', 12);    
     
 	
 	//  Preview Format Barcode berdasarkan Kategori Supplier
@@ -121,7 +121,7 @@ if(isset($_GET['partno']))
 						echo '<tr><td>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -170,7 +170,7 @@ if(isset($_GET['partno']))
 						echo '<tr><td>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -224,7 +224,7 @@ if(isset($_GET['partno']))
 					echo '<tr><td>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -273,7 +273,7 @@ if(isset($_GET['partno']))
 						echo '<td align=right>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -325,7 +325,7 @@ if(isset($_GET['partno']))
 						echo '<td align=right>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -386,7 +386,7 @@ if(isset($_GET['partno']))
 								}
 								echo '<table border=1 cellspacing=0 width=300>';
 									echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-									echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+									echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 									echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 									echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 									echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -442,7 +442,7 @@ if(isset($_GET['partno']))
 									}
 									echo '<table border=1 cellspacing=0 width=300>';
 										echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-										echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+										echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 										echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 										echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 										echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -496,7 +496,7 @@ if(isset($_GET['partno']))
 									}
 									echo '<table border=1 cellspacing=0 width=300>';
 										echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-										echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+										echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 										echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 										echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 										echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -549,7 +549,7 @@ if(isset($_GET['partno']))
 							echo '<td align=right >';
 							echo '<table border=1 cellspacing=0 width=300>';
 								echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-								echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+								echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 								echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 								echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 								echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -596,7 +596,7 @@ if(isset($_GET['partno']))
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 rowspan=2><p2>Logo</p2></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS OK</b></p2></td> </tr>';
 							echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT.JVCKENWOOD ELECTRONICS INDONESIA</p2></td> </tr>';
 							echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
 							echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
@@ -646,7 +646,7 @@ if(isset($_GET['partno']))
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 rowspan=2><p2>Logo</p2></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS OK</b></p2></td> </tr>';
 							echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT.JVCKENWOOD ELECTRONICS INDONESIA</p2></td> </tr>';
 							echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
 							echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
@@ -701,7 +701,7 @@ if(isset($_GET['partno']))
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 rowspan=2><p2>Logo</p2></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS OK</b></p2></td> </tr>';
 							echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT.JVCKENWOOD ELECTRONICS INDONESIA</p2></td> </tr>';
 							echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
 							echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
@@ -751,7 +751,7 @@ if(isset($_GET['partno']))
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 rowspan=2><p2>Logo</p2></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS OK</b></p2></td> </tr>';
 							echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT.JVCKENWOOD ELECTRONICS INDONESIA</p2></td> </tr>';
 							echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
 							echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
@@ -804,7 +804,7 @@ if(isset($_GET['partno']))
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70 rowspan=2><p2>Logo</p2></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS OK</b></p2></td> </tr>';
 							echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT.JVCKENWOOD ELECTRONICS INDONESIA</p2></td> </tr>';
 							echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
 							echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
@@ -866,7 +866,7 @@ if(isset($_GET['partno']))
 								echo '<table border=1 cellspacing=0 width=300>';
 									echo '<tr> <td width=70 rowspan=2><p2>Logo</p2></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS OK</b></p2></td> </tr>';
 									echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-									echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT.JVCKENWOOD ELECTRONICS INDONESIA</p2></td> </tr>';
 									echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 									echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
 									echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
@@ -923,7 +923,7 @@ if(isset($_GET['partno']))
 									echo '<table border=1 cellspacing=0 width=300>';
 										echo '<tr> <td width=70 rowspan=2><p2>Logo</p2></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS OK</b></p2></td> </tr>';
 										echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-										echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+										echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT.JVCKENWOOD ELECTRONICS INDONESIA</p2></td> </tr>';
 										echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 										echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
 										echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
@@ -978,7 +978,7 @@ if(isset($_GET['partno']))
 									echo '<table border=1 cellspacing=0 width=300>';
 										echo '<tr> <td width=70 rowspan=2><p2>Logo</p2></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS OK</b></p2></td> </tr>';
 										echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-										echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+										echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT.JVCKENWOOD ELECTRONICS INDONESIA</p2></td> </tr>';
 										echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 										echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
 										echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
@@ -1032,7 +1032,7 @@ if(isset($_GET['partno']))
 							echo '<table border=1 cellspacing=0 width=300>';
 								echo '<tr> <td width=70 rowspan=2><p2>Logo</p2></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS OK</b></p2></td> </tr>';
 								echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-								echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+								echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT.JVCKENWOOD ELECTRONICS INDONESIA</p2></td> </tr>';
 								echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 								echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
 								echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
@@ -1077,7 +1077,7 @@ if(isset($_GET['partno']))
 						echo '<tr><td>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -1126,7 +1126,7 @@ if(isset($_GET['partno']))
 						echo '<tr><td>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -1180,7 +1180,7 @@ if(isset($_GET['partno']))
 					echo '<tr><td>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -1229,7 +1229,7 @@ if(isset($_GET['partno']))
 						echo '<td align=right>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -1281,7 +1281,7 @@ if(isset($_GET['partno']))
 						echo '<td align=right>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -1342,7 +1342,7 @@ if(isset($_GET['partno']))
 								}
 								echo '<table border=1 cellspacing=0 width=300>';
 									echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-									echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+									echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 									echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 									echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 									echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -1398,7 +1398,7 @@ if(isset($_GET['partno']))
 									}
 									echo '<table border=1 cellspacing=0 width=300>';
 										echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-										echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+										echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 										echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 										echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 										echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -1452,7 +1452,7 @@ if(isset($_GET['partno']))
 									}
 									echo '<table border=1 cellspacing=0 width=300>';
 										echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-										echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+										echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 										echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 										echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 										echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -1505,7 +1505,7 @@ if(isset($_GET['partno']))
 							echo '<td align=right >';
 							echo '<table border=1 cellspacing=0 width=300>';
 								echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-								echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+								echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 								echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 								echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 								echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
@@ -1551,7 +1551,7 @@ if(isset($_GET['partno']))
 						echo '<tr><td>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Invoice No.</p></td> <td align=center><p>'.$invno.'</p></td> </tr>';
@@ -1600,7 +1600,7 @@ if(isset($_GET['partno']))
 						echo '<tr><td>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Invoice No.</p></td> <td align=center><p>'.$invno.'</p></td> </tr>';
@@ -1654,7 +1654,7 @@ if(isset($_GET['partno']))
 					echo '<tr><td>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Invoice No.</p></td> <td align=center><p>'.$invno.'</p></td> </tr>';
@@ -1703,7 +1703,7 @@ if(isset($_GET['partno']))
 						echo '<td align=right>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Invoice No.</p></td> <td align=center><p>'.$invno.'</p></td> </tr>';
@@ -1755,7 +1755,7 @@ if(isset($_GET['partno']))
 						echo '<td align=right>';
 						echo '<table border=1 cellspacing=0 width=300>';
 							echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+							echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 							echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 							echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 							echo '<tr> <td align=center><p>Invoice No.</p></td> <td align=center><p>'.$invno.'</p></td> </tr>';
@@ -1816,7 +1816,7 @@ if(isset($_GET['partno']))
 								}
 								echo '<table border=1 cellspacing=0 width=300>';
 									echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-									echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+									echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 									echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 									echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 									echo '<tr> <td align=center><p>Invoice No.</p></td> <td align=center><p>'.$invno.'</p></td> </tr>';
@@ -1872,7 +1872,7 @@ if(isset($_GET['partno']))
 									}
 									echo '<table border=1 cellspacing=0 width=300>';
 										echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-										echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+										echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 										echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 										echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 										echo '<tr> <td align=center><p>Invoice No.</p></td> <td align=center><p>'.$invno.'</p></td> </tr>';
@@ -1926,7 +1926,7 @@ if(isset($_GET['partno']))
 									}
 									echo '<table border=1 cellspacing=0 width=300>';
 										echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-										echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+										echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 										echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 										echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 										echo '<tr> <td align=center><p>Invoice No.</p></td> <td align=center><p>'.$invno.'</p></td> </tr>';
@@ -1979,7 +1979,7 @@ if(isset($_GET['partno']))
 							echo '<td align=right >';
 							echo '<table border=1 cellspacing=0 width=300>';
 								echo '<tr> <td width=70><p>Logo</p></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS OK</b></p></td> </tr>';
-								echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+								echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT.JVCKENWOOD ELECTRONICS INDONESIA</p></td> </tr>';
 								echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
 								echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
 								echo '<tr> <td align=center><p>Invoice No.</p></td> <td align=center><p>'.$invno.'</p></td> </tr>';

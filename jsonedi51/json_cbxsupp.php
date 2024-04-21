@@ -14,16 +14,18 @@
 	include('../../adodb5/adodb-errorpear.inc.php');
 	
 	//	JEINID
-	$db  =& ADONewConnection('odbc_mssql');
-	$dsn = "Driver={SQL Server};Server=136.198.117.5;Database=edi;";
-	$db->Connect($dsn,'sa','password');
+	$db = ADONewConnection('odbc_mssql');
+  $dsn = "Driver={SQL Server};Server=136.198.117.80\jeinsql2017s;Database=edi;";
+  $db->Connect($dsn,'sa','password');
 	
 	//	get paramater
 	$userid		= trim(@$_REQUEST["valuserid"]);
 	$search		= trim(@$_REQUEST["query"]);
 	
 	//	execute query
-    $sql 	= "select suppcode, suppname from usersupp where userid = '{$userid}' and (suppcode like '%{$search}%' or suppname like '%{$search}%')";
+    $sql = "select usersupp.SuppCode,supplier.SuppName from UserSupp 
+    inner join Supplier on usersupp.SuppCode = Supplier.SuppCode 
+    where userid = '{$userid}' order by suppname";
     $rs 	= $db->Execute($sql);
 	
 	//	array data

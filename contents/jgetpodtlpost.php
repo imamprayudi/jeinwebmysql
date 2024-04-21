@@ -1,7 +1,7 @@
 
 
 <?php
-include("koneksimysql.php");  
+include("koneksi.php");  
 $conf = $_POST['rbnconfirm'];
 $reject = $_POST['textreject'];
 $supp = $_POST['suppname']; 
@@ -20,6 +20,7 @@ $qry = "update mailpost set confirmation = '";
 $qry = $qry . $confsts;
 // for mssql use GETDATE()
 $qry = $qry . "', confirmdate = GETDATE()";
+$qry = $qry . ", updated = GETDATE()";
 // for mysql use NOW()
 // $qry = $qry . "', confirmdate = NOW()";
 $qry = $qry . ", rejectreason = '";

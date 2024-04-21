@@ -129,7 +129,32 @@ else
   $vtgl = substr($vtgl,0,2);
   $supptgl = $vsupp . $vthn . $vbln . $vtgl . "%";
 } 
-include("jmenudicss.php");
+ // include("jmenucss.php");
+  include('../contents_v2/layouts/header.php');
+
+  ?>
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Forecast</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../contents_v2/index.php">Home</a></li>
+          <li class="breadcrumb-item"><a href="#">Orders</a></li>
+          <li class="breadcrumb-item active">Forecast</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="card card-info">
+          <div class="card-body">
+          
+        
+        <?php
+
+        echo '<br />';
 echo "<table border=1>";
 echo '<tr>';
 echo '<th>ID</th>';
@@ -176,6 +201,16 @@ echo 'Klik upload untuk kirim data ke JEIN : ';
 echo '<input type="submit" value="upload" id="submit3" name="upload">';
 echo '</form>';
 echo "</table>";
-echo "</body></html>";
+
 $db->Close();
+?>
+        </div>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+    <?php include('../contents_v2/layouts/footer.php'); ?>
+</body></html>
 ?>

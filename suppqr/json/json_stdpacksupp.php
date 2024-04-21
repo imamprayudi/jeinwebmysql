@@ -10,11 +10,10 @@
 	
 	$rs = $db->execute("select	partnumber, partname, stdpack_supp, replikasi
 						from  	stdpack
-						where	suppcode = $supp and partnumber like '%".$partnumber."%'
+						where	suppcode = '" .$supp."' and partnumber like '%".$partnumber."%'
 						order by partnumber asc");
-	$totalcount = $rs->PO_RecordCount("	select	partnumber, partname, stdpack_supp, replikasi
-										from  	stdpack
-										where	suppcode = $supp and partnumber like '%".$partnumber."%'");
+						$totalcount = $rs->PO_RecordCount("	select	partnumber, partname, stdpack_supp, replikasi
+						from  	stdpack	where	suppcode = '".$supp."' and partnumber like '%".$partnumber."%'");
 	$return = array();
 	/** end of **/
 	

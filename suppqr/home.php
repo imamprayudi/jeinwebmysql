@@ -17,7 +17,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title> JKEI - Barcode Receiving Online </title>
+		<title> JEIN - Barcode Receiving Online </title>
 		<link rel="shortcut icon" href= "icons/receiving.ico"/>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">

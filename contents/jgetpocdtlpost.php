@@ -1,7 +1,7 @@
 
 
 <?php
-include("koneksimysql.php");  
+include("koneksi.php");  
 $conf = $_POST['rbnconfirm'];
 $reject = $_POST['textreject'];
 $supp = $_POST['suppname']; 

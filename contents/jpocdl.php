@@ -11,11 +11,13 @@ else
 }
 
 $supp = $_GET['sid'];
-$suppcode = $supp / 14102703 ;
+$suppcode = intval($supp) / 14102703 ;
 $tgl  = $_GET['tglid'];
-
-include('koneksimysql.php');
-$sql = "select idno,rdate, pono, partno, partname, newqty, newdate, oldqty, olddate, price, model, potype, altno from mailpoc where (supplier = '" . $suppcode . "') and (rdate='" . $tgl ."')";
+include('koneksi.php');
+$sql = "select idno,convert(varchar(10),rdate,23) as rdate, pono, partno, 
+  partname, newqty, convert(varchar(10),newdate,23) as newdate, oldqty, 
+  convert(varchar(10),olddate,23) as olddate, str(price,10,5), model, potype, altno 
+  from mailpoc where (supplier = '" . $suppcode . "') and (rdate='" . $tgl ."')";
 $rs 		= $db->Execute($sql);
 $fname = "poc" . $suppcode . ".csv";
 header("Content-type: text/csv");
@@ -23,7 +25,7 @@ header("Content-Disposition: attachment; filename=$fname");
 header("Pragma: no-cache");
 header("Expires: 0");
 $fp = fopen("php://output", "w");
-$headers = 'TRANSNO, TRANSDATE,PO, PARTNO, PARTNAME, NEWQTY, NEWDAT, OLDQTY, OLDDATE, PRICE, MODEL, TYPE, ALTNO' . "\n";
+$headers = 'TRANSNO, TRANSDATE,PO,PARTNO,PARTNAME,NEWQTY,NEWDAT,OLDQTY,OLDDATE,PRICE,MODEL,TYPE,ALTNO' . "\n";
 fwrite($fp,$headers);
 
 while(!$rs->EOF)

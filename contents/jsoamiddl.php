@@ -10,10 +10,13 @@ else
 }
 
 $supp = $_GET['sid'];
-$suppcode = $supp / 14102703 ;
+$suppcode = intval($supp) / 14102703 ;
 $tgl  = $_GET['tglid'];
-include('koneksimysql.php');
-$sql = "select tgl, po, posq, invoice, partno, partname, qty, price, amount, dncnd from soamid where (suppcode = '" . $suppcode . "') and (transdate = '" . $tgl . "') and (OK = 'D') order by invoice";
+include('koneksi.php');
+$sql = "select  convert(varchar(10),tgl,23) as tgl, po, posq, invoice, 
+  partno, partname, qty, price, amount, dncnd from soamid where 
+  (suppcode = '" . $suppcode . "') and (transdate = '" . $tgl . "') 
+  and (OK = 'D') order by invoice";
 $rs 		= $db->Execute($sql);
 $fname = "soamid" . $suppcode . "-" . $tgl . ".csv";
 header("Content-type: text/csv");

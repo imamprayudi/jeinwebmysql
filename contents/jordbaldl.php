@@ -11,9 +11,11 @@ else
 }
 
 $supp = $_GET['sid'];
-$suppcode = $supp / 14102703 ;
-include('koneksimysql.php');
-$sql = "select partnumber,partname,orderqty, reqdate,ponumber,posq,orderbalance,supprest,model,issuedate,potype from ordbal where (suppcode = '" . $suppcode . "')";
+$suppcode = intval($supp) / 14102703 ;
+include('koneksi.php');
+$sql = "select partnumber,partname,orderqty,convert(varchar(10), reqdate, 23),
+  ponumber,posq,orderbalance,supprest,model," . Helper::translateQueryMonthlyToMysql("issuedate", "10") .",
+  potype from ordbal where (suppcode = '" . $suppcode . "')";
 $rs 		= $db->Execute($sql);
 $fname = "ordbal" . $suppcode . ".csv";
 header("Content-type: text/csv");

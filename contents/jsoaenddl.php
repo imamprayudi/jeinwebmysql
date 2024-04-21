@@ -10,10 +10,21 @@ else
 }
 
 $supp = $_GET['sid'];
-$suppcode = $supp / 14102703 ;
+$suppcode = intval($supp) / 14102703 ;
 $tgl  = $_GET['tglid'];
 include('koneksi.php');
-$sql = "select  convert(varchar(10),tgl,23) as tgl, po, posq, invoice, partno, partname, qty, price, amount, dncnd from soaend where (suppcode = '" . $suppcode . "') and (transdate = '" . $tgl . "') and (OK = 'D') order by invoice";
+$tahunsoa = substr($tgl,0,4);
+$tablesoa = 'soaend' . $tahunsoa;
+if ($tahunsoa < 2020){
+$sql = "select  convert(varchar(10),tgl,23) as tgl, po, posq, invoice,partno, 
+  partname, qty, price, amount, dncnd from " . $tablesoa . " where (suppcode = '" . $suppcode . "') 
+  and (transdate = '" . $tgl . "') and (OK = 'D') order by invoice";
+}
+else{
+$sql = "select  convert(varchar(10),tgl,23) as tgl, po, posq, invoice,partno, 
+  partname, qty, price, amount, dncnd from soaend where (suppcode = '" . $suppcode . "') 
+  and (transdate = '" . $tgl . "') and (OK = 'D') order by invoice";
+}
 $rs 		= $db->Execute($sql);
 $fname = "soaend" . $suppcode . "-" . $tgl . ".csv";
 header("Content-type: text/csv");

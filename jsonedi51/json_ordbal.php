@@ -14,8 +14,8 @@
 	include('../../adodb5/adodb-errorpear.inc.php');
 	
 	//	JEINID
-	$db  =& ADONewConnection('odbc_mssql');
-	$dsn = "Driver={SQL Server};Server=136.198.117.5;Database=edi;";
+	$db = ADONewConnection('odbc_mssql');
+	$dsn = "Driver={SQL Server};Server=136.198.117.80\jeinsql2017s;Database=edi;";
 	$db->Connect($dsn,'sa','password');
 	
 	//	get paramater

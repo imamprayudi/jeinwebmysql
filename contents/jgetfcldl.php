@@ -18,11 +18,13 @@ else
 }
 
 $supp = $_GET['sid'];
-$suppcode = $supp / 14102703 ;
-include('koneksimysql.php');
-$sqlh = "select dqty1,dqty2,dqty3,dqty4,dqty5,dqty6,dqty7,dqty8,dqty9,dqty10,
-dqty11,dqty12,dqty13,dqty14,dqty15,dqty16,dqty17,dqty18,dqty19,dqty20,dqty21,dqty22,
-dqty23,dqty24,dqty25,dqty26,dqty27,dqty28 
+$suppcode = intval($supp) / 14102703 ;
+
+include('koneksi.php');
+
+$sqlh = "select dtqty1,dtqty2,dtqty3,dtqty4,dtqty5,dtqty6,dtqty7,dtqty8,dtqty9,dtqty10,
+dtqty11,dtqty12,dtqty13,dtqty14,dtqty15,dtqty16,dtqty17,dtqty18,dtqty19,dtqty20,dtqty21,dtqty22,
+dtqty23,dtqty24,dtqty25,dtqty26,dtqty27,dtqty28 
 from fcl where (suppcode = '" . $suppcode . "') and rt = 'H'"; 
 $rsh    = $db->Execute($sqlh);
 $fname = "fcl" . $suppcode . ".csv";
@@ -40,9 +42,9 @@ $rsh->fields['18'] . ',' . $rsh->fields['19'] . ','  . $rsh->fields['20'] . ',' 
 $rsh->fields['22'] . ',' . $rsh->fields['23'] . ',' . $rsh->fields['24'] . ',' . $rsh->fields['25'] . ',' .
 $rsh->fields['26'] . ',' . $rsh->fields['27'] . "\n";
            
-$sql = "select partno,partname,leadtime,dqty1,dqty2,dqty3,dqty4,dqty5,dqty6,dqty7,
-dqty8,dqty9,dqty10,dqty11,dqty12,dqty13,dqty14,dqty15,dqty16,dqty17,dqty18,
-dqty19,dqty20,dqty21,dqty22,dqty23,dqty24,dqty25,dqty26,dqty27,dqty28,
+$sql = "select partno,partname,leadtime,dtqty1,dtqty2,dtqty3,dtqty4,dtqty5,dtqty6,dtqty7,
+dtqty8,dtqty9,dtqty10,dtqty11,dtqty12,dtqty13,dtqty14,dtqty15,dtqty16,dtqty17,dtqty18,
+dtqty19,dtqty20,dtqty21,dtqty22,dtqty23,dtqty24,dtqty25,dtqty26,dtqty27,dtqty28,
 dt2qt1,dt2qt2,dt2qt3,dt2qt4,dt2qt5,dt2qt6,dt2qt7,dt2qt8,dt2qt9,dt2qt10,dt2qt11,dt2qt12,
 dt2qt13,dt2qt14,dt2qt15,dt2qt16,dt2qt17,dt2qt18,dt2qt19,dt2qt20,dt2qt21,dt2qt22,dt2qt23,
 dt2qt24,dt2qt25,dt2qt26,dt2qt27,dt2qt28,

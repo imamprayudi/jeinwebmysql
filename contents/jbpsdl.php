@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 if(isset($_SESSION['usr']))
@@ -15,11 +14,15 @@ else
   <?php   
 }
 
-include('koneksimysql.php');
+include('koneksi.php');
 $supp = $_GET['suppid'];
-$suppcode = $supp / 14102703 ;
+$suppcode = intval($supp) / 14102703 ;
 $tgl  = $_GET['tgl'];
-$sqlh = "select * from bps where ( hd = 'H' ) and (suppcode = '" . $suppcode . "') and (transdate = '" . $tgl . "') LIMIT 1";
+$sqlh = "select top 1 transdate,hd,tm,suppcode,partno,partname,balqty,
+  qty1,qty2,qty3,qty4,qty5,qty6,qty7,qty8,qty9,qty10,qty11,qty12,qty13,qty14,qty15,
+  qty16,qty17,qty18,qty19,qty20,qty21,qty22,qty23,qty24,
+  qty25,qty26,qty27,qty28,qty29,qty30,qty31 from bps where ( hd = 'H' ) and 
+  (suppcode = '" . $suppcode . "') and (transdate = '" . $tgl . "')";
 $rsh 		= $db->Execute($sqlh);
 
 while (!$rsh->EOF)
@@ -33,7 +36,11 @@ while (!$rsh->EOF)
   $rsh->MoveNext();
 }
 
-$sqld = "select  * from bps where ( hd = 'd' ) and (suppcode = '" . $suppcode . "') and (transdate = '" . $tgl . "') order by partno";
+$sqld = "select transdate,hd,tm,suppcode,partno,partname,balqty,
+  qty1,qty2,qty3,qty4,qty5,qty6,qty7,qty8,qty9,qty10,qty11,qty12,qty13,qty14,qty15,
+  qty16,qty17,qty18,qty19,qty20,qty21,qty22,qty23,qty24,
+  qty25,qty26,qty27,qty28,qty29,qty30,qty31 from bps where ( hd = 'd' ) and 
+  (suppcode = '" . $suppcode . "') and (transdate = '" . $tgl . "') order by partno";
 $rsd  = $db->Execute($sqld);
 $fname = "bps" . $suppcode . ".csv";
 header("Content-type: text/csv");

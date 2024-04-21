@@ -51,7 +51,12 @@ $session_userid = $_SESSION['s_userid'];
 				echo '<tr>';
 					echo '<td width="250px" valign="top">Select Supplier</td>';
 					echo '<td> <select name="suppcode">';
-						$rs_cb_suppcode = $db->Execute("select * from usersupp where userid = '" .$session_userid. "' order by suppname asc");
+						$rs_cb_suppcode = $db->Execute("select [UserId]
+														,[SuppCode]
+														,[SuppName]
+														,[scold]
+														,[scnew] 
+														from usersupp where userid = '" .$session_userid. "' order by suppname asc");
 						while (!$rs_cb_suppcode->EOF)
 						{
 							echo '<option value="' . $rs_cb_suppcode->fields[1] . '">' . $rs_cb_suppcode->fields[1] . ' - ' . $rs_cb_suppcode->fields[2] . '</option>';

@@ -3,17 +3,7 @@
 /*
 get data Big Parts Schedule
 */
-include("koneksimysql.php");
-session_start();
-if(!isset($_SESSION['usr']))
-{
-  echo "session time out";
-  ?> 
-  <script> 
-    window.location.href = '../index.php';
-  </script>
-  <?php  
-}  
+include("koneksi.php");
 
 if (isset($_GET['supp']))
 {
@@ -25,15 +15,22 @@ if (isset($_GET['tgl']))
   $tgl = $_GET['tgl'];
 }
 
-$rs = $db->Execute("select * from bps where (hd = 'H') and (suppcode = '" . $suppid . "') and (transdate = '" . $tgl . "')");
+$rs = $db->Execute("select transdate,hd,tm,suppcode,partno,partname,balqty,
+  qty1,qty2,qty3,qty4,qty5,qty6,qty7,qty8,qty9,qty10,qty11,qty12,qty13,qty14,qty15,
+  qty16,qty17,qty18,qty19,qty20,qty21,qty22,qty23,qty24,
+  qty25,qty26,qty27,qty28,qty29,qty30,qty31 from bps where (hd = 'H') and
+  (suppcode = '" . $suppid . "') and (transdate = '" . $tgl . "')");
 $ada = $rs->RecordCount();
-if ($ada == 0)
-{
-  echo 'Data Nothing ....';
+if ($ada == 0) {
+  // echo 'Data Nothing ....';
+  ?>
+    <div class="mt-4 container col-12 text-center text-danger">
+      <h2>Data Nothing ....</h2>
+    </div>
+  <?php
+  die();
 }
-else
-{
-  $supp = $suppid * 14102703 ;
+  $supp = intval($suppid) * 14102703 ;
   echo '&nbsp;&nbsp;&nbsp;';
   echo '<a target="_blank" href="jbpsdl.php?suppid=' . $supp . "&tgl=" . $tgl . '">DOWNLOAD DATA TO CSV FORMAT</a>';
   echo '<br />';
@@ -55,7 +52,11 @@ else
     $rs->MoveNext();
   }
   $nomor = 0;
-  $rs = $db->Execute("select * from bps where (hd = 'D') and (suppcode = '" . $suppid . "') and (transdate = '" . $tgl . "') order by partno");
+  $rs = $db->Execute("select transdate,hd,tm,suppcode,partno,partname,balqty,
+    qty1,qty2,qty3,qty4,qty5,qty6,qty7,qty8,qty9,qty10,qty11,qty12,qty13,qty14,qty15,
+    qty16,qty17,qty18,qty19,qty20,qty21,qty22,qty23,qty24,
+    qty25,qty26,qty27,qty28,qty29,qty30,qty31 from bps where (hd = 'D') 
+    and (suppcode = '" . $suppid . "') and (transdate = '" . $tgl . "') order by partno");
   while (!$rs->EOF)
   {
     $nomor++;
@@ -71,7 +72,7 @@ else
     $rs->MoveNext();
   }
     echo '</table>';
-}
+
 $rs->Close();
 $db->Close();
 ?>

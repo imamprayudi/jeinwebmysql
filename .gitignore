@@ -1,1 +1,30 @@
-contents/koneksipdo.php
+printqr
+node_modules
+template
+# template/login
+# template/NiceAdmin
+# template/utama/forms
+# template/utama/blog-details.html
+# template/utama/blog.html
+# template/utama/index-2.html
+# template/utama/index-3.html
+# template/utama/index-4.html
+# template/utama/index.html
+# template/utama/inner-page.html
+# template/utama/portfolio-details.html
+# template/utama/Readme.txt
+
+
+src_bak/bootstrap.css
+src_bak/main.css
+src_bak/utama.js
+.gitignore
+template/utama/assets/vendor/bootstrap-icons/bootstrap-icons.json
+template/utama/assets/vendor/bootstrap-icons/bootstrap-icons.scss
+template/utama/assets/vendor/bootstrap-icons/fonts/bootstrap-icons.woff
+template/utama/assets/vendor/bootstrap-icons/fonts/bootstrap-icons.woff2
+assets_v2/js/_main.js
+contents/jpo_v1.php
+contents/jpo no vue.php
+contents_v2/index_2.php
+ext
