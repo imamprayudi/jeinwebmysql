@@ -32,8 +32,8 @@ if ($_POST)
  
 $rs = $pdo->query("select transdate,suppcode,partnumber,partname,orderqty,reqdate,ponumber,
   posq,orderbalance,supprest,model,issuedate,potype,statuspart,remark,statusread 
-  from ordbal where suppcode = '" . $supp . "' order by " . $orderby);
-$ada = $rs->RecordCount();
+  from ordbal where suppcode = '" . $supp . "' order by " . $orderby)->fetchAll();
+$ada = count($rs);
 if ($ada == 0) {
   // echo 'Data Nothing ....';
   ?>
@@ -67,27 +67,46 @@ if ($ada == 0) {
 	echo '</thead>';
   $nomor = 0;
   echo "<tbody>";
-  while (!$rs->EOF)
-  {
-    $nomor++; 
-	  echo '<tr>';
-		echo '<td>' . $nomor . '</td>'; 
-    echo '<td>' . $rs->fields[2] . '</td>';
-		echo '<td>' . $rs->fields[3] . '</td>';
-		echo '<td align="right">' . $rs->fields[4] . '</td>';
-		$rdate = substr($rs->fields[5],0,10);
-		echo '<td>' . $rdate . '</td>';
-		echo '<td>' . $rs->fields[6] . '</td>';
-		echo '<td>' . $rs->fields[7] . '</td>';
-		echo '<td align="right">' . $rs->fields[8] . '</td>';
-		echo '<td align="right">' . $rs->fields[9] . '</td>';
-		echo '<td>' . $rs->fields[10] . '</td>';
-		$idate = substr($rs->fields[11],0,10);
-		echo '<td>' . $idate . '</td>';
-		echo '<td>&nbsp;' . $rs->fields[12] . '&nbsp;</td>';
-		echo '</tr>';
-	  $rs->MoveNext();
+  foreach ($rs as $row) {
+    $nomor++;
+    echo '<tr>';
+    echo '<td>' . $nomor . '</td>';
+    echo '<td>' . $row[2] . '</td>';
+    echo '<td>' . $row[3] . '</td>';
+    echo '<td align="right">' . $row[4] . '</td>';
+    $rdate = substr($row[5], 0, 10);
+    echo '<td>' . $rdate . '</td>';
+    echo '<td>' . $row[6] . '</td>';
+    echo '<td>' . $row[7] . '</td>';
+    echo '<td align="right">' . $row[8] . '</td>';
+    echo '<td align="right">' . $row[9] . '</td>';
+    echo '<td>' . $row[10] . '</td>';
+    $idate = substr($row[11], 0, 10);
+    echo '<td>' . $idate . '</td>';
+    echo '<td>&nbsp;' . $row[12] . '&nbsp;</td>';
+    echo '</tr>';
   }
+  // while (!$rs->EOF)
+  // {
+  //   $nomor++; 
+	//   echo '<tr>';
+	// 	echo '<td>' . $nomor . '</td>'; 
+  //   echo '<td>' . $rs->fields[2] . '</td>';
+	// 	echo '<td>' . $rs->fields[3] . '</td>';
+	// 	echo '<td align="right">' . $rs->fields[4] . '</td>';
+	// 	$rdate = substr($rs->fields[5],0,10);
+	// 	echo '<td>' . $rdate . '</td>';
+	// 	echo '<td>' . $rs->fields[6] . '</td>';
+	// 	echo '<td>' . $rs->fields[7] . '</td>';
+	// 	echo '<td align="right">' . $rs->fields[8] . '</td>';
+	// 	echo '<td align="right">' . $rs->fields[9] . '</td>';
+	// 	echo '<td>' . $rs->fields[10] . '</td>';
+	// 	$idate = substr($rs->fields[11],0,10);
+	// 	echo '<td>' . $idate . '</td>';
+	// 	echo '<td>&nbsp;' . $rs->fields[12] . '&nbsp;</td>';
+	// 	echo '</tr>';
+	//   $rs->MoveNext();
+  // }
   echo "</tbody>";
   echo '</table>';
 

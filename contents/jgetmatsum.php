@@ -30,8 +30,8 @@ require_once("../connection.php");
   $rs = $pdo->query("select partno,partname, convert(decimal,prevblncqty), 
   convert(decimal,recqty), convert(decimal,shipqty), convert(decimal,thisblncqty) 
   from sc01 where (loccode = '" . $csupp . "') and (period='" . $period . "') 
-  AND (WHCODE = 'MC1') order by partno");
-  $ada = $rs->RecordCount();
+  AND (WHCODE = 'MC1') order by partno")->fetchAll();
+  $ada = count($rs);
   if ($ada == 0) {
     // echo 'Data Nothing ....';
   ?>
@@ -55,24 +55,41 @@ require_once("../connection.php");
       <tbody>
         <?php
         $nomor = 0;
-        while (!$rs->EOF) {
+        foreach ($rs as $row) {
           $nomor++;
           echo '<tr>';
           echo '<td>' . $nomor . '</td>';
           echo '<td>
-        <pre>' . trim($rs->fields[0]) . '</pre>
+        <pre>' . trim($row[0]) . '</pre>
       </td>';
-          echo '<td>' . $rs->fields[1] . '</td>';
-          $f2 = number_format($rs->fields[2]);
+          echo '<td>' . $row[1] . '</td>';
+          $f2 = number_format($row[2]);
           echo '<td align="right">' . $f2 . '</td>';
-          $f3 = number_format($rs->fields[3]);
+          $f3 = number_format($row[3]);
           echo '<td align="right">' . $f3 . '</td>';
-          $f4 = number_format($rs->fields[4]);
+          $f4 = number_format($row[4]);
           echo '<td align="right">' . $f4 . '</td>';
-          $f5 = number_format($rs->fields[5]);
+          $f5 = number_format($row[5]);
           echo '<td align="right">' . $f5 . '</td>';
-          $rs->MoveNext();
         }
+      //   while (!$rs->EOF) {
+      //     $nomor++;
+      //     echo '<tr>';
+      //     echo '<td>' . $nomor . '</td>';
+      //     echo '<td>
+      //   <pre>' . trim($rs->fields[0]) . '</pre>
+      // </td>';
+      //     echo '<td>' . $rs->fields[1] . '</td>';
+      //     $f2 = number_format($rs->fields[2]);
+      //     echo '<td align="right">' . $f2 . '</td>';
+      //     $f3 = number_format($rs->fields[3]);
+      //     echo '<td align="right">' . $f3 . '</td>';
+      //     $f4 = number_format($rs->fields[4]);
+      //     echo '<td align="right">' . $f4 . '</td>';
+      //     $f5 = number_format($rs->fields[5]);
+      //     echo '<td align="right">' . $f5 . '</td>';
+      //     $rs->MoveNext();
+      //   }
         ?>
       </tbody>
     </table>

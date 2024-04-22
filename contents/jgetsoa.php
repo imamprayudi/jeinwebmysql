@@ -79,15 +79,15 @@ require_once("../connection.php");
 		$rs = $pdo->query("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
 	invoice,partno,partname,qty,price,amount,dncnd,lastpay,purchase,dncns,netpur,vat,
 	salesvat,payment,balance from " . $tablesoa . " where (hd = 'H') and (suppcode = '" . $suppid . "') 
-	and (transdate = '" . $tgl . "')");
+	and (transdate = '" . $tgl . "')")->fetchAll();
 	} else {
 		$rs = $pdo->query("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
 	invoice,partno,partname,qty,price,amount,dncnd,lastpay,purchase,dncns,netpur,vat,
 	salesvat,payment,balance from soa where (hd = 'H') and (suppcode = '" . $suppid . "') 
-	and (transdate = '" . $tgl . "')");
+	and (transdate = '" . $tgl . "')")->fetchAll();
 	}
 
-	$ada = $rs->RecordCount();
+	$ada = count($rs);
 	if ($ada == 0) {
 		// echo 'Data Nothing ....';
 	?>
@@ -97,9 +97,9 @@ require_once("../connection.php");
 	<?php
 		die();
 	}
-	$query = "select suppcom,jeincom from soacom where blnthn = '" . $rs->fields[3] . "' and
-	  suppcode = '" . $rs->fields[4] . "'";
-	$rc = $pdo->query($query);
+	$query = "select suppcom,jeincom from soacom where blnthn = '" . $rs[0][3] . "' and
+	  suppcode = '" . $rs[0][4] . "'";
+	$rc = $pdo->query($query)->fetchAll();
 	$supp = intval($suppid) * 14102703;
 	// print_r($rs->fields);
 	// print_r($rc->fields);
@@ -108,7 +108,7 @@ require_once("../connection.php");
 	<form id="frmcom" action="jsoacom.php" method="post">
 		<?php
 		if ($mysecure == '3') {
-			if (isset($rc->fields[1])) {
+			if (isset($rc[0][1])) {
 			?>
 			<article class="card bg-light">
 				<header class="card-header border-0 bg-transparent d-flex align-items-center">
@@ -126,14 +126,14 @@ require_once("../connection.php");
 					</div>
 				</header>
 				<div class="card-body py-2 px-3">
-					<?= $rc->fields[1] ?>
+					<?= $rc[0][1] ?>
 				</div>
 				<footer class="card-footer bg-white border-0 py-1 px-3">
 				</footer>
 			</article>
 			<?php
 			}
-			if (isset($rc->fields[0])) {
+			if (isset($rc[0][0])) {
 			?>
 				<article class="card bg-light">
 					<header class="card-header border-0 bg-transparent d-flex align-items-center">
@@ -151,7 +151,7 @@ require_once("../connection.php");
 						</div>
 					</header>
 					<div class="card-body py-2 px-3">
-						<?= $rc->fields[0] ?>
+						<?= $rc[0][0] ?>
 					</div>
 					<footer class="card-footer bg-white border-0 py-1 px-3">
 					</footer>
@@ -171,8 +171,8 @@ require_once("../connection.php");
 								Comment</label>
 							<textarea class="form-control form-control-sm border border-2 rounded-1" id="txtcom" name="txtcom" style="height: 50px" placeholder="Add a comment..." minlength="3" maxlength="255" required></textarea>
 							<input type="hidden" id="hcom" name="hcom" value="jeincom">
-							<input type="hidden" id="hsupp" name="hsupp" value="<?= $rs->fields[4] ?>">
-							<input type="hidden" id="hblnthn" name="hblnthn" value="<?= $rs->fields[3] ?>">
+							<input type="hidden" id="hsupp" name="hsupp" value="<?= $rs[0][4] ?>">
+							<input type="hidden" id="hblnthn" name="hblnthn" value="<?= $rs[0][3] ?>">
 						</div>
 					</form>
 				</div>
@@ -194,7 +194,7 @@ require_once("../connection.php");
 			// echo '<input type="hidden" id="hsupp" name="hsupp" value="' . $rs->fields[4] . '">';
 			// echo '<input type="hidden" id="hblnthn" name="hblnthn" value="' . $rs->fields[3] . '">';
 		} else {
-			if (isset($rc->fields[0])) {
+			if (isset($rc[0][0])) {
 		?>
 			<article class="card bg-light">
 				<header class="card-header border-0 bg-transparent d-flex align-items-center">
@@ -212,14 +212,14 @@ require_once("../connection.php");
 					</div>
 				</header>
 				<div class="card-body py-2 px-3">
-					<?= $rc->fields[0] ?>
+					<?= $rc[0][0] ?>
 				</div>
 				<footer class="card-footer bg-white border-0 py-1 px-3">
 				</footer>
 			</article>
 			<?php
 			}
-			if (isset($rc->fields[1])) {
+			if (isset($rc[0][1])) {
 			?>
 				<article class="card bg-light">
 					<header class="card-header border-0 bg-transparent d-flex align-items-center">
@@ -237,7 +237,7 @@ require_once("../connection.php");
 						</div>
 					</header>
 					<div class="card-body py-2 px-3">
-						<?= $rc->fields[1] ?>
+						<?= $rc[0][1] ?>
 					</div>
 					<footer class="card-footer bg-white border-0 py-1 px-3">
 					</footer>
@@ -257,8 +257,8 @@ require_once("../connection.php");
 								Comment</label>
 							<textarea class="form-control form-control-sm border border-2 rounded-1" id="txtcom" name="txtcom" style="height: 50px" placeholder="Add a comment..." minlength="3" maxlength="255" required></textarea>
 							<input type="hidden" id="hcom" name="hcom" value="jeincom">
-							<input type="hidden" id="hsupp" name="hsupp" value="<?= $rs->fields[4] ?>">
-							<input type="hidden" id="hblnthn" name="hblnthn" value="<?= $rs->fields[3] ?>">
+							<input type="hidden" id="hsupp" name="hsupp" value="<?= $rs[0][4] ?>">
+							<input type="hidden" id="hblnthn" name="hblnthn" value="<?= $rs[0][3] ?>">
 						</div>
 					</form>
 				</div>
@@ -302,19 +302,31 @@ require_once("../connection.php");
 		</thead>
 		<tbody>
 			<?php
-			while (!$rs->EOF) {
+			foreach ($rs as $row) {
 				echo '<tr>';
-				echo '<td align="right">' . $rs->fields[16] . '</td>';
-				echo '<td align="right">' . $rs->fields[17] . '</td>';
-				echo '<td align="right">' . $rs->fields[18] . '</td>';
-				echo '<td align="right">' . $rs->fields[19] . '</td>';
-				echo '<td align="right">' . $rs->fields[20] . '</td>';
-				echo '<td align="right">' . $rs->fields[21] . '</td>';
-				echo '<td align="right">' . $rs->fields[22] . '</td>';
-				echo '<td align="right">' . $rs->fields[23] . '</td>';
+				echo '<td align="right">' . $row[16] . '</td>';
+				echo '<td align="right">' . $row[17] . '</td>';
+				echo '<td align="right">' . $row[18] . '</td>';
+				echo '<td align="right">' . $row[19] . '</td>';
+				echo '<td align="right">' . $row[20] . '</td>';
+				echo '<td align="right">' . $row[21] . '</td>';
+				echo '<td align="right">' . $row[22] . '</td>';
+				echo '<td align="right">' . $row[23] . '</td>';
 				echo '</tr>';
-				$rs->MoveNext();
 			}
+			// while (!$rs->EOF) {
+			// 	echo '<tr>';
+			// 	echo '<td align="right">' . $rs->fields[16] . '</td>';
+			// 	echo '<td align="right">' . $rs->fields[17] . '</td>';
+			// 	echo '<td align="right">' . $rs->fields[18] . '</td>';
+			// 	echo '<td align="right">' . $rs->fields[19] . '</td>';
+			// 	echo '<td align="right">' . $rs->fields[20] . '</td>';
+			// 	echo '<td align="right">' . $rs->fields[21] . '</td>';
+			// 	echo '<td align="right">' . $rs->fields[22] . '</td>';
+			// 	echo '<td align="right">' . $rs->fields[23] . '</td>';
+			// 	echo '</tr>';
+			// 	$rs->MoveNext();
+			// }
 			?>
 		</tbody>
 	</table>
@@ -342,38 +354,54 @@ require_once("../connection.php");
 				$rs = $pdo->query("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
 	  invoice,partno,partname,qty,price,amount,dncnd,lastpay,purchase,dncns,netpur,vat,
 	  salesvat,payment,balance from " .  $tablesoa . " where (hd = 'D') and (suppcode = '" . $suppid . "') 
-	  and (transdate = '" . $tgl . "') order by INVOICE, OK");
+	  and (transdate = '" . $tgl . "') order by INVOICE, OK")->fetchAll();
 			} else {
 				$rs = $pdo->query("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
 		invoice,partno,partname,qty,price,amount,dncnd,lastpay,purchase,dncns,netpur,vat,
 		salesvat,payment,balance from SOA where (hd = 'D') and (suppcode = '" . $suppid . "') 
-		and (transdate = '" . $tgl . "') order by INVOICE, OK");
+		and (transdate = '" . $tgl . "') order by INVOICE, OK")->fetchAll();
 			}
-
-			while (!$rs->EOF) {
+			foreach ($rs as $row) {
 				$nomor++;
 				echo '<tr>';
 				echo '<td align="right">' . $nomor . '</td>';
-				echo '<td >' . $rs->fields[6] . '</td>';
-				echo '<td>' . $rs->fields[7] . '</td>';
-				echo '<td>' . $rs->fields[8] . '</td>';
-				echo '<td>' . $rs->fields[9] . '</td>';
-				echo '<td><pre>' . trim($rs->fields[10]) . '</pre></td>';
-				echo '<td>' . $rs->fields[11] . '</td>';
-				echo '<td align="right">' . $rs->fields[12] . '</td>';
-				echo '<td align="right">' . $rs->fields[13] . '</td>';
-				echo '<td align="right">' . $rs->fields[14] . '</td>';
-				echo '<td align="right">' . $rs->fields[15] . '</td>';
+				echo '<td >' . $row[6] . '</td>';
+				echo '<td>' . $row[7] . '</td>';
+				echo '<td>' . $row[8] . '</td>';
+				echo '<td>' . $row[9] . '</td>';
+				echo '<td><pre>' . trim($row[10]) . '</pre></td>';
+				echo '<td>' . $row[11] . '</td>';
+				echo '<td align="right">' . $row[12] . '</td>';
+				echo '<td align="right">' . $row[13] . '</td>';
+				echo '<td align="right">' . $row[14] . '</td>';
+				echo '<td align="right">' . $row[15] . '</td>';
 				echo '</tr>';
-				$rs->MoveNext();
 			}
+			// while (!$rs->EOF) {
+			// 	$nomor++;
+			// 	echo '<tr>';
+			// 	echo '<td align="right">' . $nomor . '</td>';
+			// 	echo '<td >' . $rs->fields[6] . '</td>';
+			// 	echo '<td>' . $rs->fields[7] . '</td>';
+			// 	echo '<td>' . $rs->fields[8] . '</td>';
+			// 	echo '<td>' . $rs->fields[9] . '</td>';
+			// 	echo '<td><pre>' . trim($rs->fields[10]) . '</pre></td>';
+			// 	echo '<td>' . $rs->fields[11] . '</td>';
+			// 	echo '<td align="right">' . $rs->fields[12] . '</td>';
+			// 	echo '<td align="right">' . $rs->fields[13] . '</td>';
+			// 	echo '<td align="right">' . $rs->fields[14] . '</td>';
+			// 	echo '<td align="right">' . $rs->fields[15] . '</td>';
+			// 	echo '</tr>';
+			// 	$rs->MoveNext();
+			// }
 			?>
 		</tbody>
 	</table>
 </div>
 <?php
-$rs->Close();
-$db->Close();
+// $rs->Close();
+// $db->Close();
+$pdo = null;
 ?>
 </body>
 <script type="text/javascript">

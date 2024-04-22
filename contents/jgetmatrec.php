@@ -30,8 +30,8 @@ require_once("../connection.php");
   $rs = $pdo->query("select col001,col002,col003,col004,col005,col006,col007,col008,
   col009,col010,col011,col012,col013,col014,col015,col016,col017,col018,col019,col020
   from vvi07rec where ( col013 = '" . $supp . "') and 
-  ( col005 between '" . $tgl1 . "' and '" . $tgl2 . "') order by col005,col001");
-  $ada = $rs->RecordCount();
+  ( col005 between '" . $tgl1 . "' and '" . $tgl2 . "') order by col005,col001")->fetchAll();
+  $ada = count($rs);
 
   if ($ada == 0) {
     // echo 'Data Nothing ....';
@@ -57,27 +57,47 @@ require_once("../connection.php");
       <tbody>
         <?php
         $nomor = 0;
-        while (!$rs->EOF) {
+        foreach ($rs as $row) {
           $nomor++;
           echo '<tr>';
           echo '<td>' . $nomor . '</td>';
-          $vdate = substr($rs->fields[4], 0, 10);
+          $vdate = substr($row[4], 0, 10);
           echo '<td>' . $vdate . '</td>';
           echo '<td>
-        <pre>' . trim($rs->fields[0]) . '</pre>
+        <pre>' . trim($row[0]) . '</pre>
       </td>';
-          echo '<td>' . $rs->fields[8] . '</td>';
-          $vqty = number_format($rs->fields[5]);
+          echo '<td>' . $row[8] . '</td>';
+          $vqty = number_format($row[5]);
           echo '<td align="right">' . $vqty . '</td>';
-          echo '<td align="center">' . $rs->fields[2] . '</td>';
-          if ($rs->fields[5] < 0) {
+          echo '<td align="center">' . $row[2] . '</td>';
+          if ($row[5] < 0) {
             $cekpm = '-';
           } else {
             $cekpm = '+';
           }
           echo '<td align="center">' . $cekpm . '</td>';
-          $rs->MoveNext();
         }
+      //   while (!$rs->EOF) {
+      //     $nomor++;
+      //     echo '<tr>';
+      //     echo '<td>' . $nomor . '</td>';
+      //     $vdate = substr($rs->fields[4], 0, 10);
+      //     echo '<td>' . $vdate . '</td>';
+      //     echo '<td>
+      //   <pre>' . trim($rs->fields[0]) . '</pre>
+      // </td>';
+      //     echo '<td>' . $rs->fields[8] . '</td>';
+      //     $vqty = number_format($rs->fields[5]);
+      //     echo '<td align="right">' . $vqty . '</td>';
+      //     echo '<td align="center">' . $rs->fields[2] . '</td>';
+      //     if ($rs->fields[5] < 0) {
+      //       $cekpm = '-';
+      //     } else {
+      //       $cekpm = '+';
+      //     }
+      //     echo '<td align="center">' . $cekpm . '</td>';
+      //     $rs->MoveNext();
+      //   }
 
         ?>
       </tbody>

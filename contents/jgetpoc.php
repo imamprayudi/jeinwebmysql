@@ -33,8 +33,8 @@ if ($_POST)
 
 $rs = $pdo->query("select transdate,supplier,status,confirmation,confirmdate,
   rejectreason from mailpocst where ( supplier = '" . $supp . "') 
-  and ( transdate between '" . $tgl1 ."' and '" . $tgl2 . "') order by transdate");
-$ada = $rs->RecordCount();
+  and ( transdate between '" . $tgl1 ."' and '" . $tgl2 . "') order by transdate")->fetchAll();
+$ada = count($rs);
 if ($ada == 0)
 {
   echo '<br />Data Nothing ....';
@@ -53,37 +53,63 @@ else
   echo '<th>***</th>';
   echo '</tr>';
   $nomor = 0;
-  while (!$rs->EOF)
-  {
-    $nomor++; 
-	  echo '<tr>';
-		echo '<td>' . $nomor . '</td>'; 
-		$vdate = substr($rs->fields[0],0,10);
+  foreach ($rs as $row) {
+    $nomor++;
+    echo '<tr>';
+    echo '<td>' . $nomor . '</td>';
+    $vdate = substr($row[0], 0, 10);
     echo '<td>' . $vdate . '</td>';
-		echo '<td>' . $rs->fields[2] . '</td>';
-		echo '<td>' . $rs->fields[3] . '</td>';
-		$vconfirm = substr($rs->fields[4],0,16);
+    echo '<td>' . $row[2] . '</td>';
+    echo '<td>' . $row[3] . '</td>';
+    $vconfirm = substr($row[4], 0, 16);
     echo '<td align="center">' . $vconfirm . '</td>';
-    echo '<td>' . $rs->fields[5] . '</td>';
-    $suppcode = $rs->fields[1] * 14102703;
+    echo '<td>' . $row[5] . '</td>';
+    $suppcode = $row[1] * 14102703;
     echo '<td><font size="1" face="verdana"><a target="_blank" href="jgetpocdtl.php?sid=';
     echo $suppcode;
     echo '&tglid=';
     echo $vdate;
     echo '&sts=';
-    echo $rs->fields[2];
+    echo $row[2];
     echo '&conf=';
-    echo $rs->fields[3];
+    echo $row[3];
     echo '&confdate=';
     echo $vconfirm;
     echo '"</a>View Detail</td>';
     echo '<td><font size="1" face="verdana"><a target="_blank" href="jpocdl.php?sid=' . $suppcode . '&tglid=' . $vdate . '"</a>Download</td>';
-	  $rs->MoveNext();
   }
+  // while (!$rs->EOF)
+  // {
+  //   $nomor++; 
+	//   echo '<tr>';
+	// 	echo '<td>' . $nomor . '</td>'; 
+	// 	$vdate = substr($rs->fields[0],0,10);
+  //   echo '<td>' . $vdate . '</td>';
+	// 	echo '<td>' . $rs->fields[2] . '</td>';
+	// 	echo '<td>' . $rs->fields[3] . '</td>';
+	// 	$vconfirm = substr($rs->fields[4],0,16);
+  //   echo '<td align="center">' . $vconfirm . '</td>';
+  //   echo '<td>' . $rs->fields[5] . '</td>';
+  //   $suppcode = $rs->fields[1] * 14102703;
+  //   echo '<td><font size="1" face="verdana"><a target="_blank" href="jgetpocdtl.php?sid=';
+  //   echo $suppcode;
+  //   echo '&tglid=';
+  //   echo $vdate;
+  //   echo '&sts=';
+  //   echo $rs->fields[2];
+  //   echo '&conf=';
+  //   echo $rs->fields[3];
+  //   echo '&confdate=';
+  //   echo $vconfirm;
+  //   echo '"</a>View Detail</td>';
+  //   echo '<td><font size="1" face="verdana"><a target="_blank" href="jpocdl.php?sid=' . $suppcode . '&tglid=' . $vdate . '"</a>Download</td>';
+	//   $rs->MoveNext();
+  // }
 	echo '</table>';
 }
-$rs->Close();
-$db->Close();
+// $rs->Close();
+// $db->Close();
+$pdo = null;
 ?>
 </body>
 </html>

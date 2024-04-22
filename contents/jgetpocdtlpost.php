@@ -26,10 +26,10 @@ $qry = $qry . $supp;
 $qry = $qry . "') and (transdate='";
 $qry = $qry . $tgl;
 $qry = $qry . "')";
-$rs = $pdo->query($qry);
-if($db->affected_rows() > 0) 
+$rs = $pdo->query($qry)->fetchAll();
+if(count($rs) > 0) 
 {
   echo "<script>window.close();</script>";
 }
-$rs->Close();
+// $rs->Close();
 ?>

@@ -32,8 +32,8 @@ if ($_POST)
  
 $rs = $pdo->query("select tgl,partno,partname,pono,qty,amount,ngcode,ngdesc
   from rog where ( suppcode = '" . $supp . "') and 
-  ( tgl between '" . $tgl1 ."' and '" . $tgl2 . "') order by tgl,partno");
-$ada = $rs->RecordCount();
+  ( tgl between '" . $tgl1 ."' and '" . $tgl2 . "') order by tgl,partno")->fetchAll();
+$ada = count($rs);
 if ($ada == 0)
 {
   echo '<br />Data Nothing ....';
@@ -53,24 +53,40 @@ else
   echo '<th>NG Desc</th>';
 	echo '</tr>';
   $nomor = 0;
-  while (!$rs->EOF)
-  {
-    $nomor++; 
-	  echo '<tr>';
-		echo '<td>' . $nomor . '</td>'; 
-		$vdate = substr($rs->fields[0],0,10);
+  foreach ($rs as $row) {
+    $nomor++;
+    echo '<tr>';
+    echo '<td>' . $nomor . '</td>';
+    $vdate = substr($row[0], 0, 10);
     echo '<td>' . $vdate . '</td>';
-		echo '<td>' . $rs->fields[1] . '</td>';
-        echo '<td>' . $rs->fields[2] . '</td>';
-        echo '<td>' . $rs->fields[3] . '</td>';
-		$vqty = number_format($rs->fields[4]);
-        echo '<td align="right">' . $vqty . '</td>';
-        $vamt = number_format($rs->fields[5]);
-        echo '<td align="right">' . $vamt . '</td>';
-		echo '<td align="center">' . $rs->fields[6] . '</td>';
-        echo '<td>' . $rs->fields[7] . '</td>';
-	  $rs->MoveNext();
+    echo '<td>' . $row[1] . '</td>';
+    echo '<td>' . $row[2] . '</td>';
+    echo '<td>' . $row[3] . '</td>';
+    $vqty = number_format($row[4]);
+    echo '<td align="right">' . $vqty . '</td>';
+    $vamt = number_format($row[5]);
+    echo '<td align="right">' . $vamt . '</td>';
+    echo '<td align="center">' . $row[6] . '</td>';
+    echo '<td>' . $row[7] . '</td>';
   }
+  // while (!$rs->EOF)
+  // {
+  //   $nomor++; 
+	//   echo '<tr>';
+	// 	echo '<td>' . $nomor . '</td>'; 
+	// 	$vdate = substr($rs->fields[0],0,10);
+  //   echo '<td>' . $vdate . '</td>';
+	// 	echo '<td>' . $rs->fields[1] . '</td>';
+  //       echo '<td>' . $rs->fields[2] . '</td>';
+  //       echo '<td>' . $rs->fields[3] . '</td>';
+	// 	$vqty = number_format($rs->fields[4]);
+  //       echo '<td align="right">' . $vqty . '</td>';
+  //       $vamt = number_format($rs->fields[5]);
+  //       echo '<td align="right">' . $vamt . '</td>';
+	// 	echo '<td align="center">' . $rs->fields[6] . '</td>';
+  //       echo '<td>' . $rs->fields[7] . '</td>';
+	//   $rs->MoveNext();
+  // }
 	echo '</table>';
 }  
 ?>
