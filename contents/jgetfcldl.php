@@ -20,27 +20,28 @@ else
 $supp = $_GET['sid'];
 $suppcode = intval($supp) / 14102703 ;
 
-include('koneksi.php');
+// include('koneksi.php');
+require_once('../connection.php');
 
 $sqlh = "select dtqty1,dtqty2,dtqty3,dtqty4,dtqty5,dtqty6,dtqty7,dtqty8,dtqty9,dtqty10,
 dtqty11,dtqty12,dtqty13,dtqty14,dtqty15,dtqty16,dtqty17,dtqty18,dtqty19,dtqty20,dtqty21,dtqty22,
 dtqty23,dtqty24,dtqty25,dtqty26,dtqty27,dtqty28 
 from fcl where (suppcode = '" . $suppcode . "') and rt = 'H'"; 
-$rsh    = $db->Execute($sqlh);
+$rsh    = $pdo->query($sqlh)->fetchAll();
 $fname = "fcl" . $suppcode . ".csv";
 header("Content-type: text/csv");
 header("Content-Disposition: attachment; filename=$fname");
 header("Pragma: no-cache");
 header("Expires: 0");
 $fp = fopen("php://output", "w");
-$headers = 'PARTNO,PARTNAME,LT,DD/MM,' . $rsh->fields['0'] . ',' . $rsh->fields['1'] . ',' .
-$rsh->fields['2'] . ',' . $rsh->fields['3'] . ',' . $rsh->fields['4'] . ',' . $rsh->fields['5'] . ',' .
-$rsh->fields['6'] . ',' . $rsh->fields['7'] . ',' . $rsh->fields['8'] . ',' . $rsh->fields['9'] . ',' .
-$rsh->fields['10'] . ',' . $rsh->fields['11'] . ',' . $rsh->fields['12'] . ',' . $rsh->fields['13'] . ',' .
-$rsh->fields['14'] . ',' . $rsh->fields['15'] . ',' .  $rsh->fields['16'] . ',' . $rsh->fields['17'] . ',' .
-$rsh->fields['18'] . ',' . $rsh->fields['19'] . ','  . $rsh->fields['20'] . ',' . $rsh->fields['21'] . ',' .
-$rsh->fields['22'] . ',' . $rsh->fields['23'] . ',' . $rsh->fields['24'] . ',' . $rsh->fields['25'] . ',' .
-$rsh->fields['26'] . ',' . $rsh->fields['27'] . "\n";
+$headers = 'PARTNO,PARTNAME,LT,DD/MM,' . $rsh[0]['0'] . ',' . $rsh[0]['1'] . ',' .
+$rsh[0]['2'] . ',' . $rsh[0]['3'] . ',' . $rsh[0]['4'] . ',' . $rsh[0]['5'] . ',' .
+$rsh[0]['6'] . ',' . $rsh[0]['7'] . ',' . $rsh[0]['8'] . ',' . $rsh[0]['9'] . ',' .
+$rsh[0]['10'] . ',' . $rsh[0]['11'] . ',' . $rsh[0]['12'] . ',' . $rsh[0]['13'] . ',' .
+$rsh[0]['14'] . ',' . $rsh[0]['15'] . ',' .  $rsh[0]['16'] . ',' . $rsh[0]['17'] . ',' .
+$rsh[0]['18'] . ',' . $rsh[0]['19'] . ','  . $rsh[0]['20'] . ',' . $rsh[0]['21'] . ',' .
+$rsh[0]['22'] . ',' . $rsh[0]['23'] . ',' . $rsh[0]['24'] . ',' . $rsh[0]['25'] . ',' .
+$rsh[0]['26'] . ',' . $rsh[0]['27'] . "\n";
            
 $sql = "select partno,partname,leadtime,dtqty1,dtqty2,dtqty3,dtqty4,dtqty5,dtqty6,dtqty7,
 dtqty8,dtqty9,dtqty10,dtqty11,dtqty12,dtqty13,dtqty14,dtqty15,dtqty16,dtqty17,dtqty18,
@@ -55,48 +56,89 @@ dt4qt1,dt4qt2,dt4qt3,dt4qt4,dt4qt5,dt4qt6,dt4qt7,dt4qt8,dt4qt9,dt4qt10,dt4qt11,d
 dt4qt13,dt4qt14,dt4qt15,dt4qt16,dt4qt17,dt4qt18,dt4qt19,dt4qt20,dt4qt21,dt4qt22,dt4qt23,
 dt4qt24,dt4qt25,dt4qt26,dt4qt27,dt4qt28
 from fcl where (suppcode = '" . $suppcode . "') and (rt = 'D') order by partno";
-$rs 		= $db->Execute($sql);
+$rs 		= $pdo->query($sql)->fetchAll();
 fwrite($fp,$headers);
+foreach ($rs as $row) {
+  fputcsv($fp, array(
+    $row['0'], $row['1'], $row['2'],
+    'FIRM', $row['3'], $row['4'], $row['5'], $row['6'], $row['7'],
+    $row['8'], $row['9'], $row['10'], $row['11'], $row['12'],
+    $row['13'], $row['14'], $row['15'], $row['16'], $row['17'],
+    $row['18'], $row['19'], $row['20'], $row['21'], $row['22'],
+    $row['23'], $row['24'], $row['25'], $row['26'], $row['27'],
+    $row['28'], $row['29'], $row['30']
+  ));
 
-while(!$rs->EOF)
-{
-  fputcsv($fp, array(	$rs->fields['0'], $rs->fields['1'], $rs->fields['2'], 
-  'FIRM',$rs->fields['3'], $rs->fields['4'],$rs->fields['5'],$rs->fields['6'],$rs->fields['7'],
-  $rs->fields['8'],$rs->fields['9'],$rs->fields['10'],$rs->fields['11'],$rs->fields['12'],
-  $rs->fields['13'],$rs->fields['14'],$rs->fields['15'],$rs->fields['16'],$rs->fields['17'],
-  $rs->fields['18'],$rs->fields['19'],$rs->fields['20'],$rs->fields['21'],$rs->fields['22'],
-  $rs->fields['23'],$rs->fields['24'],$rs->fields['25'],$rs->fields['26'],$rs->fields['27'],
-  $rs->fields['28'],$rs->fields['29'],$rs->fields['30']));
-  
-  fputcsv($fp, array(	$rs->fields['0'], $rs->fields['1'], $rs->fields['2'], 
-  'FOREC',$rs->fields['31'], $rs->fields['32'],$rs->fields['33'],$rs->fields['34'],$rs->fields['35'],
-  $rs->fields['36'],$rs->fields['37'],$rs->fields['38'],$rs->fields['39'],$rs->fields['40'],
-  $rs->fields['41'],$rs->fields['42'],$rs->fields['43'],$rs->fields['44'],$rs->fields['45'],
-  $rs->fields['46'],$rs->fields['47'],$rs->fields['48'],$rs->fields['49'],$rs->fields['50'],
-  $rs->fields['51'],$rs->fields['52'],$rs->fields['53'],$rs->fields['54'],$rs->fields['55'],
-  $rs->fields['56'],$rs->fields['57'],$rs->fields['58']));
-                      
-  fputcsv($fp, array(	$rs->fields['0'], $rs->fields['1'], $rs->fields['2'], 
-  'PLAN',$rs->fields['59'], $rs->fields['60'],$rs->fields['61'],$rs->fields['62'],$rs->fields['63'],
-  $rs->fields['64'],$rs->fields['65'],$rs->fields['66'],$rs->fields['67'],$rs->fields['68'],
-  $rs->fields['69'],$rs->fields['70'],$rs->fields['71'],$rs->fields['72'],$rs->fields['73'],
-  $rs->fields['74'],$rs->fields['75'],$rs->fields['76'],$rs->fields['77'],$rs->fields['78'],
-  $rs->fields['79'],$rs->fields['80'],$rs->fields['81'],$rs->fields['82'],$rs->fields['83'],
-  $rs->fields['84'],$rs->fields['85'],$rs->fields['86']));
+  fputcsv($fp, array(
+    $row['0'], $row['1'], $row['2'],
+    'FOREC', $row['31'], $row['32'], $row['33'], $row['34'], $row['35'],
+    $row['36'], $row['37'], $row['38'], $row['39'], $row['40'],
+    $row['41'], $row['42'], $row['43'], $row['44'], $row['45'],
+    $row['46'], $row['47'], $row['48'], $row['49'], $row['50'],
+    $row['51'], $row['52'], $row['53'], $row['54'], $row['55'],
+    $row['56'], $row['57'], $row['58']
+  ));
 
-  fputcsv($fp, array(	$rs->fields['0'], $rs->fields['1'], $rs->fields['2'], 
-  'TOTAL',$rs->fields['87'], $rs->fields['88'],$rs->fields['89'],$rs->fields['90'],$rs->fields['91'],
-  $rs->fields['92'],$rs->fields['93'],$rs->fields['94'],$rs->fields['95'],$rs->fields['96'],
-  $rs->fields['97'],$rs->fields['98'],$rs->fields['99'],$rs->fields['100'],$rs->fields['101'],
-  $rs->fields['102'],$rs->fields['103'],$rs->fields['104'],$rs->fields['105'],$rs->fields['106'],
-  $rs->fields['107'],$rs->fields['108'],$rs->fields['109'],$rs->fields['110'],$rs->fields['111'],
-  $rs->fields['112'],$rs->fields['113'],$rs->fields['114']));
+  fputcsv($fp, array(
+    $row['0'], $row['1'], $row['2'],
+    'PLAN', $row['59'], $row['60'], $row['61'], $row['62'], $row['63'],
+    $row['64'], $row['65'], $row['66'], $row['67'], $row['68'],
+    $row['69'], $row['70'], $row['71'], $row['72'], $row['73'],
+    $row['74'], $row['75'], $row['76'], $row['77'], $row['78'],
+    $row['79'], $row['80'], $row['81'], $row['82'], $row['83'],
+    $row['84'], $row['85'], $row['86']
+  ));
 
-  $rs->MoveNext();
+  fputcsv($fp, array(
+    $row['0'], $row['1'], $row['2'],
+    'TOTAL', $row['87'], $row['88'], $row['89'], $row['90'], $row['91'],
+    $row['92'], $row['93'], $row['94'], $row['95'], $row['96'],
+    $row['97'], $row['98'], $row['99'], $row['100'], $row['101'],
+    $row['102'], $row['103'], $row['104'], $row['105'], $row['106'],
+    $row['107'], $row['108'], $row['109'], $row['110'], $row['111'],
+    $row['112'], $row['113'], $row['114']
+  ));
 }
+// while(!$rs->EOF)
+// {
+//   fputcsv($fp, array(	$rs->fields['0'], $rs->fields['1'], $rs->fields['2'], 
+//   'FIRM',$rs->fields['3'], $rs->fields['4'],$rs->fields['5'],$rs->fields['6'],$rs->fields['7'],
+//   $rs->fields['8'],$rs->fields['9'],$rs->fields['10'],$rs->fields['11'],$rs->fields['12'],
+//   $rs->fields['13'],$rs->fields['14'],$rs->fields['15'],$rs->fields['16'],$rs->fields['17'],
+//   $rs->fields['18'],$rs->fields['19'],$rs->fields['20'],$rs->fields['21'],$rs->fields['22'],
+//   $rs->fields['23'],$rs->fields['24'],$rs->fields['25'],$rs->fields['26'],$rs->fields['27'],
+//   $rs->fields['28'],$rs->fields['29'],$rs->fields['30']));
+  
+//   fputcsv($fp, array(	$rs->fields['0'], $rs->fields['1'], $rs->fields['2'], 
+//   'FOREC',$rs->fields['31'], $rs->fields['32'],$rs->fields['33'],$rs->fields['34'],$rs->fields['35'],
+//   $rs->fields['36'],$rs->fields['37'],$rs->fields['38'],$rs->fields['39'],$rs->fields['40'],
+//   $rs->fields['41'],$rs->fields['42'],$rs->fields['43'],$rs->fields['44'],$rs->fields['45'],
+//   $rs->fields['46'],$rs->fields['47'],$rs->fields['48'],$rs->fields['49'],$rs->fields['50'],
+//   $rs->fields['51'],$rs->fields['52'],$rs->fields['53'],$rs->fields['54'],$rs->fields['55'],
+//   $rs->fields['56'],$rs->fields['57'],$rs->fields['58']));
+                      
+//   fputcsv($fp, array(	$rs->fields['0'], $rs->fields['1'], $rs->fields['2'], 
+//   'PLAN',$rs->fields['59'], $rs->fields['60'],$rs->fields['61'],$rs->fields['62'],$rs->fields['63'],
+//   $rs->fields['64'],$rs->fields['65'],$rs->fields['66'],$rs->fields['67'],$rs->fields['68'],
+//   $rs->fields['69'],$rs->fields['70'],$rs->fields['71'],$rs->fields['72'],$rs->fields['73'],
+//   $rs->fields['74'],$rs->fields['75'],$rs->fields['76'],$rs->fields['77'],$rs->fields['78'],
+//   $rs->fields['79'],$rs->fields['80'],$rs->fields['81'],$rs->fields['82'],$rs->fields['83'],
+//   $rs->fields['84'],$rs->fields['85'],$rs->fields['86']));
+
+//   fputcsv($fp, array(	$rs->fields['0'], $rs->fields['1'], $rs->fields['2'], 
+//   'TOTAL',$rs->fields['87'], $rs->fields['88'],$rs->fields['89'],$rs->fields['90'],$rs->fields['91'],
+//   $rs->fields['92'],$rs->fields['93'],$rs->fields['94'],$rs->fields['95'],$rs->fields['96'],
+//   $rs->fields['97'],$rs->fields['98'],$rs->fields['99'],$rs->fields['100'],$rs->fields['101'],
+//   $rs->fields['102'],$rs->fields['103'],$rs->fields['104'],$rs->fields['105'],$rs->fields['106'],
+//   $rs->fields['107'],$rs->fields['108'],$rs->fields['109'],$rs->fields['110'],$rs->fields['111'],
+//   $rs->fields['112'],$rs->fields['113'],$rs->fields['114']));
+
+//   $rs->MoveNext();
+// }
 
 fclose($fp);
-$rsh->Close();
-$rs->Close();
-$db->Close();
+// $rsh->Close();
+// $rs->Close();
+// $db->Close();
+$pdo = null;
 ?>

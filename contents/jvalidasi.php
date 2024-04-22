@@ -6,8 +6,8 @@ if($_POST)
   $puserid = $_POST['userid'];
   $ppassword = $_POST['password'];
   
-  // $rs = $db->Execute("select * from tuser where userid = '" . $puserid . "' and password = '" . $ppassword . "'");
-  $rs = $db->Execute("select userid,userpass,usersecure,usergroup,username,
+  // $rs = $pdo->query("select * from tuser where userid = '" . $puserid . "' and password = '" . $ppassword . "'");
+  $rs = $pdo->query("select userid,userpass,usersecure,usergroup,username,
     useremail,useremail1,useremail2 from usertbl where 
     UserId = '" . $puserid . "'" . " and UserPass = '" . $ppassword . "'");
   $sukses = $rs->RecordCount();
@@ -31,7 +31,7 @@ if($_POST)
     $qryins = "insert into log1(userid,waktu,ipserver,ipclient) 
     values('" . $insuser . "',Getdate(),'" . $namaserver . "','" . $namaclient . "')";
     // $qryins = "insert into log1(userid) values('" . $insuser . "')";
-    $rsins = $db->Execute($qryins);
+    $rsins = $pdo->query($qryins);
     /* end of input data to log */
   
   }

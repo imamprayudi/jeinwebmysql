@@ -62,8 +62,9 @@
   <?php
   }
 
-  include("koneksi.php");
-  $rs = $db->Execute("select usersupp.UserId,usersupp.SuppCode,supplier.SuppName from UserSupp 
+  // include("koneksi.php");
+require_once("../connection.php");
+  $rs = $pdo->query("select usersupp.UserId,usersupp.SuppCode,supplier.SuppName from UserSupp 
   inner join Supplier on usersupp.SuppCode = Supplier.SuppCode 
   where UserId = '" . $myid . "' order by suppname");
 
@@ -107,7 +108,7 @@
               </div>
               <div class="col-2">
                 <label for="idtgl" class="col-form-label"> Transmission Date </label>
-                <?php $rs = $db->Execute("select transdate from tdsdate order by transdate desc"); ?>
+                <?php $rs = $pdo->query("select transdate from tdsdate order by transdate desc"); ?>
                 <select name="tgl" id="idtgl" class="form-select">
                   <?php
                   while (!$rs->EOF) {

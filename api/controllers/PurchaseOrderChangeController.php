@@ -40,7 +40,7 @@ class PurchaseOrderChangeController
                     ->orderBy($request->filter_by, "asc");
             }
             if ($request->filter_by == 'rdate') {
-                $getData = MailPoChange::selectRaw(Helper::translateQueryMonthlyToMysql($request->filter_by, "10") ." as $request->filter_by")
+                $getData = MailPoChange::selectRaw(Helper::translateQueryMonthlyToMysql($request->filter_by,"10", "MySQL") ." as $request->filter_by")
                     ->orderBy($request->filter_by, "desc");
             }
             $getData = $getData->where("supplier", trim($request->supplier))
@@ -146,7 +146,7 @@ class PurchaseOrderChangeController
             if ($filter == "transdate") {
 
                 $getData = MailPoChangeSt::select(
-                    DB::raw(Helper::translateQueryMonthlyToMysql("transdate", "10") . " as transdate"),
+                    DB::raw(Helper::translateQueryMonthlyToMysql("transdate","10", "MySQL") . " as transdate"),
                     DB::raw("trim(mailpocst.supplier) as supplier"),
                     'status',
                     DB::raw("isnull(confirmed.total_confirmed,0) as total_confirmed"),

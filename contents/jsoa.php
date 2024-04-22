@@ -80,8 +80,9 @@
   <?php
   }
 
-  include("koneksi.php");
-  $rs = $db->Execute("select usersupp.UserId,usersupp.SuppCode,supplier.SuppName from UserSupp 
+  // include("koneksi.php");
+require_once("../connection.php");
+  $rs = $pdo->query("select usersupp.UserId,usersupp.SuppCode,supplier.SuppName from UserSupp 
 inner join Supplier on usersupp.SuppCode = Supplier.SuppCode 
 where UserId = '" . $myid . "' order by suppname");
   // include("jmenucss.php");
@@ -125,8 +126,8 @@ where UserId = '" . $myid . "' order by suppname");
                 </select>
               </div>
               <?php
-              // $rs = $db->Execute("select distinct transdate from soa order by transdate desc");
-              $rs = $db->Execute("select transdate from soadate where transdate is not null order by transdate desc");
+              // $rs = $pdo->query("select distinct transdate from soa order by transdate desc");
+              $rs = $pdo->query("select transdate from soadate where transdate is not null order by transdate desc");
               ?>
               <div class="col-3">
                 <label class="col-form-label" for="idsupp">Tanggal</label>

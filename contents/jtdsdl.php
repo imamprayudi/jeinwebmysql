@@ -24,7 +24,7 @@ $sqlh = "select top 1 transdate,hd,tm,suppcode,partno,partname,balqty,
   qty16,qty17,qty18,qty19,qty20,qty21,qty22,qty23,qty24,
   qty25,qty26,qty27,qty28,qty29,qty30,qty31,qty32 from tds where ( hd = 'H' ) and 
   (suppcode = '" . $suppcode . "') and (transdate = '" . $tgl . "')";
-$rsh 		= $db->Execute($sqlh);
+$rsh 		= $pdo->query($sqlh);
 
 while (!$rsh->EOF)
 { 
@@ -44,7 +44,7 @@ $sqld = "select transdate,hd,tm,suppcode,partno,partname,balqty,
   qty16,qty17,qty18,qty19,qty20,qty21,qty22,qty23,qty24,
   qty25,qty26,qty27,qty28,qty29,qty30,qty31,qty32 from tds where ( hd = 'd' ) and 
   (suppcode = '" . $suppcode . "') and (transdate = '" . $tgl . "') order by partno";
-$rsd  = $db->Execute($sqld);
+$rsd  = $pdo->query($sqld);
 $fname = "tds" . $suppcode . ".csv";
 header("Content-type: text/csv");
 header("Content-Disposition: attachment; filename=$fname");

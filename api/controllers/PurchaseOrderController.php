@@ -36,13 +36,14 @@ class PurchaseOrderController
                     ->orderBy($request->filter_by, "asc");
             }
             if ($request->filter_by == 'rdate') {
-                $getData = MailPo::selectRaw(Helper::translateQueryMonthlyToMysql($request->filter_by, "10") . " as $request->filter_by")
+                $getData = MailPo::selectRaw(Helper::translateQueryMonthlyToMysql($request->filter_by,"10", "MySQL") . " as $request->filter_by")
                     ->orderBy($request->filter_by, "desc");
             }
             $getData = $getData->where("supplier", trim($request->supplier))
                 ->whereBetween("rdate", [$request->from_date, $request->end_date])
                 ->distinct()
                 ->get();
+                // return Helper::getEloquentSqlWithBindings($getData);
 
             $data = [];
             foreach ($getData as $val) {
@@ -143,7 +144,7 @@ class PurchaseOrderController
 
 
                 $getData = MailPoSt::select(
-                    DB::raw(Helper::translateQueryMonthlyToMysql("transdate", "10") . " as transdate"),
+                    DB::raw(Helper::translateQueryMonthlyToMysql("transdate","10", "MySQL") . " as transdate"),
                     DB::raw("trim(mailpost.supplier) as supplier"),
                     'status',
                     DB::raw("isnull(confirmed.total_confirmed,0) as total_confirmed"),

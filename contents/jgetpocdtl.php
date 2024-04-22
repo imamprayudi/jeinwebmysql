@@ -138,7 +138,8 @@
 
       // }
 
-      // include("koneksi.php");
+      // // include("koneksi.php");
+require_once("../connection.php");
       // echo '<div class="datagrid">';
       //     $supp = $_GET['sid'];
       //     $suppcode = intval($supp) / 14102703;
@@ -150,7 +151,7 @@
       //     $qry = $qry . "actioncode,pono,partno,partname,newqty,";
       //     $qry = $qry . "newdate,oldqty,olddate,price,model,potype,altno";
       //     $qry = $qry . " from mailpoc where (supplier = '" . $suppcode . "') and (rdate='" . $tgl . "')";
-      //     $rs = $db->Execute($qry);
+      //     $rs = $pdo->query($qry);
       //     $ada = $rs->RecordCount();
       //     if ($ada == 0) {
       //       echo '<br />Data Nothing ....';
@@ -179,7 +180,7 @@
       //       echo '</form>';
       //       $qrysts = "update mailpocst set status = 'read',updated = GETDATE() 
       //   where (supplier = '" . $suppcode . "') and (transdate='" . $tgl . "')";
-      //       $rsts = $db->Execute($qrysts);
+      //       $rsts = $pdo->query($qrysts);
       //       if ($db->affected_rows() > 0) {
       //         echo '<br />';
       //       }

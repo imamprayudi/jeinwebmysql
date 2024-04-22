@@ -1,6 +1,7 @@
   <?php  
 
-include("koneksi.php");
+// include("koneksi.php");
+require_once("../connection.php");
 
 if ($_POST)
 {
@@ -29,7 +30,7 @@ if ($_POST)
 	
 }
  
-$rs = $db->Execute("select transdate,suppcode,partnumber,partname,orderqty,reqdate,ponumber,
+$rs = $pdo->query("select transdate,suppcode,partnumber,partname,orderqty,reqdate,ponumber,
   posq,orderbalance,supprest,model,issuedate,potype,statuspart,remark,statusread 
   from ordbal where suppcode = '" . $supp . "' order by " . $orderby);
 $ada = $rs->RecordCount();

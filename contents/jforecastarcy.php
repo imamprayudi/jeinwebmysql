@@ -51,10 +51,11 @@
     });
   </script>
   <?php
-  include("koneksi.php");
-  $rs = $db->Execute("select usersupp.UserId,usersupp.SuppCode,supplier.SuppName from UserSupp 
+  // include("koneksi.php");
+require_once("../connection.php");
+  $rs = $pdo->query("select usersupp.UserId,usersupp.SuppCode,supplier.SuppName from UserSupp 
 inner join Supplier on usersupp.SuppCode = Supplier.SuppCode 
-where UserId = '" . $myid . "' order by suppname");
+where UserId = '" . $myid . "' order by suppname")->fetchAll();
   // include("jmenucss.php");
   include('../contents_v2/layouts/header.php');
 
@@ -89,24 +90,30 @@ where UserId = '" . $myid . "' order by suppname");
                 <label class="col-form-label" for="idsupp">Supplier</label>
                 <select class="form-select" name="supp" id="idsupp">
                   <?php
-                  while (!$rs->EOF) {
-                    echo '<option value="' . $rs->fields[1] . '">' . $rs->fields[2] . ' - ' . $rs->fields[1] . '</option>';
-                    $rs->MoveNext();
+                  foreach ($rs as $row) {
+                    echo '<option value="' . $row[1] . '">' . $row[2] . ' - ' . $rs->fields[1] . '</option>';
                   }
+                  // while (!$rs->EOF) {
+                  //   echo '<option value="' . $rs->fields[1] . '">' . $rs->fields[2] . ' - ' . $rs->fields[1] . '</option>';
+                  //   $rs->MoveNext();
+                  // }
                   ?>
                 </select>
               </div>
               <?php
-              $rsf = $db->Execute("select transdate from FORECASTDATEY order by transdate desc");
+              $rsf = $pdo->query("select transdate from FORECASTDATEY order by transdate desc")->fetchAll();
               ?>
               <div class="col-2">
                 <label class="col-form-label" for="idtgl">Tanggal</label>
                 <select class="form-select" name="tgl" id="idtgl">
                   <?php
-                  while (!$rsf->EOF) {
-                    echo '<option value="' . substr($rsf->fields[0], 0, 10) . '">' . substr($rsf->fields[0], 0, 10) . '</option>';
-                    $rsf->MoveNext();
+                  foreach ($rsf as $rowf) {
+                    echo '<option value="' . substr($rowf[0], 0, 10) . '">' . substr($rowf[0], 0, 10) . '</option>';
                   }
+                  // while (!$rsf->EOF) {
+                  //   echo '<option value="' . substr($rsf->fields[0], 0, 10) . '">' . substr($rsf->fields[0], 0, 10) . '</option>';
+                  //   $rsf->MoveNext();
+                  // }
                   ?>
                 </select>
               </div>
@@ -122,9 +129,10 @@ where UserId = '" . $myid . "' order by suppname");
               </div>
             </form>
             <?php
-            $rs->Close();
-            $rsf->Close();
-            $db->Close();
+            // $rs->Close();
+            // $rsf->Close();
+            // $db->Close();
+            $pdo = null;
             ?>
 
             <div id="fdata" class="table-responsive">

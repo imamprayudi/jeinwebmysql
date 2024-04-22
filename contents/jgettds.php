@@ -2,7 +2,8 @@
 /*
 get data Time Delivery Schedule
 */
-include("koneksi.php");
+// include("koneksi.php");
+require_once("../connection.php");
 if (isset($_GET['supp'])) {
   $suppid = $_GET['supp'];
 }
@@ -11,7 +12,7 @@ if (isset($_GET['tgl'])) {
   $tgl = $_GET['tgl'];
 }
 
-$rs = $db->Execute("select transdate,hd,tm,suppcode,partno,partname,balqty,qty1,qty2,qty3,qty4,
+$rs = $pdo->query("select transdate,hd,tm,suppcode,partno,partname,balqty,qty1,qty2,qty3,qty4,
   qty5,qty6,qty7,qty8,qty9,qty10,qty11,qty12,qty13,qty14,qty15,qty16,
   qty17,qty18,qty19,qty20,qty21,qty22,qty23,qty24,qty25,qty26,qty27,
   qty28,qty29,qty30,qty31,qty32 from tds where (hd = 'H') and (suppcode = '" . $suppid . "') 
@@ -52,7 +53,7 @@ while (!$rs->EOF) {
 }
 echo "</thead>";
 $nomor = 0;
-$rs = $db->Execute("select transdate,hd,tm,suppcode,partno,partname,balqty,qty1,qty2,qty3,qty4,
+$rs = $pdo->query("select transdate,hd,tm,suppcode,partno,partname,balqty,qty1,qty2,qty3,qty4,
     qty5,qty6,qty7,qty8,qty9,qty10,qty11,qty12,qty13,qty14,qty15,qty16,
     qty17,qty18,qty19,qty20,qty21,qty22,qty23,qty24,qty25,qty26,qty27,
     qty28,qty29,qty30,qty31,qty32 from tds where (hd = 'D') and (suppcode = '" . $suppid . "') 

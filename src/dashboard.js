@@ -163,9 +163,9 @@ $(function (){
         tablerepeat.columns.adjust().draw();
         // var table = $('#myTable').DataTable();
         var dummy = "";
-        let tablechange = $("#po-change").DataTable({
+        let tablechange = $("#table-purchase-order-change").DataTable({
           data: response.data.pochange,
-          order: [1, "desc"],
+          // order: [1, "desc"],
           fixedHeader: true,
           retrieve: true,
           responsive: true,

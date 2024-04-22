@@ -31,7 +31,8 @@ border-collapse: collapse;
 
 <?php
 
-include("koneksi.php");
+// include("koneksi.php");
+require_once("../connection.php");
 
 if (isset($_GET['supp']))
  {
@@ -50,8 +51,7 @@ if (isset($_GET['supp']))
 	  $r2 = 60;
     }
  }
-
-$rs = $db->Execute("select transdate, rt, suppcode, subsuppcode, subsuppname, partno, partname, leadtime, 
+$query = "select transdate, rt, suppcode, subsuppcode, subsuppname, partno, partname, leadtime, 
   dt1qt1, dt1qt2, dt1qt3, dt1qt4, dt1qt5, dt1qt6, dt1qt7, dt1qt8, dt1qt9, dt1qt10, 
   dt1qt11, dt1qt12, dt1qt13, dt1qt14, dt1qt15, dt1qt16, dt1qt17, dt1qt18, dt1qt19, dt1qt20, 
   dt1qt21, dt1qt22, dt1qt23, dt1qt24, dt1qt25, dt1qt26, dt1qt27, dt1qt28, dt1qt29, dt1qt30, 
@@ -76,9 +76,9 @@ $rs = $db->Execute("select transdate, rt, suppcode, subsuppcode, subsuppname, pa
   dt4qt31, dt4qt32, dt4qt33, dt4qt34, dt4qt35, dt4qt36, dt4qt37, dt4qt38, dt4qt39, dt4qt40, 
   dt4qt41,dt4qt42,dt4qt43,dt4qt44, dt4qt45, dt4qt46, dt4qt47, dt4qt48, dt4qt49, dt4qt50, 
   dt4qt51, dt4qt52, dt4qt53,
-  webcode from fc2y where rt = 'H' and suppcode = '" . $suppid . "'");
-
-$ada = $rs->RecordCount();
+  webcode from fc2y where rt = 'H' and suppcode = '" . $suppid . "'";
+$rs = $pdo->query($query)->fetchAll();
+$ada = count($rs);
 
 if ($ada == 0) {
   // echo 'Data Nothing ....';
@@ -91,26 +91,39 @@ if ($ada == 0) {
 }
     echo '<div class="mt-2">';
     echo '<table id="tblfcl" class="table table-responsive table-bordered table-striped font-monospace">';
-    
-    while (!$rs->EOF)
-     {
-       echo '<caption>FORECAST FOR ' . $rs->fields[4] . ' (' . $rs->fields[2] . ')' . ' - ' . $rs->fields[0] . ' - ' .$tipetext . '</caption>';
-       echo '<tr>';
-       echo "<thead class='table-primary'>";
-       echo '<th>NO</th>';
-       echo '<th style="width:100%">Part Number</th>';
-       echo '<th>DD/MM</th>';
+    foreach ($rs as $row) {
+      echo '<caption>FORECAST FOR ' . $row[4] . ' (' . $row[2] . ')' . ' - ' . $row[0] . ' - ' . $tipetext . '</caption>';
+      echo '<tr>';
+      echo "<thead class='table-primary'>";
+      echo '<th>NO</th>';
+      echo '<th style="width:100%">Part Number</th>';
+      echo '<th>DD/MM</th>';
+
+      for ($i = $r1; $i <= $r2; $i++) {
+        echo '<th>' . $row[$i] . '</th>';
+      }
+      echo '</tr>';
+    }
+    // while (!$rs->EOF)
+    //  {
+    //    echo '<caption>FORECAST FOR ' . $rs->fields[4] . ' (' . $rs->fields[2] . ')' . ' - ' . $rs->fields[0] . ' - ' .$tipetext . '</caption>';
+    //    echo '<tr>';
+    //    echo "<thead class='table-primary'>";
+    //    echo '<th>NO</th>';
+    //    echo '<th style="width:100%">Part Number</th>';
+    //    echo '<th>DD/MM</th>';
       
-       for ($i = $r1; $i <= $r2; $i++)
-        {
-          echo '<th>' . $rs->fields[$i] . '</th>';
-        }
-       echo '</tr>';
-       $rs->MoveNext();
-     }
+    //    for ($i = $r1; $i <= $r2; $i++)
+    //     {
+    //       echo '<th>' . $rs->fields[$i] . '</th>';
+    //     }
+    //    echo '</tr>';
+    //    $rs->MoveNext();
+    //  }
     echo "</thead>";
+    
     $nomor = 0;
-    $rs = $db->Execute("select transdate, rt, suppcode, subsuppcode, subsuppname, partno, partname, leadtime, 
+    $query = "select transdate, rt, suppcode, subsuppcode, subsuppname, partno, partname, leadtime, 
     dt1qt1, dt1qt2, dt1qt3, dt1qt4, dt1qt5, dt1qt6, dt1qt7, dt1qt8, dt1qt9, dt1qt10, 
     dt1qt11, dt1qt12, dt1qt13, dt1qt14, dt1qt15, dt1qt16, dt1qt17, dt1qt18, dt1qt19, dt1qt20, 
     dt1qt21, dt1qt22, dt1qt23, dt1qt24, dt1qt25, dt1qt26, dt1qt27, dt1qt28, dt1qt29, dt1qt30, 
@@ -135,29 +148,49 @@ if ($ada == 0) {
     dt4qt31, dt4qt32, dt4qt33, dt4qt34, dt4qt35, dt4qt36, dt4qt37, dt4qt38, dt4qt39, dt4qt40, 
     dt4qt41, dt4qt42, dt4qt43, dt4qt44, dt4qt45, dt4qt46, dt4qt47, dt4qt48, dt4qt49, dt4qt50, 
     dt4qt51, dt4qt52, dt4qt53,
-    webcode from fc2y where rt = 'D' and suppcode = '" . $suppid . "' order by partno");
+    webcode from fc2y where rt = 'D' and suppcode = '" . $suppid . "' order by partno";
+    $rs = $pdo->query($query)->fetchAll();
+    
   echo "<tbody>";
-    while (!$rs->EOF)
-     {
-       $nomor++;
-       echo '<tr>';
-       echo '<td>' . $nomor . '</td><td style="width:100%">';
-       echo '<pre>' . $rs->fields[5]  . '</pre><br />';
-       echo $rs->fields[6] . '<br />';
-       echo $rs->fields[7] . '<br />';
-       // echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-       echo '</td>';
-       echo '<td>FIRM<br />FOREC<br />PLAN<br />TOTAL<br /></td>';
-       for ($y = $r1; $y <= $r2; $y++)
-        {
-         echo '<td align="right">' . $rs->fields[$y] . '<br />';
-         echo $rs->fields[$y+53] . '<br />';
-         echo $rs->fields[$y+53+53] . '<br />';
-         echo $rs->fields[$y+53+53+53] . '</td>';
-        }
-       echo '</tr>';
-       $rs->MoveNext();
-     }
+  foreach ($rs as $row) {
+    $nomor++;
+    echo '<tr>';
+    echo '<td>' . $nomor . '</td><td style="width:100%">';
+    echo '<pre>' . $row[5]  . '</pre><br />';
+    echo $row[6] . '<br />';
+    echo $row[7] . '<br />';
+    // echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+    echo '</td>';
+    echo '<td>FIRM<br />FOREC<br />PLAN<br />TOTAL<br /></td>';
+    for ($y = $r1; $y <= $r2; $y++) {
+      echo '<td align="right">' . $row[$y] . '<br />';
+      echo $row[$y + 53] . '<br />';
+      echo $row[$y + 53 + 53] . '<br />';
+      echo $row[$y + 53 + 53 + 53] . '</td>';
+    }
+    echo '</tr>';
+  }
+  // while (!$rs->EOF)
+  //    {
+  //      $nomor++;
+  //      echo '<tr>';
+  //      echo '<td>' . $nomor . '</td><td style="width:100%">';
+  //      echo '<pre>' . $rs->fields[5]  . '</pre><br />';
+  //      echo $rs->fields[6] . '<br />';
+  //      echo $rs->fields[7] . '<br />';
+  //      // echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+  //      echo '</td>';
+  //      echo '<td>FIRM<br />FOREC<br />PLAN<br />TOTAL<br /></td>';
+  //      for ($y = $r1; $y <= $r2; $y++)
+  //       {
+  //        echo '<td align="right">' . $rs->fields[$y] . '<br />';
+  //        echo $rs->fields[$y+53] . '<br />';
+  //        echo $rs->fields[$y+53+53] . '<br />';
+  //        echo $rs->fields[$y+53+53+53] . '</td>';
+  //       }
+  //      echo '</tr>';
+  //      $rs->MoveNext();
+  //    }
   echo "</tbody>";
     echo '</table>';
 

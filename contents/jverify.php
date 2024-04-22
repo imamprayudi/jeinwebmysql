@@ -23,12 +23,16 @@
 	<?php
 	}
 
-	include("koneksi.php");
+	// include("koneksi.php");
+require_once("../connection.php");
+require_once("../api/controllers/Helper.php");
+
 	$sql 	= "select userid,userpass,usersecure,usergroup,username,
   useremail,useremail1,useremail2 from usertbl where UserId = '" . $myid . "'";
-	$rs 	= $db->execute($sql);
-	$hitung = $rs->PO_RecordCount($sql);
-	$usrlevel = $rs->fields[2];
+	$rs 	= $pdo->query($sql)->fetchAll();
+	$hitung = count($rs);
+	
+	$usrlevel = $rs[0][2];
 	if ($hitung == 1) {
 		$_SESSION['dinew_smyid'] = $myid;
 		$_SESSION['dinew_suserlevel'] = $usrlevel;
@@ -70,20 +74,28 @@
 					</div>
 				<?php
 
-				$sqlob 	= "select top 1 TransDate from ordbal";
-				$rsob 	= $db->execute($sqlob);
+				$sqlob 	= "select TransDate from ordbal";
+				$limit = 1;
+				$query = Helper::translateQueryTopToMysql($sqlob, $limit, "MySQL");
+				
+				$rsob 	= $pdo->query($query)->fetchAll();
 
-				while (!$rsob->EOF) {
+				foreach ($rsob as $row) {
 					echo '<br>';
-					$rsob->MoveNext();
 				}
-				$rsob->Close();
+
+				// while (!$rsob->EOF) {
+				// 	echo '<br>';
+				// 	$rsob->MoveNext();
+				// }
+				// $rsob->Close();
 			} else {
 				echo "Wrong Username or Password";
 			}
 
-			$rs->Close();
-			$db->Close();
+			// $rs->Close();
+			// $db->Close();
+			$pdo=null;
 				?>
 				</div>
 

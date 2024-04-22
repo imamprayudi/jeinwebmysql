@@ -1,7 +1,8 @@
 
 
 <?php
-include("koneksi.php");  
+// include("koneksi.php");
+require_once("../connection.php");  
 $conf = $_POST['rbnconfirm'];
 $reject = $_POST['textreject'];
 $supp = $_POST['suppname']; 
@@ -30,7 +31,7 @@ $qry = $qry . $supp;
 $qry = $qry . "') and (transdate='";
 $qry = $qry . $tgl;
 $qry = $qry . "')";
-$rs = $db->Execute($qry);
+$rs = $pdo->query($qry);
 if($db->affected_rows() > 0) 
 {
   echo 'Thank you for read the detail...'  	;

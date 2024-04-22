@@ -285,11 +285,8 @@ class DashboardController
 
         $poc_change = MailPoChange::select('idno','rdate','actioncode','pono','partno','partname','newqty','newdate','oldqty','olddate','potype')
                             ->whereIn('supplier', $supplierGroup)
-                            ->whereBetween('rdate',[$request->from_date,
-                                        $request->end_date]);
+                            ->whereBetween('rdate',[$request->from_date, $request->end_date]);
 
-                                      
-                                                  
         if(isset($request->select_po))
         {
 
@@ -300,19 +297,14 @@ class DashboardController
 
             if($request->filter_by == 'part')
             {
-                                    $poc_repeat = $poc_repeat->whereIn('partno',$select_po)->get();
-                                    $poc_change = $poc_change->whereIn('partno',$select_po)->get();
-                               
+                $poc_repeat = $poc_repeat->whereIn('partno',$select_po)->get();
+                $poc_change = $poc_change->whereIn('partno',$select_po)->get();
             }
             if($request->filter_by == 'pono')
             {
-                                    $poc_repeat = $poc_repeat->whereIn('pono',$select_po)->get();
-                                    $poc_change = $poc_change->whereIn('pono',$select_po)->get();
-                                  
-
-
-                                 
-            }             
+                $poc_repeat = $poc_repeat->whereIn('pono',$select_po)->get();
+                $poc_change = $poc_change->whereIn('pono',$select_po)->get();
+            }              
            
         }
         
@@ -322,9 +314,7 @@ class DashboardController
             $enddate  = substr($request->end_date, 0,7 ); 
     
             if($fromdate != $enddate){
-                   return "failed";
-
-
+                   return "start date dan end date harus sama !";
             }
             else{
                 $poc_repeat = $poc_repeat->get();

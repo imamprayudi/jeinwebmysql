@@ -50,8 +50,13 @@
     });
   </script>
   <?php
-  include("koneksi.php");
-  $rs = $db->Execute("select usersupp.UserId,usersupp.SuppCode,supplier.SuppName from UserSupp 
+  // include("koneksi.php");
+  // require_once("../connection.php");
+  require_once "../api/bootstrap.php";
+
+  use Illuminate\Database\Capsule\Manager as DB;
+
+  $rs = DB::select("select usersupp.UserId,usersupp.SuppCode,supplier.SuppName from UserSupp 
 inner join Supplier on usersupp.SuppCode = Supplier.SuppCode 
 where UserId = '" . $myid . "' order by suppname");
   // include("jmenucss.php");
@@ -80,24 +85,25 @@ where UserId = '" . $myid . "' order by suppname");
                 <label class="col-form-label" for="idsupp">Supplier</label>
                 <select class="form-select" name="supp" id="idsupp">
                   <?php
-                  while (!$rs->EOF) {
-                    echo '<option value="' . $rs->fields[1] . '">' . $rs->fields[2] . ' - ' . $rs->fields[1] . '</option>';
-                    $rs->MoveNext();
-                  }
-                  ?>
+                  foreach ($rs as $row) {
+                    echo '<option value="' . $row->SuppCode . '">' . $row->SuppName . ' - ' . $row->SuppCode . '</option>';
+                  } ?>
                 </select>
               </div>
               <?php
-              $rsf = $db->Execute("select transdate from FC2YDATE order by transdate desc");
+              $rsf = DB::select("select transdate from FC2YDATE order by transdate desc");
               ?>
               <div class="col-2">
                 <label class="col-form-label" for="idtgl">Tanggal</label>
                 <select class="form-select" name="tgl" id="idtgl">
                   <?php
-                  while (!$rsf->EOF) {
-                    echo '<option value="' . substr($rsf->fields[0], 0, 10) . '">' . substr($rsf->fields[0], 0, 10) . '</option>';
-                    $rsf->MoveNext();
+                  foreach ($rsf as $row) {
+                    echo '<option value="' . substr($row->transdate, 0, 10) . '">' . substr($row->transdate, 0, 10) . '</option>';
                   }
+                  // while (!$rsf->EOF) {
+                  //   echo '<option value="' . substr($rsf->fields[0], 0, 10) . '">' . substr($rsf->fields[0], 0, 10) . '</option>';
+                  //   $rsf->MoveNext();
+                  // }
                   ?>
 
                 </select>
@@ -114,9 +120,10 @@ where UserId = '" . $myid . "' order by suppname");
               </div>
             </form>
             <?php
-            $rs->Close();
-            $rsf->Close();
-            $db->Close();
+            // $rs->Close();
+            // $rsf->Close();
+            // $db->Close();
+            $pdo = null;
 
             ?>
             <div id="fdata" class="table-responsive"></div>

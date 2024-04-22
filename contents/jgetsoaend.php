@@ -26,7 +26,8 @@
 	<?php
 	}
 
-	include("koneksi.php");
+	// include("koneksi.php");
+require_once("../connection.php");
 
 	if (isset($_GET['supp'])) {
 		$suppid = $_GET['supp'];
@@ -40,13 +41,13 @@
 	$tablesoa = 'soaend' . $tahunsoa;
 
 	if ($tahunsoa < 2020) {
-		$rs = $db->Execute("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
+		$rs = $pdo->query("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
   invoice,partno,partname,qty,price,amount,dncnd,lastpay,purchase,dncns,netpur,
   vat,salesvat,payment,this,col027,col028,video,term15,term30,term45,term60,
   term75,term90,termtotal from " . $tablesoa . " where (hd = 'H') and (suppcode = '" . $suppid . "') 
   and (transdate = '" . $tgl . "')");
 	} else {
-		$rs = $db->Execute("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
+		$rs = $pdo->query("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
     invoice,partno,partname,qty,price,amount,dncnd,lastpay,purchase,dncns,netpur,
     vat,salesvat,payment,this,col027,col028,video,term15,term30,term45,term60,
     term75,term90,termtotal from soaend where (hd = 'H') and (suppcode = '" . $suppid . "') 
@@ -62,7 +63,7 @@
 	<?php
 		die();
 	}
-	$rc = $db->Execute("select suppcom,jeincom from soacomend where blnthn = '" . $rs->fields[3] . "' and
+	$rc = $pdo->query("select suppcom,jeincom from soacomend where blnthn = '" . $rs->fields[3] . "' and
     suppcode = '" . $rs->fields[4] . "'");
 	$supp = intval($suppid) * 14102703;
 	?>
@@ -332,13 +333,13 @@
 				$nomor = 0;
 
 				if ($tahunsoa < 2020) {
-					$rs = $db->Execute("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
+					$rs = $pdo->query("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
 	  invoice,partno,partname,qty,price,amount,dncnd,lastpay,purchase,dncns,netpur,
 	  vat,salesvat,payment,this,col027,col028,video,term15,term30,term45,term60,
 	  term75,term90,termtotal from " . $tablesoa . " where (hd = 'D') and (suppcode = '" . $suppid . "') 
 	  and (transdate = '" . $tgl . "') order by INVOICE, OK");
 				} else {
-					$rs = $db->Execute("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
+					$rs = $pdo->query("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
 	  invoice,partno,partname,qty,price,amount,dncnd,lastpay,purchase,dncns,netpur,
 	  vat,salesvat,payment,this,col027,col028,video,term15,term30,term45,term60,
 	  term75,term90,termtotal from soaend where (hd = 'D') and (suppcode = '" . $suppid . "') 

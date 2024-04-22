@@ -32,10 +32,11 @@ if (isset($_SESSION['dinew_smyid'])) {
 		// echo 'GET DELIVERY INSTRUCTIONS';
 		// echo '<br /><br />';
 		error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
-		include 'koneksi.php';
+		// include 'koneksi.php';
+		require_once '../connection.php';
 
 		$sql	= "SELECT userid,suppcode,suppname FROM usersupp WHERE userid='{$myusername}' order by suppname";
-		$result	= $db->execute($sql);
+		$result	= $pdo->query($sql)->fetchAll();
 		// pesan error
 		if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 			$pesan = $_REQUEST['p'];
@@ -67,10 +68,13 @@ if (isset($_SESSION['dinew_smyid'])) {
 								<label class="col-form-label" for="idsupp">Supplier</label>
 								<select class="form-select" name="supp" id="idsupp">
 									<?php
-									while (!$result->EOF) {
-										echo '<option value="' . $result->fields[1] . '">' . $result->fields[2] . ' - ' . $result->fields[1] . '</option>';
-										$result->MoveNext();
+									foreach ($result as $row) {
+										echo '<option value="' . $row[1] . '">' . $row[2] . ' - ' . $row[1] . '</option>';# code...
 									}
+									// while (!$result->EOF) {
+									// 	echo '<option value="' . $result->fields[1] . '">' . $result->fields[2] . ' - ' . $result->fields[1] . '</option>';
+									// 	$result->MoveNext();
+									// }
 									?>
 								</select>
 							</div>
@@ -167,9 +171,6 @@ if (isset($_SESSION['dinew_smyid'])) {
 						pilih tanggal yg sama kemudian pilih sequence 2<br>
 						maka Delivery Instruction akan muncul dengan balance quantity.<br>
 						update data dengan input invoice dan upload......
-						<?php
-						$db->Close();
-						?>
 					</div>
 				</div>
 			</div>

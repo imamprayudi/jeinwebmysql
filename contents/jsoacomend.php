@@ -13,7 +13,8 @@
 
 <body>
   <?php
-  include("koneksi.php");
+  // include("koneksi.php");
+require_once("../connection.php");
   // include("jmenucss.php");
   include('../contents_v2/layouts/header.php');
 
@@ -43,7 +44,7 @@
         $supp = trim($_POST["hsupp"]);
         echo '<br />';
         $blnthn = trim($_POST["hblnthn"]);
-        $rscek = $db->Execute("select blnthn,suppcode,suppcom,jeincom from soacomend where 
+        $rscek = $pdo->query("select blnthn,suppcode,suppcom,jeincom from soacomend where 
   blnthn = '" . $blnthn . "' and suppcode = '" . $supp . "'");
         $ada = $rscek->RecordCount();
         if ($ada == 0) {
@@ -54,7 +55,7 @@
         }
 
 
-        $rs = $db->Execute($sql);
+        $rs = $pdo->query($sql);
         $rs->Close();
         $db->Close();
         echo 'Your comment has been updated to the system.... thank you';

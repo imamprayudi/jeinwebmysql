@@ -56,7 +56,7 @@
         }
         include 'koneksi.php';
         $sql = "SELECT userid,suppcode,suppname FROM usersupp WHERE userid='{$myusername}' order by suppname";
-        $nt = $db->Execute($sql);
+        $nt = $pdo->query($sql);
 
         ?>
         <form action="jdiview.php" method="post" id=frmdi name=frmdi>

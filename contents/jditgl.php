@@ -42,21 +42,25 @@ $myusername = $_SESSION['dinew_smyid'];
         <br>
         <br>
         <?php
-        include 'koneksi.php';
+        // include 'koneksi.php';
+        require_once ('../connection.php');
 
         $sql = "SELECT userid,suppcode,suppname FROM usersupp WHERE userid='{$myusername}' order by suppname";
-        $nt = $db->Execute($sql);
+        $nt = $pdo->query($sql)->fetchAll();
 
         ?>
         <form action="jdiinv.php" method="post" id=frmdi name=frmdi>
           Select Supplier :
           <Select name="supp">
             <?php
-            while (!$nt->EOF) {
-              echo '<option value="' . $nt->fields[1] . '">' . $nt->fields[2] . '-' . $nt->fields[1] . '</option>';
-              $nt->MoveNext();
+            foreach ($v as $row) {
+              echo '<option value="' . $row[1] . '">' . $row[2] . '-' . $row[1] . '</option>';
             }
-            $nt->Close();
+            // while (!$nt->EOF) {
+            //   echo '<option value="' . $nt->fields[1] . '">' . $nt->fields[2] . '-' . $nt->fields[1] . '</option>';
+            //   $nt->MoveNext();
+            // }
+            // $nt->Close();
 
             ?>
           </Select>
@@ -122,7 +126,8 @@ $myusername = $_SESSION['dinew_smyid'];
             echo "<option value='2023'>2023</option>";
             echo '</select>';
 
-            $db->Close();
+            // $db->Close();
+            $pdo = null;
             ?>
 
             <br><br>

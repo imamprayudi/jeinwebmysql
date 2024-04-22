@@ -1,5 +1,8 @@
 <?php require('layouts/header.php'); ?>
-<?php require('../contents/koneksi.php'); ?>
+<?php //require('../contents/koneksi.php'); 
+?>
+<?php //require('../connection.php'); 
+?>
 <style>
   div.dataTables_filter input {
     width: 400px;
@@ -50,8 +53,8 @@
 </style>
 <?php
 
-$viewpo = $db->Execute("select top 1000 pono  from MAILPO ");
-$viewpartno = $db->Execute("select top 1000  partno from MAILPO");
+// $viewpo = $pdo->query("select top 1000 pono  from MAILPO ")->fetchAll();
+// $viewpartno = $pdo->query("select top 1000  partno from MAILPO")->fetchAll();
 
 if (isset($_SESSION['usr'])) {
   $myid = $_SESSION["usr"];
@@ -501,10 +504,10 @@ if (isset($_SESSION['usr'])) {
       </div>
 
       <div class="row">
-        <div class="card recent-sales overflow-auto ml-3">
+        <div class="card recent-sales overflow-auto ml-3 col-md-6 col-sm-12">
           <div class="card-body">
             <h5 class="card-title">FILTER</h5>
-            <form class="row g-3 ml-3" name="submit_poc" method="get">
+            <form class="row g-3 ml-3" name="filter-all" method="get">
               <div class="col-md-6">
                 <!-- supplier: $("[name=supplier]").val(),
                 from_date: $("[name=from_date]").val(),
@@ -547,6 +550,20 @@ if (isset($_SESSION['usr'])) {
             </form>
           </div>
         </div>
+        <div id="app" class="card col-sm-12 col-md-6 ml-3 table-responsive">
+          <h4 class="card-title">REPEAT PO CHANGE</h4>
+          <table id="repeat-po" class="table table-striped ml-3 display responsive nowrap">
+            <thead class="t-head">
+              <tr>
+                <th scope="col">PO Number</th>
+                <th scope="col">Change</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="row mb-3">
         <div class="message"></div>
@@ -570,9 +587,9 @@ if (isset($_SESSION['usr'])) {
       </div>
 
       <?php
-      // $rs = $db->Execute("select usersupp.UserId,usersupp.SuppCode,supplier.SuppName from UserSupp 
+      // $rs = $pdo->query("select usersupp.UserId,usersupp.SuppCode,supplier.SuppName from UserSupp
       //                               inner join Supplier on usersupp.SuppCode = Supplier.SuppCode 
-      //                               where UserId = '" . $myid . "' order by suppname");
+      //                               where UserId = '" . $myid . "' order by suppname")->fetchAll() ;
       ?>
       <!-- FILTER DATA PO -->
       <!-- <div class="row">
@@ -626,28 +643,11 @@ if (isset($_SESSION['usr'])) {
             </div>
           </div>
         </div>
-
-        <div class="col-sm-12 col-md-6 ml-2">
-          <div class="card recent-sales overflow-auto ml-3">
-            <div class="card-body">
-              <h5 class="card-title">REPEAT PO-<span class="text-danger">CHANGE</span></h5>
-              <table id="repeat-po" class="table table-striped ml-3 display responsive nowrap">
-                <thead class="t-head">
-                  <tr>
-                    <th scope="col">PO Number</th>
-                    <th scope="col">Change</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <!-- <div id="app" class="card col-sm-12 col-md-6 ml-3 table-responsive">
-            <h4 class="card-title">REPEAT PO CHANGE</h4>
+        
+      <div class="col-sm-12 col-md-5 ml-2">
+        <div class="card recent-sales overflow-auto ml-3">
+          <div class="card-body">
+            <h5 class="card-title">REPEAT PO-<span class="text-danger">CHANGE</span></h5>
             <table id="repeat-po" class="table table-striped ml-3 display responsive nowrap">
               <thead class="t-head">
                 <tr>
@@ -659,9 +659,26 @@ if (isset($_SESSION['usr'])) {
               <tbody>
               </tbody>
             </table>
-          </div> --
-      </div> -->
-      <!-- END FILTER DATA PO -->
+          </div>
+        </div>
+      </div>
+                    --
+      <div id="app" class="card col-sm-12 col-md-6 ml-3 table-responsive">
+        <h4 class="card-title">REPEAT PO CHANGE</h4>
+        <table id="repeat-po" class="table table-striped ml-3 display responsive nowrap">
+          <thead class="t-head">
+            <tr>
+              <th scope="col">PO Number</th>
+              <th scope="col">Change</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- END FILTER DATA PO -->
 
       <!-- <div class="row">
 

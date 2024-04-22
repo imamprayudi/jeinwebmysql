@@ -63,7 +63,8 @@
 	<?php
 	}
 
-	include("koneksi.php");
+	// include("koneksi.php");
+require_once("../connection.php");
 	if (isset($_GET['supp'])) {
 		$suppid = $_GET['supp'];
 	}
@@ -75,12 +76,12 @@
 	$tahunsoa = substr($tgl, 0, 4);
 	$tablesoa = 'soa' . $tahunsoa;
 	if ($tahunsoa < 2020) {
-		$rs = $db->Execute("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
+		$rs = $pdo->query("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
 	invoice,partno,partname,qty,price,amount,dncnd,lastpay,purchase,dncns,netpur,vat,
 	salesvat,payment,balance from " . $tablesoa . " where (hd = 'H') and (suppcode = '" . $suppid . "') 
 	and (transdate = '" . $tgl . "')");
 	} else {
-		$rs = $db->Execute("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
+		$rs = $pdo->query("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
 	invoice,partno,partname,qty,price,amount,dncnd,lastpay,purchase,dncns,netpur,vat,
 	salesvat,payment,balance from soa where (hd = 'H') and (suppcode = '" . $suppid . "') 
 	and (transdate = '" . $tgl . "')");
@@ -98,7 +99,7 @@
 	}
 	$query = "select suppcom,jeincom from soacom where blnthn = '" . $rs->fields[3] . "' and
 	  suppcode = '" . $rs->fields[4] . "'";
-	$rc = $db->Execute($query);
+	$rc = $pdo->query($query);
 	$supp = intval($suppid) * 14102703;
 	// print_r($rs->fields);
 	// print_r($rc->fields);
@@ -338,12 +339,12 @@
 			$nomor = 0;
 
 			if ($tahunsoa < 2020) {
-				$rs = $db->Execute("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
+				$rs = $pdo->query("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
 	  invoice,partno,partname,qty,price,amount,dncnd,lastpay,purchase,dncns,netpur,vat,
 	  salesvat,payment,balance from " .  $tablesoa . " where (hd = 'D') and (suppcode = '" . $suppid . "') 
 	  and (transdate = '" . $tgl . "') order by INVOICE, OK");
 			} else {
-				$rs = $db->Execute("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
+				$rs = $pdo->query("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
 		invoice,partno,partname,qty,price,amount,dncnd,lastpay,purchase,dncns,netpur,vat,
 		salesvat,payment,balance from SOA where (hd = 'D') and (suppcode = '" . $suppid . "') 
 		and (transdate = '" . $tgl . "') order by INVOICE, OK");

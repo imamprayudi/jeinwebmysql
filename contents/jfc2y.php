@@ -65,16 +65,29 @@
 
   }
 
-  include("koneksi.php");
-  $rs = $db->Execute("select usersupp.UserId,usersupp.SuppCode,supplier.SuppName from UserSupp 
-inner join Supplier on usersupp.SuppCode = Supplier.SuppCode 
-where UserId = '" . $myid . "' order by suppname");
+  //   // include("koneksi.php");
+// require_once("../connection.php");
+  //   $rs = $pdo->query("select usersupp.UserId,usersupp.SuppCode,supplier.SuppName from UserSupp 
+  // inner join Supplier on usersupp.SuppCode = Supplier.SuppCode 
+  // where UserId = '" . $myid . "' order by suppname");
+
+  require_once "../api/bootstrap.php";
+  use Illuminate\Database\Capsule\Manager as DB;
+  $rs = DB::select("select usersupp.UserId,usersupp.SuppCode,supplier.SuppName from UserSupp 
+  inner join Supplier on usersupp.SuppCode = Supplier.SuppCode 
+  where UserId = '" . $myid . "' order by suppname");
   // include("jmenucss.php");
   include('../contents_v2/layouts/header.php');
 
   ?>
   <main id="main" class="main">
-
+    <?php
+    // foreach ($rs as $row) {
+    //   print_r($row->SuppCode);
+    // }
+  // print_r($rs);
+  // echo count($rs);
+    ?>
     <div class="pagetitle">
       <h1>Forecast</h1>
       <nav>
@@ -95,10 +108,9 @@ where UserId = '" . $myid . "' order by suppname");
                 <label class="col-form-label" for="idsupp">Supplier</label>
                 <select class="form-select" name="supp" id="idsupp">
                   <?php
-                  while (!$rs->EOF) {
-                    echo '<option value="' . $rs->fields[1] . '">' . $rs->fields[2] . ' - ' . $rs->fields[1] . '</option>';
-                    $rs->MoveNext();
-                  } ?>
+                  foreach ($rs as $row) {
+                    echo '<option value="' . $row->SuppCode . '">' . $row->SuppName . ' - ' . $row->SuppCode . '</option>';
+                  }?>
                 </select>
               </div>
               <div class="col-2">

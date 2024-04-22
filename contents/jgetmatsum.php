@@ -19,14 +19,15 @@
   <?php
   }
 
-  include("koneksi.php");
+  // include("koneksi.php");
+require_once("../connection.php");
   if ($_POST) {
     $supp = $_POST['suppid'];
     $period  = $_POST['periodid'];
   }
 
   $csupp = 'C' . $supp;
-  $rs = $db->Execute("select partno,partname, convert(decimal,prevblncqty), 
+  $rs = $pdo->query("select partno,partname, convert(decimal,prevblncqty), 
   convert(decimal,recqty), convert(decimal,shipqty), convert(decimal,thisblncqty) 
   from sc01 where (loccode = '" . $csupp . "') and (period='" . $period . "') 
   AND (WHCODE = 'MC1') order by partno");

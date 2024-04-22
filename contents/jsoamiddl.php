@@ -17,7 +17,7 @@ $sql = "select  convert(varchar(10),tgl,23) as tgl, po, posq, invoice,
   partno, partname, qty, price, amount, dncnd from soamid where 
   (suppcode = '" . $suppcode . "') and (transdate = '" . $tgl . "') 
   and (OK = 'D') order by invoice";
-$rs 		= $db->Execute($sql);
+$rs 		= $pdo->query($sql);
 $fname = "soamid" . $suppcode . "-" . $tgl . ".csv";
 header("Content-type: text/csv");
 header("Content-Disposition: attachment; filename=$fname");

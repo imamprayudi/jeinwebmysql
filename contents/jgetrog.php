@@ -21,7 +21,8 @@ else
   <?php  
 }
 
-include("koneksi.php");
+// include("koneksi.php");
+require_once("../connection.php");
 if ($_POST)
 {
   $supp = $_POST['suppid'];
@@ -29,7 +30,7 @@ if ($_POST)
   $tgl2  = $_POST['tgl2id'];
 }
  
-$rs = $db->Execute("select tgl,partno,partname,pono,qty,amount,ngcode,ngdesc
+$rs = $pdo->query("select tgl,partno,partname,pono,qty,amount,ngcode,ngdesc
   from rog where ( suppcode = '" . $supp . "') and 
   ( tgl between '" . $tgl1 ."' and '" . $tgl2 . "') order by tgl,partno");
 $ada = $rs->RecordCount();

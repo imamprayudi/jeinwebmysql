@@ -41,7 +41,8 @@ else
    <?php   
 }
 
-include("koneksi.php");
+// include("koneksi.php");
+require_once("../connection.php");
 
 if ($_POST)
 {
@@ -67,7 +68,7 @@ if ($_POST)
   }
 }
 
-$rs = $db->Execute("select transdate, rt, suppcode, subsuppcode, subsuppname, partno, partname, leadtime, 
+$rs = $pdo->query("select transdate, rt, suppcode, subsuppcode, subsuppname, partno, partname, leadtime, 
   dtqty1, dtqty2, dtqty3, dtqty4, dtqty5, dtqty6, dtqty7, dtqty8, dtqty9, dtqty10, dtqty11, dtqty12,
   dtqty13, dtqty14, dtqty15, dtqty16, dtqty17, dtqty18, dtqty19, dtqty20, dtqty21, dtqty22, dtqty23, 
   dtqty24, dtqty25, dtqty26, dtqty27, dtqty28, dtqty29, dtqty30, dtqty31, dtqty32, dtqty33, dtqty34, 
@@ -80,8 +81,8 @@ $rs = $db->Execute("select transdate, rt, suppcode, subsuppcode, subsuppname, pa
   dt4qt1, dt4qt2, dt4qt3, dt4qt4, dt4qt5, dt4qt6, dt4qt7, dt4qt8, dt4qt9, dt4qt10, dt4qt11, dt4qt12, 
   dt4qt13, dt4qt14, dt4qt15, dt4qt16, dt4qt17, dt4qt18, dt4qt19, dt4qt20, dt4qt21, dt4qt22, dt4qt23, 
   dt4qt24, dt4qt25, dt4qt26, dt4qt27, dt4qt28, dt4qt29, dt4qt30, dt4qt31, dt4qt32, dt4qt33, dt4qt34, 
-  scold, scnew from forecastn where rt = 'H' and suppcode = '" . $supp . "' and transdate = '" . $tg . "'");
-$ada = $rs->RecordCount();
+  scold, scnew from forecastn where rt = 'H' and suppcode = '" . $supp . "' and transdate = '" . $tg . "'")->fetchAll();
+$ada = count($rs);
 
 if ($ada == 0)
 {
@@ -90,24 +91,37 @@ if ($ada == 0)
 else
 {
   echo '<table id="tblfcl">';
-  while (!$rs->EOF)
-  {
+  foreach ($rs as $row) {
     echo '<br />';
-    echo '<caption>FORECAST FOR ' . $rs->fields[4] . 
-      ' (' . $rs->fields[2] . ')' . ' - ' . $rs->fields[0] . ' - ' .$tipetext . '</caption>';
+    echo '<caption>FORECAST FOR ' . $row[4] .
+      ' (' . $row[2] . ')' . ' - ' . $row[0] . ' - ' . $tipetext . '</caption>';
     echo '<tr>';
     echo '<th>NO</th>';
     echo '<th>Part Number</th>';
-    echo '<th>DD/MM</th>'; 
-    for ($i = $r1; $i <= $r2; $i++)
-    {
-      echo '<th>' . $rs->fields[$i] . '</th>';
+    echo '<th>DD/MM</th>';
+    for ($i = $r1; $i <= $r2; $i++) {
+      echo '<th>' . $row[$i] . '</th>';
     }
-      echo '</tr>';
-      $rs->MoveNext();
+    echo '</tr>';
   }
+  // while (!$rs->EOF)
+  // {
+  //   echo '<br />';
+  //   echo '<caption>FORECAST FOR ' . $rs->fields[4] . 
+  //     ' (' . $rs->fields[2] . ')' . ' - ' . $rs->fields[0] . ' - ' .$tipetext . '</caption>';
+  //   echo '<tr>';
+  //   echo '<th>NO</th>';
+  //   echo '<th>Part Number</th>';
+  //   echo '<th>DD/MM</th>'; 
+  //   for ($i = $r1; $i <= $r2; $i++)
+  //   {
+  //     echo '<th>' . $rs->fields[$i] . '</th>';
+  //   }
+  //     echo '</tr>';
+  //     $rs->MoveNext();
+  // }
   $nomor = 0;
-  $rs = $db->Execute("select transdate, rt, suppcode, subsuppcode, subsuppname, partno, partname, leadtime, 
+  $rs = $pdo->query("select transdate, rt, suppcode, subsuppcode, subsuppname, partno, partname, leadtime, 
     dtqty1, dtqty2, dtqty3, dtqty4, dtqty5, dtqty6, dtqty7, dtqty8, dtqty9, dtqty10, dtqty11, dtqty12,
     dtqty13, dtqty14, dtqty15, dtqty16, dtqty17, dtqty18, dtqty19, dtqty20, dtqty21, dtqty22, dtqty23, 
     dtqty24, dtqty25, dtqty26, dtqty27, dtqty28, dtqty29, dtqty30, dtqty31, dtqty32, dtqty33, dtqty34, 
@@ -121,30 +135,47 @@ else
     dt4qt13, dt4qt14, dt4qt15, dt4qt16, dt4qt17, dt4qt18, dt4qt19, dt4qt20, dt4qt21, dt4qt22, dt4qt23, 
     dt4qt24, dt4qt25, dt4qt26, dt4qt27, dt4qt28, dt4qt29, dt4qt30, dt4qt31, dt4qt32, dt4qt33, dt4qt34, 
     scold, scnew from forecastn where rt = 'D' and transdate = '" . $tg . "' and 
-    suppcode = '" . $supp . "' order by partno");
-  while (!$rs->EOF)
-  {
+    suppcode = '" . $supp . "' order by partno")->fetchAll();
+  foreach ($rs as $row) {
     $nomor++;
     echo '<tr>';
     echo '<td>' . $nomor . '</td><td>';
-    echo $rs->fields[5] . '<br />';
-    echo $rs->fields[6] . '<br />';
-    echo $rs->fields[7] . '<br />';
+    echo $row[5] . '<br />';
+    echo $row[6] . '<br />';
+    echo $row[7] . '<br />';
     echo '<td>FIRM<br />FOREC<br />PLAN<br />TOTAL<br /></td>';
-    for ($y = $r1; $y <= $r2; $y++)
-    {
-      echo '<td align="right">' . $rs->fields[$y] . '<br />';
-      echo $rs->fields[$y+34] . '<br />';
-      echo $rs->fields[$y+34+34] . '<br />';
-      echo $rs->fields[$y+34+34+34] . '</td>';
+    for ($y = $r1; $y <= $r2; $y++) {
+      echo '<td align="right">' . $row[$y] . '<br />';
+      echo $row[$y + 34] . '<br />';
+      echo $row[$y + 34 + 34] . '<br />';
+      echo $row[$y + 34 + 34 + 34] . '</td>';
     }
-      echo '</tr>';
-      $rs->MoveNext();
+    echo '</tr>';
   }
+  //   while (!$rs->EOF)
+  // {
+  //   $nomor++;
+  //   echo '<tr>';
+  //   echo '<td>' . $nomor . '</td><td>';
+  //   echo $rs->fields[5] . '<br />';
+  //   echo $rs->fields[6] . '<br />';
+  //   echo $rs->fields[7] . '<br />';
+  //   echo '<td>FIRM<br />FOREC<br />PLAN<br />TOTAL<br /></td>';
+  //   for ($y = $r1; $y <= $r2; $y++)
+  //   {
+  //     echo '<td align="right">' . $rs->fields[$y] . '<br />';
+  //     echo $rs->fields[$y+34] . '<br />';
+  //     echo $rs->fields[$y+34+34] . '<br />';
+  //     echo $rs->fields[$y+34+34+34] . '</td>';
+  //   }
+  //     echo '</tr>';
+  //     $rs->MoveNext();
+  // }
   echo '</table>';
 }
-$rs->Close();
-$db->Close();
+// $rs->Close();
+// $db->Close();
+$pdo = null;
 ?>
 </body>
 </html>

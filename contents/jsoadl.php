@@ -27,7 +27,7 @@ else{
     and (transdate = '" . $tgl . "') and (OK = 'D')";
 }
 
-$rs 		= $db->Execute($sql);
+$rs 		= $pdo->query($sql);
 $fname = "soa" . $suppcode . "-" . $tgl . ".csv";
 header("Content-type: text/csv");
 header("Content-Disposition: attachment; filename=$fname");

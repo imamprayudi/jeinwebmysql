@@ -18,7 +18,7 @@ $sql = "select idno,convert(varchar(10),rdate,23) as rdate, pono, partno,
   partname, newqty, convert(varchar(10),newdate,23) as newdate, oldqty, 
   convert(varchar(10),olddate,23) as olddate, str(price,10,5), model, potype, altno 
   from mailpoc where (supplier = '" . $suppcode . "') and (rdate='" . $tgl ."')";
-$rs 		= $db->Execute($sql);
+$rs 		= $pdo->query($sql);
 $fname = "poc" . $suppcode . ".csv";
 header("Content-type: text/csv");
 header("Content-Disposition: attachment; filename=$fname");

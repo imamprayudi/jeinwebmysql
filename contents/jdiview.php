@@ -1,7 +1,8 @@
 <?php
 //session_start();
 //$myusername = $_SESSION['dinew_smyid'];
-include 'koneksi.php';
+// include 'koneksi.php';
+require_once("../connection.php");
 // include("jmenudicss.php");
 ?>
 
@@ -88,19 +89,19 @@ include 'koneksi.php';
               $supptgl = substr($rowId, 0, 11) . '%';
               if (($uinv != "") && ($btnsub == "invoice")) {
                 $sqlupinv = "update di set invoice = '{$uinv}' where supptglpo = '{$rowId}'";
-                $rsupdate = $db->Execute($sqlupinv);
+                $rsupdate = $pdo->prepare($sqlupinv)->execute();
                 $rsupdate->Close();
               }
 
               if (($uqty != "") && ($btnsub == "qty")) {
                 $sqlupqty = "update di set qty = '{$uqty}' where supptglpo = '{$rowId}'";
-                $rsupdate = $db->Execute($sqlupqty);
+                $rsupdate = $pdo->prepare($sqlupqty)->execute();
                 $rsupdate->Close();
               }
 
               if ($btnsub == "upload") {
                 $sqlupload = "update di set status = '1' where supptglpo = '{$rowId}'";
-                $rsupload  = $db->Execute($rsupload);
+                $rsupload  = $pdo->prepare($rsupload)->execute();
                 $rsupload->Close();
               }
             } //end foreach
@@ -163,21 +164,32 @@ include 'koneksi.php';
         $sqldiv = "select supptglpo,supp,convert(varchar,tgli,1),po,partno,qty,convert(varchar,tgld,1),
   invoice,status,ditime,disq from di where status = '{$vstatus}' and supptglpo like
   '{$supptgl}' order by invoice,partno,po";
-        $recdiv = $db->Execute($sqldiv);
+        $recdiv = $pdo->query($sqldiv)->fetchAll();
         echo '<form action="diinv.php" method="post" id=frmdiinv name=frmdiinv>';
-        while (!$recdiv->EOF) {
+        foreach ($recdiv as $row) {
           echo "<tr>";
-          echo  "<td>" . $recdiv->fields[0] . "</td><td>" . $recdiv->fields[1] . "</td><td>" . $recdiv->fields[2] . "</td>";
-          echo  "<td>" . $recdiv->fields[3] . "</td><td>" . $recdiv->fields[4] . '</td><td align="right">' . $recdiv->fields[5] . "</td>";
-          echo  "<td>" . $recdiv->fields[6] . "</td><td>" . $recdiv->fields[9] . ":00</td><td>" . $recdiv->fields[7] . "</td><td>" . $recdiv->fields[8] . "</td><td>" . $recdiv->fields[10] . "</td>";
+          echo  "<td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td>";
+          echo  "<td>" . $row[3] . "</td><td>" . $row[4] . '</td><td align="right">' . $row[5] . "</td>";
+          echo  "<td>" . $row[6] . "</td><td>" . $row[9] . ":00</td><td>" . $row[7] . "</td><td>" . $row[8] . "</td><td>" . $row[10] . "</td>";
           $yd = 'yudi';
-          echo '<td><input type="checkbox" value=' . $recdiv->fields[0] . ' name="chkRow[]"></td>';
+          echo '<td><input type="checkbox" value=' . $row[0] . ' name="chkRow[]"></td>';
           echo "<td>";
           echo "</td>";
           echo "</tr>";
-          $recdiv->MoveNext();
-        }  // end of while recdiv fetch array
-        $recdiv->Close();
+        }
+        // while (!$recdiv->EOF) {
+        //   echo "<tr>";
+        //   echo  "<td>" . $recdiv->fields[0] . "</td><td>" . $recdiv->fields[1] . "</td><td>" . $recdiv->fields[2] . "</td>";
+        //   echo  "<td>" . $recdiv->fields[3] . "</td><td>" . $recdiv->fields[4] . '</td><td align="right">' . $recdiv->fields[5] . "</td>";
+        //   echo  "<td>" . $recdiv->fields[6] . "</td><td>" . $recdiv->fields[9] . ":00</td><td>" . $recdiv->fields[7] . "</td><td>" . $recdiv->fields[8] . "</td><td>" . $recdiv->fields[10] . "</td>";
+        //   $yd = 'yudi';
+        //   echo '<td><input type="checkbox" value=' . $recdiv->fields[0] . ' name="chkRow[]"></td>';
+        //   echo "<td>";
+        //   echo "</td>";
+        //   echo "</tr>";
+        //   $recdiv->MoveNext();
+        // }  // end of while recdiv fetch array
+        // $recdiv->Close();
         echo '<input type="hidden" name="supptgl" value=' . $supptgl . '>';
         echo '</form>';
         echo "</table>";

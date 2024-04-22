@@ -55,9 +55,10 @@
 
   }
 
-  include("koneksi.php");
-  $rs = $db->Execute("select userid,suppcode,suppname from usersupp where UserId = '" . $myid . "' 
-  order by suppname");
+  // include("koneksi.php");
+require_once("../connection.php");
+  $rs = $pdo->query("select userid,suppcode,suppname from usersupp where UserId = '" . $myid . "' 
+  order by suppname")->fetchAll();
   // include("jmenucss.php");
   include('../contents_v2/layouts/header.php');
 
@@ -94,11 +95,13 @@
         echo '<form action="">';
         echo 'Supplier : &nbsp;&nbsp;';
         echo '<select name="supp" id="idsupp">';
-
-        while (!$rs->EOF) {
-          echo '<option value="' . $rs->fields[1] . '">' . $rs->fields[2] . ' - ' . $rs->fields[1] . '</option>';
-          $rs->MoveNext();
+        foreach ($rs as $row) {
+          echo '<option value="' . $row[1] . '">' . $row[2] . ' - ' . $row[1] . '</option>';
         }
+        // while (!$rs->EOF) {
+        //   echo '<option value="' . $rs->fields[1] . '">' . $rs->fields[2] . ' - ' . $rs->fields[1] . '</option>';
+        //   $rs->MoveNext();
+        // }
         echo '</select>';
         echo '&nbsp;&nbsp;';
         echo '<select name="tipe" id="idtipe">';
@@ -108,8 +111,9 @@
         echo '&nbsp;&nbsp;';
         echo '<input type=BUTTON value="Display" name="mybtn" id="btn" onClick="setText()">';
         echo '</form>';
-        $rs->Close();
-        $db->Close();
+        // $rs->Close();
+        // $db->Close();
+        $pdo=null;
         ?>
         <br /><br />
 

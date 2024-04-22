@@ -64,10 +64,11 @@
   <?php
   }
 
-  include("koneksi.php");
-  $rs = $db->Execute("select usersupp.UserId,usersupp.SuppCode,supplier.SuppName from UserSupp 
+  // include("koneksi.php");
+require_once("../connection.php");
+  $rs = $pdo->query("select usersupp.UserId,usersupp.SuppCode,supplier.SuppName from UserSupp 
 inner join Supplier on usersupp.SuppCode = Supplier.SuppCode 
-where UserId = '" . $myid . "' order by suppname");
+where UserId = '" . $myid . "' order by suppname")->fetchAll();
   // include("jmenucss.php");
   include('../contents_v2/layouts/header.php');
 
@@ -94,24 +95,30 @@ where UserId = '" . $myid . "' order by suppname");
                 <label class="col-form-label" for="idsupp">Supplier</label>
                 <select class="form-select" name="supp" id="idsupp">
                   <?php
-                  while (!$rs->EOF) {
-                    echo '<option value="' . $rs->fields[1] . '">' . $rs->fields[2] . ' - ' . $rs->fields[1] . '</option>';
-                    $rs->MoveNext();
+                  foreach ($rs as $row) {
+                    echo '<option value="' . $row[1] . '">' . $row[2] . ' - ' . $row[1] . '</option>';
                   }
+                  // while (!$rs->EOF) {
+                  //   echo '<option value="' . $rs->fields[1] . '">' . $rs->fields[2] . ' - ' . $rs->fields[1] . '</option>';
+                  //   $rs->MoveNext();
+                  // }
                   ?>
                 </select>
               </div>
               <?php
-              $rs = $db->Execute("select transdate from bpsdate order by transdate desc");
+              $rs = $pdo->query("select transdate from bpsdate order by transdate desc")->fetchAll();
               ?>
               <div class="col-4">
                 <label class="col-form-label" for="idtgl">Transmission Date</label>
                 <select class="form-select" name="tgl" id="idtgl">
                   <?php
-                  while (!$rs->EOF) {
-                    echo '<option value="' . substr($rs->fields[0], 0, 10) . '">' . substr($rs->fields[0], 0, 10) . '</option>';
-                    $rs->MoveNext();
+                  foreach ($rs as $row) {
+                    echo '<option value="' . substr($row[0], 0, 10) . '">' . substr($row[0], 0, 10) . '</option>';
                   }
+                  // while (!$rs->EOF) {
+                  //   echo '<option value="' . substr($rs->fields[0], 0, 10) . '">' . substr($rs->fields[0], 0, 10) . '</option>';
+                  //   $rs->MoveNext();
+                  // }
                   ?>
                 </select>
               </div>
@@ -120,8 +127,9 @@ where UserId = '" . $myid . "' order by suppname");
               </div>
             </form>
             <?php
-            $rs->Close();
-            $db->Close();
+            // $rs->Close();
+            // $db->Close();
+            $pdo = null;
             ?>
             <!-- <br /><br /> -->
             <!-- <div id="fdata" class="table-responsive"> -->

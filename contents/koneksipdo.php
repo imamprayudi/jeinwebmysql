@@ -11,7 +11,7 @@ try {
 
   $conn->query("select * from usertbl");
 
-  print_r($conn);
+  // print_r($conn);
 //   echo "Connected successfully";
 } catch(PDOException $e) {
   echo "Connection failed: " . $e->getMessage();

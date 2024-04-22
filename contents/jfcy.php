@@ -66,8 +66,9 @@ if(isset($_SESSION['usr']))
  
   }
 
-include("koneksimysql.php");
-$rs = $db->Execute("select * from usersupp where UserId = '" . $myid . "' order by suppname");
+// include("koneksimysql.php");
+include('../connection.php');
+$rs = $pdo->query("select * from usersupp where UserId = '" . $myid . "' order by suppname")->fetchAll();
 include("jmenucss.php");
 echo '<br />';
 echo '<img src="../assets/gambar/jvc.gif" alt="JVC KENWOOD CORPORATION" style="float:left;width:220px;height:35px;">';
@@ -79,11 +80,14 @@ echo '<form action="">';
 echo 'Supplier : &nbsp;&nbsp;';
 echo '<select name="supp" id="idsupp">';
 
-while (!$rs->EOF) {
-  echo '<option value="' . $rs->fields[1] . '">' . $rs->fields[2] . ' - ' . $rs->fields[1] . '</option>';
-  $rs->MoveNext();
-
+foreach ($rs as $row) {
+  echo '<option value="' . $row[1] . '">' . $row[2] . ' - ' . $row[1] . '</option>';
 }
+// while (!$rs->EOF) {
+//   echo '<option value="' . $rs->fields[1] . '">' . $rs->fields[2] . ' - ' . $rs->fields[1] . '</option>';
+//   $rs->MoveNext();
+
+// }
 echo '</select>';
 echo '&nbsp;&nbsp;';
 echo '<select name="tipe" id="idtipe">';

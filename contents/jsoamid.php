@@ -63,11 +63,12 @@
   <?php
   }
 
-  include("koneksi.php");
+  // include("koneksi.php");
+require_once("../connection.php");
   $query = "select usersupp.UserId,usersupp.SuppCode,supplier.SuppName from UserSupp 
 inner join Supplier on usersupp.SuppCode = Supplier.SuppCode 
 where UserId = '" . $myid . "' order by suppname";
-  $rs = $db->Execute($query);
+  $rs = $pdo->query($query);
   // include("jmenucss.php");
   include('../contents_v2/layouts/header.php');
 
@@ -110,7 +111,7 @@ where UserId = '" . $myid . "' order by suppname";
                 </select>
               </div>
               <?php
-              $rs = $db->Execute("select distinct transdate from soamid order by transdate desc");
+              $rs = $pdo->query("select distinct transdate from soamid order by transdate desc");
               ?>
               <div class="col-3">
                 <label class="col-form-label" for="idsupp">Tanggal</label>

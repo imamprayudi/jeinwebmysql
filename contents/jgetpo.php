@@ -29,7 +29,8 @@ else
   ?>
 
 <?php
-include("koneksi.php");
+// include("koneksi.php");
+require_once("../connection.php");
 if ($_POST)
 {
   $supp = $_POST['suppid'];
@@ -39,7 +40,7 @@ if ($_POST)
   $tgl2 = date('Y-m-d' , strtotime($tgl2));
 }
 
-$rs = $db->Execute("select transdate,supplier,status,confirmation,confirmdate,rejectreason 
+$rs = $pdo->query("select transdate,supplier,status,confirmation,confirmdate,rejectreason 
   from mailpost where ( supplier = '" . $supp . "') and 
   ( transdate between '" . $tgl1 ."' and '" . $tgl2 . "') order by transdate");
 $ada = $rs->RecordCount();

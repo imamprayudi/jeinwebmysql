@@ -21,7 +21,9 @@ try {
     die();
 }
 
-// $data = $db->query('select * from usertbl')->fetchAll();
+// print_r($pdo);
+
+// $data = $pdo->query('select * from usertbl')->fetchAll();
 // echo json_encode($data);
 
 

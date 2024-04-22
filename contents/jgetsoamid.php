@@ -61,7 +61,8 @@
 	<?php
 	}
 
-	include("koneksi.php");
+	// include("koneksi.php");
+require_once("../connection.php");
 	if (isset($_GET['supp'])) {
 		$suppid = $_GET['supp'];
 	}
@@ -74,8 +75,8 @@
   invoice,partno,partname,qty,price,amount,dncnd,lastpay,purchase,dncns,netpur,
   vat,salesvat,payment,this,col027,col028,video,term15,term30,term45,term60,term75,
   term90,termtotal from soamid where (hd = 'H') and (suppcode = '" . $suppid . "') 
-  and ". Helper::translateQueryMonthlyToMysql("transdate", "10") . " = '" . $tgl . "')";
-	$rs = $db->Execute($query);
+  and ". Helper::translateQueryMonthlyToMysql("transdate", "10","MySQL") . " = '" . $tgl . "')";
+	$rs = $pdo->query($query);
 	$ada = $rs->RecordCount();
 	if ($ada == 0) {
 		// echo 'Data Nothing ....';
@@ -86,7 +87,7 @@
 	<?php
 		die();
 	}
-	$rc = $db->Execute("select suppcom,jeincom from soacommid where blnthn = '" . $rs->fields[3] . "' and
+	$rc = $pdo->query("select suppcom,jeincom from soacommid where blnthn = '" . $rs->fields[3] . "' and
     suppcode = '" . $rs->fields[4] . "'");
 	$supp = intval($suppid) * 14102703;
 	?>
@@ -383,7 +384,7 @@
 			<tbody class="text-nowrap">
 				<?php
 				$nomor = 0;
-				$rs = $db->Execute("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
+				$rs = $pdo->query("select transdate,hd,tm,blnthn,suppcode,ok,tgl,po,posq,
 	  invoice,partno,partname,qty,price,amount,dncnd,lastpay,purchase,dncns,netpur,
 	  vat,salesvat,payment,this,col027,col028,video,term15,term30,term45,term60,term75,
 	  term90,termtotal from soamid where (hd = 'D') and (suppcode = '" . $suppid . "') 

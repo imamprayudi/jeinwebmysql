@@ -1,6 +1,7 @@
 
 <?php
-include 'koneksi.php';
+// include 'koneksi.php';
+require_once("../connection.php");
 ?>
 
 <html> 
@@ -90,20 +91,48 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       $supptgl = substr($rowId,0,11) . '%';
       if( ($uinv != "") && ($btnsub == "invoice"))
       {
-        $sqlupinv = "update di set invoice = '{$uinv}' where supptglpo = '{$rowId}'";
-        $rsupdate = $db->Execute($sqlupinv);
+        // $sqlupinv = "update di set invoice = '{$uinv}' where supptglpo = '{$rowId}'";
+        try {
+          $sqlupinv = "update di set invoice = :uinv where supptglpo = :rowId";
+          $rsupdate = $pdo->prepare($sqlupinv);
+          $rsupdate->bindValue(":uinv", $uinv);
+          $rsupdate->bindValue(":rowId", $rowId);
+          $rsupdate->execute();
+        } catch (PDOException $e) {
+          echo $e->getMessage();
+        }
+        
+        
       }
   
       if( ($uqty != "") && ($btnsub == "qty"))
-      { 
-	      $sqlupinv = "update di set qty = '{$uqty}' where supptglpo = '{$rowId}'";
-        $rsupdate = $db->Execute($sqlupinv); 
+      {
+        // $sqlupinv = "update di set qty = '{$uqty}' where supptglpo = '{$rowId}'";
+        // $rsupdate = $db->execute($sqlupinv); 
+        try {
+          $sqlupinv = "update di set qty = :uqty where supptglpo = :rowId";
+          $rsupdate = $pdo->prepare($sqlupinv);
+          $rsupdate->bindValue(":uqty", $uqty);
+          $rsupdate->bindValue(":rowId", $rowId);
+          $rsupdate->execute();
+        } catch (PDOException $e) {
+          echo $e->getMessage();
+        }
       }
   
       if($btnsub == "upload")
       {
-        $sqlupinv = "update di set status = '1' where (supptglpo = '{$rowId}') and (invoice <> '')";
-        $rsupdate = $db->Execute($sqlupinv);
+        // $sqlupinv = "update di set status = '1' where (supptglpo = '{$rowId}') and (invoice <> '')";
+        // $rsupdate = $db->execute($sqlupinv)->fetchAll();
+        try {
+          $sqlupinv = "update di set status = :status where (supptglpo = :rowId) and (invoice <> '')";
+          $rsupdate = $pdo->prepare($sqlupinv);
+          $rsupdate->bindValue(":status", "1");
+          $rsupdate->bindValue(":rowId", $rowId);
+          $rsupdate->execute();
+        } catch (PDOException $e) {
+          echo $e->getMessage();
+        }
       }
 
     } 
@@ -171,22 +200,33 @@ echo '<th>SQ</th>';
 echo "<th><input type='checkbox' name='checkall' onclick='checkedall(frmdiinv);'></th>";
 echo '</tr>';
 $sqldiv = "select supptglpo,supp,convert(varchar,tgli,1),po,partno,qty,convert(varchar,tgld,1),invoice,status,ditime,disq from di where status = '0' and supptglpo like  '{$supptgl}' order by invoice,partno,po";
-$recdiv = $db->execute($sqldiv);
+$recdiv = $pdo->query($sqldiv)->fetchAll();
 echo '<form action="jdiinv.php" method="post" id=frmdiinv name=frmdiinv>';
-while (!$recdiv->EOF)
-{
+foreach ($recdiv as $row_recdiv) {
   echo "<tr>";
-  echo  "<td>" . $recdiv->fields[0] . "</td><td>" . $recdiv->fields[1] . "</td><td>" . $recdiv->fields[2] . "</td>" ;
-  echo  "<td>" . $recdiv->fields[3] . "</td><td>" . $recdiv->fields[4] . '</td><td align="right">' . $recdiv->fields[5] . "</td>";
-  echo  "<td>" . $recdiv->fields[6] . "</td><td>" . $recdiv->fields[9] . ":00</td><td>" . $recdiv->fields[7] . "</td><td>" . $recdiv->fields[8] . "</td><td>" . $recdiv->fields[10] . "</td>" ;
-  $yd = 'yudi'; 
-  echo '<td><input type="checkbox" value=' . $recdiv->fields[0] . ' name="chkRow[]"></td>';
+  echo  "<td>" . $row_recdiv[0] . "</td><td>" . $row_recdiv[1] . "</td><td>" . $row_recdiv[2] . "</td>";
+  echo  "<td>" . $row_recdiv[3] . "</td><td>" . $row_recdiv[4] . '</td><td align="right">' . $row_recdiv[5] . "</td>";
+  echo  "<td>" . $row_recdiv[6] . "</td><td>" . $row_recdiv[9] . ":00</td><td>" . $row_recdiv[7] . "</td><td>" . $row_recdiv[8] . "</td><td>" . $row_recdiv[10] . "</td>";
+  $yd = 'yudi';
+  echo '<td><input type="checkbox" value=' . $row_recdiv[0] . ' name="chkRow[]"></td>';
   echo "<td>";
   echo "</td>";
   echo "</tr>";
-  $recdiv->MoveNext();
-}  
-$recdiv->Close();
+}
+// while (!$recdiv->EOF)
+// {
+//   echo "<tr>";
+//   echo  "<td>" . $recdiv->fields[0] . "</td><td>" . $recdiv->fields[1] . "</td><td>" . $recdiv->fields[2] . "</td>" ;
+//   echo  "<td>" . $recdiv->fields[3] . "</td><td>" . $recdiv->fields[4] . '</td><td align="right">' . $recdiv->fields[5] . "</td>";
+//   echo  "<td>" . $recdiv->fields[6] . "</td><td>" . $recdiv->fields[9] . ":00</td><td>" . $recdiv->fields[7] . "</td><td>" . $recdiv->fields[8] . "</td><td>" . $recdiv->fields[10] . "</td>" ;
+//   $yd = 'yudi'; 
+//   echo '<td><input type="checkbox" value=' . $recdiv->fields[0] . ' name="chkRow[]"></td>';
+//   echo "<td>";
+//   echo "</td>";
+//   echo "</tr>";
+//   // $recdiv->MoveNext();
+// }  
+// $recdiv->Close();
 echo '<br>';
 echo '<input type="hidden" name="supptgl" value=' . $supptgl . '>'; 
 echo 'ketik nomor invoice ( MAX 15 digit ) : ';

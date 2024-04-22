@@ -26,7 +26,7 @@ $sql = "select idno,rdate,pono,partno,partname,newqty,newdate, price, model,
   potype from mailpo where (supplier = '" . $suppcode . "') and (rdate='" . $tgl ."')";
 */
 
-$rs 		= $db->Execute($sql);
+$rs 		= $pdo->query($sql);
 $fname = "po" . $suppcode . ".csv";
 header("Content-type: text/csv");
 header("Content-Disposition: attachment; filename=$fname");

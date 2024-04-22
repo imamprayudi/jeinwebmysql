@@ -10,7 +10,7 @@ if (isset($_GET['tgl']))
 	$tgl = $_GET['tgl'];
 }
 
-$rs = $db->Execute("select * from soa where (hd = 'H') and (suppcode = '" . $suppid . "') and (transdate = '" . $tgl . "')");
+$rs = $pdo->query("select * from soa where (hd = 'H') and (suppcode = '" . $suppid . "') and (transdate = '" . $tgl . "')");
 $ada = $rs->RecordCount();
 if ($ada == 0)
 {
@@ -66,7 +66,7 @@ else
 	echo '<th>OUR DN CN</th>';
 	echo '</tr>';
 	$nomor = 0;
-	$rs = $db->Execute("select * from SOA where (hd = 'D') and (suppcode = '" . $suppid . "') and (transdate = '" . $tgl . "') order by INVOICE, OK");
+	$rs = $pdo->query("select * from SOA where (hd = 'D') and (suppcode = '" . $suppid . "') and (transdate = '" . $tgl . "') order by INVOICE, OK");
 	while (!$rs->EOF)
   {
 		$nomor++;

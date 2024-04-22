@@ -22,7 +22,8 @@ else
   <?php  
 }
 
-include("koneksi.php");
+// include("koneksi.php");
+require_once("../connection.php");
 if ($_POST)
 {
   $supp = $_POST['suppid'];
@@ -30,7 +31,7 @@ if ($_POST)
   $tgl2  = $_POST['tgl2id'];
 }
 
-$rs = $db->Execute("select transdate,supplier,status,confirmation,confirmdate,
+$rs = $pdo->query("select transdate,supplier,status,confirmation,confirmdate,
   rejectreason from mailpocst where ( supplier = '" . $supp . "') 
   and ( transdate between '" . $tgl1 ."' and '" . $tgl2 . "') order by transdate");
 $ada = $rs->RecordCount();

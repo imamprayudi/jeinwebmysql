@@ -58,8 +58,9 @@
   </script>
 
   <?php
-  include("koneksi.php");
-  $rs = $db->Execute("select usersupp.UserId,usersupp.SuppCode,supplier.SuppName from UserSupp 
+  // include("koneksi.php");
+require_once("../connection.php");
+  $rs = $pdo->query("select usersupp.UserId,usersupp.SuppCode,supplier.SuppName from UserSupp 
 inner join Supplier on usersupp.SuppCode = Supplier.SuppCode 
 where UserId = '" . $myid . "' order by suppname");
   // include("jmenucss.php");
