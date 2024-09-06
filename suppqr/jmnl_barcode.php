@@ -14,6 +14,9 @@ else
   </script>
 	<?php   
 }
+include('../../adodb5/adodb.inc.php');
+	include('../../adodb5/adodb-exceptions.inc.php');
+	include('../../adodb5/adodb-errorpear.inc.php');
 	
 include('../contents/koneksimysql.php');
 ?>
@@ -27,7 +30,6 @@ include('../contents/koneksimysql.php');
 		<link rel="stylesheet" type="text/css" href="../assets/css/style.css">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	</head>
-	
 	<body>
 <?php
 // tampilkan data
@@ -45,7 +47,8 @@ echo '<table border=0 cellpadding=0 cellspacing=0 width=55%>';
 echo '<tr>';
 echo '<td width="250px" valign="top">Select Supplier</td>';
 echo '<td> <select name="suppcode">';
-$rs_cb_suppcode = $db->Execute("select * from usersupp where userid = '" .$session_userid. "' order by suppname asc");
+$stmt = "select * from usersupp where userid = '" . $session_userid . "' order by suppname asc";
+$rs_cb_suppcode = $db->query($stmt);
 while (!$rs_cb_suppcode->EOF)
 {
   echo '<option value="' . $rs_cb_suppcode->fields[1] . '">' . $rs_cb_suppcode->fields[1] . ' - ' . $rs_cb_suppcode->fields[2] . '</option>';
@@ -61,7 +64,8 @@ echo '</td>';
 echo '</tr>';
 echo '</table>';
 echo '</form>';
-$rs_cb_suppcode->Close(); $db->Close();
+// $rs_cb_suppcode->Close(); 
+// $db->Close();
 ?>
 			</div>
 		</div>		

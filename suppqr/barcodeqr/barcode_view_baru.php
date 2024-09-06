@@ -14,7 +14,12 @@
 </head>
 <body bgcolor="#ffffff">
 <?php
-include 'koneksimysql.php';
+include_once('../../../ADODB/adodb5/adodb.inc.php');
+	include_once('../../../ADODB/adodb5/toexport.inc.php');
+	include_once('../../../ADODB/adodb5/adodb-exceptions.inc.php');
+	include_once('../../../ADODB/adodb5/adodb-errorpear.inc.php');
+	include '../../contents/koneksimysql.php';
+// include 'koneksimysql.php';
 date_default_timezone_set('Asia/Jakarta');
 
 if(isset($_GET['partno']))
@@ -563,259 +568,52 @@ if(isset($_GET['partno']))
 			//$jml =floor($totalqty / $stdpack); //hasil bagi dibulatkan ke bawah
 			//echo $jml ." dan " .$sisa;
 
-      $sisa3 = $sisa;
-      $pjgsisa3 = strlen($sisa);
-      switch ($pjgsisa3)
-      {
-        case 1:
-        $sisa3 .= '    ';
-        break;
-        case 2:
-        $sisa3 .= '   ';
-        break;
-        case 3:
-        $sisa3 .= '  ';
-        break;
-        case 4:
-        $sisa3 .= ' ';
-        break;
-        default:
-      }
+			$sisa3 = $sisa;
+			$pjgsisa3 = strlen($sisa);
+			switch ($pjgsisa3)
+			{
+				case 1:
+				$sisa3 .= '    ';
+				break;
+				case 2:
+				$sisa3 .= '   ';
+				break;
+				case 3:
+				$sisa3 .= '  ';
+				break;
+				case 4:
+				$sisa3 .= ' ';
+				break;
+				default:
+			}
 
 
-			echo '<table border=0 cellspacing=0 width=650>';
-				if ($jml==1){
-					if ($stdpack == $totalqty){
-						//echo("<tr><td>". $totalqty ."</td></tr>");
-						//	soucrdb ( suppQR : P | ediweb : B | 48JEIN : I ) 
-							$srcdb9	   			= 'P';
-							$supp9	   			= str_pad($vsupp,6," ", STR_PAD_RIGHT);
-							$partno9   			= str_pad($partno,15," ", STR_PAD_RIGHT);
-							$date9				= date("YmdHis");
-							$micro_date9		= microtime();
-							$date_array_temp9	= explode(" ",$micro_date9);
-							$date_array9		= substr($date_array_temp9[0], 2, -4);
-							$orderCodeDate9		= $date9.$date_array9;
-							$datetime9 			= $orderCodeDate9;
-							$printcode9 		= str_pad($jml,6,"0", STR_PAD_LEFT);
-							$unique9   			= $srcdb9 . $supp9 . $partno9 . $datetime9 . $printcode9;
-
-						//	generate label
-						$namafile 	= trim($vsupp).'_'.trim($partno).'_'.trim($po).'_'.trim($stdpack) . '_' . trim($unique9) . '.jpg';
-						$barcode 	= $partno . ' ' . $po . ' ' . $stdpack2 . ' ' . $unique9;
-						$tempDir 	= '../../printqr/injc/';
-						QRcode::png($barcode, $tempDir . $namafile, QR_ECLEVEL_L, 2);
-
-						echo '<tr><td>';
-						echo '<table border=1 cellspacing=0 width=300>';
-							echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="../../printqr/injc/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
-							echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
-							echo '<tr> <td align=center><p2>PO No.</p2></td> <td align=center><p2>'.$po.'</p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Qty</p2></td> <td align=center><p2><b>'.$stdpack.' PCS</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Del. Date</p2></td> <td align=center><p2>'.$deldate.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Prod. Date</p2></td> <td align=center><p2>'.$proddate.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Shift</p2></td> <td align=center><p2>'.$shift.'</p2></td> <td rowspan=2 align=center valign=top><b>Location</b><br><font size=2>'.$lokasi.'</font></td> </tr>';
-							echo '<tr> <td align=center><p2>QC Check</p2></td> <td align=center><p2>'.$qcc.'</b></p2></td> </tr>';
-						echo '</table>';
-						echo '</td></tr>';
-					}
-					else{
-						//echo("<tr><td>". $sisa ."</td></tr>");
-						//	soucrdb ( suppQR : P | ediweb : B | 48JEIN : I ) 
-							$srcdb10   			= 'P';
-							$supp10	   			= str_pad($vsupp,6," ", STR_PAD_RIGHT);
-							$partno10  			= str_pad($partno,15," ", STR_PAD_RIGHT);
-							$date10				= date("YmdHis");
-							$micro_date10		= microtime();
-							$date_array_temp10	= explode(" ",$micro_date10);
-							$date_array10		= substr($date_array_temp10[0], 2, -4);
-							$orderCodeDate10	= $date10.$date_array10;
-							$datetime10 		= $orderCodeDate10;
-							$printcode10 		= str_pad($jml,6,"0", STR_PAD_LEFT);
-							$unique10   		= $srcdb10 . $supp10 . $partno10 . $datetime10 . $printcode10;
-							
-						//	generate label
-						$extfile 	= $jml + 1;
-						$namafile 	= trim($vsupp).'_'.trim($partno).'_'.trim($po).'_'.trim($qtybal) . '_' . trim($unique10) . '.jpg';
-						$barcode 	= $partno . ' ' . $po . ' ' . $qtybal2 . ' ' . $unique10;
-						$tempDir 	= '../../printqr/injc/';
-						QRcode::png($barcode, $tempDir . $namafile, QR_ECLEVEL_L, 2);
-
-						echo '<tr><td>';
-						echo '<table border=1 cellspacing=0 width=300>';
-							echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="../../printqr/injc/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
-							echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
-							echo '<tr> <td align=center><p2>PO No.</p2></td> <td align=center><p2>'.$po.'</p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Qty</p2></td> <td align=center><p2><b>'.$qtybal.' PCS</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Del. Date</p2></td> <td align=center><p2>'.$deldate.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Prod. Date</p2></td> <td align=center><p2>'.$proddate.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Shift</p2></td> <td align=center><p2>'.$shift.'</p2></td> <td rowspan=2 align=center valign=top><b>Location</b><br><font size=2>'.$lokasi.'</font></td> </tr>';
-							echo '<tr> <td align=center><p2>QC Check</p2></td> <td align=center><p2>'.$qcc.'</b></p2></td> </tr>';
-						echo '</table>';
-						echo '</td></tr>';
-					}
-				} // end if ($jml==1)
-				if ($jml==2){
-					//echo("<tr><td>". $stdpack ."</td>");
-					//	soucrdb ( suppQR : P | ediweb : B | 48JEIN : I ) 
-						$srcdb11   			= 'P';
-						$supp11	   			= str_pad($vsupp,6," ", STR_PAD_RIGHT);
-						$partno11  			= str_pad($partno,15," ", STR_PAD_RIGHT);
-						$date11				= date("YmdHis");
-						$micro_date11		= microtime();
-						$date_array_temp11	= explode(" ",$micro_date11);
-						$date_array11		= substr($date_array_temp11[0], 2, -4);
-						$orderCodeDate11	= $date11.$date_array11;
-						$datetime11 		= $orderCodeDate11;
-						$printcode11 		= str_pad("1",6,"0", STR_PAD_LEFT);
-						$unique11   		= $srcdb11 . $supp11 . $partno11 . $datetime11 . $printcode11;
-						
-
-					//	generate label
-					$namafile 	= trim($vsupp).'_'.trim($partno).'_'.trim($po).'_'.trim($stdpack) . '_' . trim($unique11) . '.jpg';
-					$barcode 	= $partno . ' ' . $po . ' ' . $stdpack2 . ' ' . $unique11;
-					$tempDir 	= '../../printqr/injc/';
-					QRcode::png($barcode, $tempDir . $namafile, QR_ECLEVEL_L, 2);
-
-					echo '<tr><td>';
-						echo '<table border=1 cellspacing=0 width=300>';
-							echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="../../printqr/injc/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
-							echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
-							echo '<tr> <td align=center><p2>PO No.</p2></td> <td align=center><p2>'.$po.'</p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Qty</p2></td> <td align=center><p2><b>'.$stdpack.' PCS</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Del. Date</p2></td> <td align=center><p2>'.$deldate.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Prod. Date</p2></td> <td align=center><p2>'.$proddate.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Shift</p2></td> <td align=center><p2>'.$shift.'</p2></td> <td rowspan=2 align=center valign=top><b>Location</b><br><font size=2>'.$lokasi.'</font></td> </tr>';
-							echo '<tr> <td align=center><p2>QC Check</p2></td> <td align=center><p2>'.$qcc.'</b></p2></td> </tr>';
-						echo '</table>';
-					echo '</td>';
-					if ($sisa!=0){
-						//echo("<td>". $sisa ."</td></tr>");
-						//	soucrdb ( suppQR : P | ediweb : B | 48JEIN : I ) 
-							$srcdb12   			= 'P';
-							$supp12	   			= str_pad($vsupp,6," ", STR_PAD_RIGHT);
-							$partno12  			= str_pad($partno,15," ", STR_PAD_RIGHT);
-							$date12				= date("YmdHis");
-							$micro_date12		= microtime();
-							$date_array_temp12	= explode(" ",$micro_date12);
-							$date_array12		= substr($date_array_temp12[0], 2, -4);
-							$orderCodeDate12	= $date12.$date_array12;
-							$datetime12 		= $orderCodeDate12;
-							$printcode12 		= str_pad("2",6,"0", STR_PAD_LEFT);
-							$unique12	  		= $srcdb12 . $supp12 . $partno12 . $datetime12 . $printcode12;
-						
-
-						//	generate label
-						$extfile 	= $sisa;
-						$namafile	= trim($vsupp).'_'.trim($partno).'_'.trim($po).'_'.trim($sisa) . '_' . trim($unique12) . '.jpg';
-						$barcode 	= $partno . ' ' . $po . ' ' . $sisa3 . ' ' . $unique12 ;
-						$tempDir 	= '../../printqr/injc/';
-						QRcode::png($barcode, $tempDir . $namafile, QR_ECLEVEL_L, 2);
-
-						echo '<td align=right>';
-						echo '<table border=1 cellspacing=0 width=300>';
-							echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="../../printqr/injc/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
-							echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
-							echo '<tr> <td align=center><p2>PO No.</p2></td> <td align=center><p2>'.$po.'</p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Qty</p2></td> <td align=center><p2><b>'.$sisa.' PCS</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Del. Date</p2></td> <td align=center><p2>'.$deldate.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Prod. Date</p2></td> <td align=center><p2>'.$proddate.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Shift</p2></td> <td align=center><p2>'.$shift.'</p2></td> <td rowspan=2 align=center valign=top><b>Location</b><br><font size=2>'.$lokasi.'</font></td> </tr>';
-							echo '<tr> <td align=center><p2>QC Check</p2></td> <td align=center><p2>'.$qcc.'</b></p2></td> </tr>';
-						echo '</table>';
-						echo '</td></tr>';
-					} // end if ($sisa!=0)
-					else{
-						//echo("<td>". $stdpack ."</td></tr>");
-						//	soucrdb ( suppQR : P | ediweb : B | 48JEIN : I ) 
-							$srcdb13   			= 'P';
-							$supp13	   			= str_pad($vsupp,6," ", STR_PAD_RIGHT);
-							$partno13  			= str_pad($partno,15," ", STR_PAD_RIGHT);
-							$date13				= date("YmdHis");
-							$micro_date13		= microtime();
-							$date_array_temp13	= explode(" ",$micro_date13);
-							$date_array13		= substr($date_array_temp13[0], 2, -4);
-							$orderCodeDate13	= $date13.$date_array13;
-							$datetime13 		= $orderCodeDate13;
-							$printcode13 		= str_pad("2",6,"0", STR_PAD_LEFT);
-							$unique13	  		= $srcdb13 . $supp13 . $partno13 . $datetime13 . $printcode13;
-
-						//	generate label
-						$namafile 	= trim($vsupp).'_'.trim($partno).'_'.trim($po).'_'.trim($stdpack) . '_' . trim($unique13) . '.jpg';
-						$barcode 	= $partno . ' ' . $po . ' ' . $stdpack2 . ' ' . $unique13;
-						$tempDir 	= '../../printqr/injc/';
-						QRcode::png($barcode, $tempDir . $namafile, QR_ECLEVEL_L, 2);
-
-						echo '<td align=right>';
-						echo '<table border=1 cellspacing=0 width=300>';
-							echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="../../printqr/injc/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
-							echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
-							echo '<tr> <td align=center><p2>PO No.</p2></td> <td align=center><p2>'.$po.'</p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Qty</p2></td> <td align=center><p2><b>'.$stdpack.' PCS</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Del. Date</p2></td> <td align=center><p2>'.$deldate.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Prod. Date</p2></td> <td align=center><p2>'.$proddate.'</b></p2></td> </tr>';
-							echo '<tr> <td align=center><p2>Shift</p2></td> <td align=center><p2>'.$shift.'</p2></td> <td rowspan=2 align=center valign=top><b>Location</b><br><font size=2>'.$lokasi.'</font></td> </tr>';
-							echo '<tr> <td align=center><p2>QC Check</p2></td> <td align=center><p2>'.$qcc.'</b></p2></td> </tr>';
-						echo '</table>';
-						echo '</td></tr>';
-					} //end  else
-				} // end if ($jml==2)
-
-				if($jml>2){
-					for ($i=1;$i<=$jml;$i++){
-						$kurang = $i * $stdpack;
-						if($i % 2!=0){
-							if (($totalqty - $kurang)>$sisa){
-								//echo("<tr><td>". $stdpack ."</td>");
+					echo '<table border=0 cellspacing=0 width=650>';
+						if ($jml==1){
+							if ($stdpack == $totalqty){
+								//echo("<tr><td>". $totalqty ."</td></tr>");
 								//	soucrdb ( suppQR : P | ediweb : B | 48JEIN : I ) 
-									$srcdb14   			= 'P';
-									$supp14	   			= str_pad($vsupp,6," ", STR_PAD_RIGHT);
-									$partno14  			= str_pad($partno,15," ", STR_PAD_RIGHT);
-									$date14				= date("YmdHis");
-									$micro_date14		= microtime();
-									$date_array_temp14	= explode(" ",$micro_date14);
-									$date_array14		= substr($date_array_temp14[0], 2, -4);
-									$orderCodeDate14	= $date14.$date_array14;
-									$datetime14 		= $orderCodeDate14;
-									$printcode14 		= str_pad($i,6,"0", STR_PAD_LEFT);
-									$unique14	  		= $srcdb14 . $supp14 . $partno14 . $datetime14. $printcode14;
-								
+									$srcdb9	   			= 'P';
+									$supp9	   			= str_pad($vsupp,6," ", STR_PAD_RIGHT);
+									$partno9   			= str_pad($partno,15," ", STR_PAD_RIGHT);
+									$date9				= date("YmdHis");
+									$micro_date9		= microtime();
+									$date_array_temp9	= explode(" ",$micro_date9);
+									$date_array9		= substr($date_array_temp9[0], 2, -4);
+									$orderCodeDate9		= $date9.$date_array9;
+									$datetime9 			= $orderCodeDate9;
+									$printcode9 		= str_pad($jml,6,"0", STR_PAD_LEFT);
+									$unique9   			= $srcdb9 . $supp9 . $partno9 . $datetime9 . $printcode9;
 
 								//	generate label
-								$a 			= trim($vsupp).'_'.trim($partno).'_'.trim($po).'_'.trim($stdpack) . '_' . trim($unique14) . '.jpg';
-								$barcode 	= $partno . ' ' . $po . ' ' . $stdpack2 . ' ' . $unique14;
+								$namafile 	= trim($vsupp).'_'.trim($partno).'_'.trim($po).'_'.trim($stdpack) . '_' . trim($unique9) . '.jpg';
+								$barcode 	= $partno . ' ' . $po . ' ' . $stdpack2 . ' ' . $unique9;
 								$tempDir 	= '../../printqr/injc/';
-								QRcode::png($barcode, $tempDir . $a, QR_ECLEVEL_L, 2);
+								QRcode::png($barcode, $tempDir . $namafile, QR_ECLEVEL_L, 2);
 
-								if(($i+1) % 6==0){
-									echo '<tr style="page-break-after: always;"><td>';
-								}elseif($i % 3==0)	{
-									echo '<tr><td height=380>';
-								}else{
-									echo '<tr><td>';
-								}
+								echo '<tr><td>';
 								echo '<table border=1 cellspacing=0 width=300>';
-									echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="../../printqr/injc/' . $a . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
+									echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="../../printqr/injc/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
 									echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
 									echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
 									echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
@@ -828,39 +626,330 @@ if(isset($_GET['partno']))
 									echo '<tr> <td align=center><p2>Shift</p2></td> <td align=center><p2>'.$shift.'</p2></td> <td rowspan=2 align=center valign=top><b>Location</b><br><font size=2>'.$lokasi.'</font></td> </tr>';
 									echo '<tr> <td align=center><p2>QC Check</p2></td> <td align=center><p2>'.$qcc.'</b></p2></td> </tr>';
 								echo '</table>';
-								echo '</td>';
-							} // end if (($totalqty - $kurang)>$sisa)
+								echo '</td></tr>';
+							}
 							else{
-								if($sisa==0){
-									//echo("<tr><td>". $stdpack ."</td>");
-									//	soucrdb ( suppQR : P | ediweb : B | 48JEIN : I ) 
-										$srcdb15   			= 'P';
-										$supp15	   			= str_pad($vsupp,6," ", STR_PAD_RIGHT);
-										$partno15  			= str_pad($partno,15," ", STR_PAD_RIGHT);
-										$date15				= date("YmdHis");
-										$micro_date15		= microtime();
-										$date_array_temp15	= explode(" ",$micro_date15);
-										$date_array15		= substr($date_array_temp15[0], 2, -4);
-										$orderCodeDate15	= $date15.$date_array15;
-										$datetime15 		= $orderCodeDate15;
-										$printcode15 		= str_pad($i,6,"0", STR_PAD_LEFT);
-										$unique15	  		= $srcdb15 . $supp15 . $partno15 . $datetime15. $printcode15;
+								//echo("<tr><td>". $sisa ."</td></tr>");
+								//	soucrdb ( suppQR : P | ediweb : B | 48JEIN : I ) 
+									$srcdb10   			= 'P';
+									$supp10	   			= str_pad($vsupp,6," ", STR_PAD_RIGHT);
+									$partno10  			= str_pad($partno,15," ", STR_PAD_RIGHT);
+									$date10				= date("YmdHis");
+									$micro_date10		= microtime();
+									$date_array_temp10	= explode(" ",$micro_date10);
+									$date_array10		= substr($date_array_temp10[0], 2, -4);
+									$orderCodeDate10	= $date10.$date_array10;
+									$datetime10 		= $orderCodeDate10;
+									$printcode10 		= str_pad($jml,6,"0", STR_PAD_LEFT);
+									$unique10   		= $srcdb10 . $supp10 . $partno10 . $datetime10 . $printcode10;
 									
-									//	generate label
-									$a 			= trim($vsupp).'_'.trim($partno).'_'.trim($po).'_'.trim($stdpack) . '_' . trim($unique15) . '.jpg';
-									$barcode 	= $partno . ' ' . $po . ' ' . $stdpack2 . ' ' . $unique15;
-									$tempDir 	= '../../printqr/injc/';
-									QRcode::png($barcode, $tempDir . $a, QR_ECLEVEL_L, 2);
+								//	generate label
+								$extfile 	= $jml + 1;
+								$namafile 	= trim($vsupp).'_'.trim($partno).'_'.trim($po).'_'.trim($qtybal) . '_' . trim($unique10) . '.jpg';
+								$barcode 	= $partno . ' ' . $po . ' ' . $qtybal2 . ' ' . $unique10;
+								$tempDir 	= '../../printqr/injc/';
+								QRcode::png($barcode, $tempDir . $namafile, QR_ECLEVEL_L, 2);
 
-									if(($i+1) % 6==0){
-										echo '<tr style="page-break-after: always;"><td>';
-									}elseif($i % 3==0)	{
-										echo '<tr><td height=380>';
-									}else{
-										echo '<tr><td>';
-									}
+								echo '<tr><td>';
+								echo '<table border=1 cellspacing=0 width=300>';
+									echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="../../printqr/injc/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
+									echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
+									echo '<tr> <td align=center><p2>PO No.</p2></td> <td align=center><p2>'.$po.'</p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Qty</p2></td> <td align=center><p2><b>'.$qtybal.' PCS</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Del. Date</p2></td> <td align=center><p2>'.$deldate.'</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Prod. Date</p2></td> <td align=center><p2>'.$proddate.'</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Shift</p2></td> <td align=center><p2>'.$shift.'</p2></td> <td rowspan=2 align=center valign=top><b>Location</b><br><font size=2>'.$lokasi.'</font></td> </tr>';
+									echo '<tr> <td align=center><p2>QC Check</p2></td> <td align=center><p2>'.$qcc.'</b></p2></td> </tr>';
+								echo '</table>';
+								echo '</td></tr>';
+							}
+						} // end if ($jml==1)
+						if ($jml==2){
+							//echo("<tr><td>". $stdpack ."</td>");
+							//	soucrdb ( suppQR : P | ediweb : B | 48JEIN : I ) 
+								$srcdb11   			= 'P';
+								$supp11	   			= str_pad($vsupp,6," ", STR_PAD_RIGHT);
+								$partno11  			= str_pad($partno,15," ", STR_PAD_RIGHT);
+								$date11				= date("YmdHis");
+								$micro_date11		= microtime();
+								$date_array_temp11	= explode(" ",$micro_date11);
+								$date_array11		= substr($date_array_temp11[0], 2, -4);
+								$orderCodeDate11	= $date11.$date_array11;
+								$datetime11 		= $orderCodeDate11;
+								$printcode11 		= str_pad("1",6,"0", STR_PAD_LEFT);
+								$unique11   		= $srcdb11 . $supp11 . $partno11 . $datetime11 . $printcode11;
+								
+
+							//	generate label
+							$namafile 	= trim($vsupp).'_'.trim($partno).'_'.trim($po).'_'.trim($stdpack) . '_' . trim($unique11) . '.jpg';
+							$barcode 	= $partno . ' ' . $po . ' ' . $stdpack2 . ' ' . $unique11;
+							$tempDir 	= '../../printqr/injc/';
+							QRcode::png($barcode, $tempDir . $namafile, QR_ECLEVEL_L, 2);
+
+							echo '<tr><td>';
+								echo '<table border=1 cellspacing=0 width=300>';
+									echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="../../printqr/injc/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
+									echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
+									echo '<tr> <td align=center><p2>PO No.</p2></td> <td align=center><p2>'.$po.'</p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Qty</p2></td> <td align=center><p2><b>'.$stdpack.' PCS</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Del. Date</p2></td> <td align=center><p2>'.$deldate.'</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Prod. Date</p2></td> <td align=center><p2>'.$proddate.'</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Shift</p2></td> <td align=center><p2>'.$shift.'</p2></td> <td rowspan=2 align=center valign=top><b>Location</b><br><font size=2>'.$lokasi.'</font></td> </tr>';
+									echo '<tr> <td align=center><p2>QC Check</p2></td> <td align=center><p2>'.$qcc.'</b></p2></td> </tr>';
+								echo '</table>';
+							echo '</td>';
+							if ($sisa!=0){
+								//echo("<td>". $sisa ."</td></tr>");
+								//	soucrdb ( suppQR : P | ediweb : B | 48JEIN : I ) 
+									$srcdb12   			= 'P';
+									$supp12	   			= str_pad($vsupp,6," ", STR_PAD_RIGHT);
+									$partno12  			= str_pad($partno,15," ", STR_PAD_RIGHT);
+									$date12				= date("YmdHis");
+									$micro_date12		= microtime();
+									$date_array_temp12	= explode(" ",$micro_date12);
+									$date_array12		= substr($date_array_temp12[0], 2, -4);
+									$orderCodeDate12	= $date12.$date_array12;
+									$datetime12 		= $orderCodeDate12;
+									$printcode12 		= str_pad("2",6,"0", STR_PAD_LEFT);
+									$unique12	  		= $srcdb12 . $supp12 . $partno12 . $datetime12 . $printcode12;
+								
+
+								//	generate label
+								$extfile 	= $sisa;
+								$namafile	= trim($vsupp).'_'.trim($partno).'_'.trim($po).'_'.trim($sisa) . '_' . trim($unique12) . '.jpg';
+								$barcode 	= $partno . ' ' . $po . ' ' . $sisa3 . ' ' . $unique12 ;
+								$tempDir 	= '../../printqr/injc/';
+								QRcode::png($barcode, $tempDir . $namafile, QR_ECLEVEL_L, 2);
+
+								echo '<td align=right>';
+								echo '<table border=1 cellspacing=0 width=300>';
+									echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="../../printqr/injc/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
+									echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
+									echo '<tr> <td align=center><p2>PO No.</p2></td> <td align=center><p2>'.$po.'</p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Qty</p2></td> <td align=center><p2><b>'.$sisa.' PCS</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Del. Date</p2></td> <td align=center><p2>'.$deldate.'</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Prod. Date</p2></td> <td align=center><p2>'.$proddate.'</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Shift</p2></td> <td align=center><p2>'.$shift.'</p2></td> <td rowspan=2 align=center valign=top><b>Location</b><br><font size=2>'.$lokasi.'</font></td> </tr>';
+									echo '<tr> <td align=center><p2>QC Check</p2></td> <td align=center><p2>'.$qcc.'</b></p2></td> </tr>';
+								echo '</table>';
+								echo '</td></tr>';
+							} // end if ($sisa!=0)
+							else{
+								//echo("<td>". $stdpack ."</td></tr>");
+								//	soucrdb ( suppQR : P | ediweb : B | 48JEIN : I ) 
+									$srcdb13   			= 'P';
+									$supp13	   			= str_pad($vsupp,6," ", STR_PAD_RIGHT);
+									$partno13  			= str_pad($partno,15," ", STR_PAD_RIGHT);
+									$date13				= date("YmdHis");
+									$micro_date13		= microtime();
+									$date_array_temp13	= explode(" ",$micro_date13);
+									$date_array13		= substr($date_array_temp13[0], 2, -4);
+									$orderCodeDate13	= $date13.$date_array13;
+									$datetime13 		= $orderCodeDate13;
+									$printcode13 		= str_pad("2",6,"0", STR_PAD_LEFT);
+									$unique13	  		= $srcdb13 . $supp13 . $partno13 . $datetime13 . $printcode13;
+
+								//	generate label
+								$namafile 	= trim($vsupp).'_'.trim($partno).'_'.trim($po).'_'.trim($stdpack) . '_' . trim($unique13) . '.jpg';
+								$barcode 	= $partno . ' ' . $po . ' ' . $stdpack2 . ' ' . $unique13;
+								$tempDir 	= '../../printqr/injc/';
+								QRcode::png($barcode, $tempDir . $namafile, QR_ECLEVEL_L, 2);
+
+								echo '<td align=right>';
+								echo '<table border=1 cellspacing=0 width=300>';
+									echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="../../printqr/injc/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
+									echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
+									echo '<tr> <td align=center><p2>PO No.</p2></td> <td align=center><p2>'.$po.'</p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Qty</p2></td> <td align=center><p2><b>'.$stdpack.' PCS</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Del. Date</p2></td> <td align=center><p2>'.$deldate.'</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Prod. Date</p2></td> <td align=center><p2>'.$proddate.'</b></p2></td> </tr>';
+									echo '<tr> <td align=center><p2>Shift</p2></td> <td align=center><p2>'.$shift.'</p2></td> <td rowspan=2 align=center valign=top><b>Location</b><br><font size=2>'.$lokasi.'</font></td> </tr>';
+									echo '<tr> <td align=center><p2>QC Check</p2></td> <td align=center><p2>'.$qcc.'</b></p2></td> </tr>';
+								echo '</table>';
+								echo '</td></tr>';
+							} //end  else
+						} // end if ($jml==2)
+
+						if($jml>2){
+							for ($i=1;$i<=$jml;$i++){
+								$kurang = $i * $stdpack;
+								if($i % 2!=0){
+									if (($totalqty - $kurang)>$sisa){
+										//echo("<tr><td>". $stdpack ."</td>");
+										//	soucrdb ( suppQR : P | ediweb : B | 48JEIN : I ) 
+											$srcdb14   			= 'P';
+											$supp14	   			= str_pad($vsupp,6," ", STR_PAD_RIGHT);
+											$partno14  			= str_pad($partno,15," ", STR_PAD_RIGHT);
+											$date14				= date("YmdHis");
+											$micro_date14		= microtime();
+											$date_array_temp14	= explode(" ",$micro_date14);
+											$date_array14		= substr($date_array_temp14[0], 2, -4);
+											$orderCodeDate14	= $date14.$date_array14;
+											$datetime14 		= $orderCodeDate14;
+											$printcode14 		= str_pad($i,6,"0", STR_PAD_LEFT);
+											$unique14	  		= $srcdb14 . $supp14 . $partno14 . $datetime14. $printcode14;
+										
+
+										//	generate label
+										$a 			= trim($vsupp).'_'.trim($partno).'_'.trim($po).'_'.trim($stdpack) . '_' . trim($unique14) . '.jpg';
+										$barcode 	= $partno . ' ' . $po . ' ' . $stdpack2 . ' ' . $unique14;
+										$tempDir 	= '../../printqr/injc/';
+										QRcode::png($barcode, $tempDir . $a, QR_ECLEVEL_L, 2);
+
+										if(($i+1) % 6==0){
+											echo '<tr style="page-break-after: always;"><td>';
+										}elseif($i % 3==0)	{
+											echo '<tr><td height=380>';
+										}else{
+											echo '<tr><td>';
+										}
+										echo '<table border=1 cellspacing=0 width=300>';
+											echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="../../printqr/injc/' . $a . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
+											echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
+											echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+											echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
+											echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
+											echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
+											echo '<tr> <td align=center><p2>PO No.</p2></td> <td align=center><p2>'.$po.'</p2></td> </tr>';
+											echo '<tr> <td align=center><p2>Qty</p2></td> <td align=center><p2><b>'.$stdpack.' PCS</b></p2></td> </tr>';
+											echo '<tr> <td align=center><p2>Del. Date</p2></td> <td align=center><p2>'.$deldate.'</b></p2></td> </tr>';
+											echo '<tr> <td align=center><p2>Prod. Date</p2></td> <td align=center><p2>'.$proddate.'</b></p2></td> </tr>';
+											echo '<tr> <td align=center><p2>Shift</p2></td> <td align=center><p2>'.$shift.'</p2></td> <td rowspan=2 align=center valign=top><b>Location</b><br><font size=2>'.$lokasi.'</font></td> </tr>';
+											echo '<tr> <td align=center><p2>QC Check</p2></td> <td align=center><p2>'.$qcc.'</b></p2></td> </tr>';
+										echo '</table>';
+										echo '</td>';
+									} // end if (($totalqty - $kurang)>$sisa)
+									else{
+										if($sisa==0){
+											//echo("<tr><td>". $stdpack ."</td>");
+											//	soucrdb ( suppQR : P | ediweb : B | 48JEIN : I ) 
+												$srcdb15   			= 'P';
+												$supp15	   			= str_pad($vsupp,6," ", STR_PAD_RIGHT);
+												$partno15  			= str_pad($partno,15," ", STR_PAD_RIGHT);
+												$date15				= date("YmdHis");
+												$micro_date15		= microtime();
+												$date_array_temp15	= explode(" ",$micro_date15);
+												$date_array15		= substr($date_array_temp15[0], 2, -4);
+												$orderCodeDate15	= $date15.$date_array15;
+												$datetime15 		= $orderCodeDate15;
+												$printcode15 		= str_pad($i,6,"0", STR_PAD_LEFT);
+												$unique15	  		= $srcdb15 . $supp15 . $partno15 . $datetime15. $printcode15;
+											
+											//	generate label
+											$a 			= trim($vsupp).'_'.trim($partno).'_'.trim($po).'_'.trim($stdpack) . '_' . trim($unique15) . '.jpg';
+											$barcode 	= $partno . ' ' . $po . ' ' . $stdpack2 . ' ' . $unique15;
+											$tempDir 	= '../../printqr/injc/';
+											QRcode::png($barcode, $tempDir . $a, QR_ECLEVEL_L, 2);
+
+											if(($i+1) % 6==0){
+												echo '<tr style="page-break-after: always;"><td>';
+											}elseif($i % 3==0)	{
+												echo '<tr><td height=380>';
+											}else{
+												echo '<tr><td>';
+											}
+											echo '<table border=1 cellspacing=0 width=300>';
+												echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="../../printqr/injc/' . $a . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
+												echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
+												echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
+												echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
+												echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
+												echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
+												echo '<tr> <td align=center><p2>PO No.</p2></td> <td align=center><p2>'.$po.'</p2></td> </tr>';
+												echo '<tr> <td align=center><p2>Qty</p2></td> <td align=center><p2><b>'.$stdpack.' PCS</b></p2></td> </tr>';
+												echo '<tr> <td align=center><p2>Del. Date</p2></td> <td align=center><p2>'.$deldate.'</b></p2></td> </tr>';
+												echo '<tr> <td align=center><p2>Prod. Date</p2></td> <td align=center><p2>'.$proddate.'</b></p2></td> </tr>';
+												echo '<tr> <td align=center><p2>Shift</p2></td> <td align=center><p2>'.$shift.'</p2></td> <td rowspan=2 align=center valign=top><b>Location</b><br><font size=2>'.$lokasi.'</font></td> </tr>';
+												echo '<tr> <td align=center><p2>QC Check</p2></td> <td align=center><p2>'.$qcc.'</b></p2></td> </tr>';
+											echo '</table>';
+											echo '</td>';
+										}else{
+											//echo("<tr><td>". $sisa ."</td>");
+											//	soucrdb ( suppQR : P | ediweb : B | 48JEIN : I ) 
+												$srcdb16   			= 'P';
+												$supp16	   			= str_pad($vsupp,6," ", STR_PAD_RIGHT);
+												$partno16 			= str_pad($partno,15," ", STR_PAD_RIGHT);
+												$date16				= date("YmdHis");
+												$micro_date16		= microtime();
+												$date_array_temp16	= explode(" ",$micro_date16);
+												$date_array16		= substr($date_array_temp16[0], 2, -4);
+												$orderCodeDate16	= $date16.$date_array16;
+												$datetime16 		= $orderCodeDate16;
+												$printcode16 		= str_pad($i,6,"0", STR_PAD_LEFT);
+												$unique16	  		= $srcdb16 . $supp16 . $partno16 . $datetime16 . $printcode16;
+											
+											//	generate label
+											$extfile	= $sisa;
+											$namafile 	= trim($vsupp).'_'.trim($partno).'_'.trim($po).'_'.trim($sisa) . '_' . trim($unique16) . '.jpg';
+											$barcode 	= $partno . ' ' . $po . ' ' . $sisa3 . ' ' . $unique16;
+											$tempDir 	= '../../printqr/injc/';
+											QRcode::png($barcode, $tempDir . $namafile, QR_ECLEVEL_L, 2);
+
+											if(($i+1) % 6==0){
+												echo '<tr style="page-break-after: always;"><td>';
+											}elseif($i % 3==0)	{
+												echo '<tr><td height=380>';
+											}else{
+												echo '<tr><td>';
+											}
+											echo '<table border=1 cellspacing=0 width=300>';
+												echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="../../printqr/injc/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
+												echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
+												echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></tr>';
+												echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
+												echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
+												echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
+												echo '<tr> <td align=center><p2>PO No.</p2></td> <td align=center><p2>'.$po.'</p2></td> </tr>';
+												echo '<tr> <td align=center><p2>Qty</p2></td> <td align=center><p2><b>'.$sisa.' PCS</b></p2></td> </tr>';
+												echo '<tr> <td align=center><p2>Del. Date</p2></td> <td align=center><p2>'.$deldate.'</b></p2></td> </tr>';
+												echo '<tr> <td align=center><p2>Prod. Date</p2></td> <td align=center><p2>'.$proddate.'</b></p2></td> </tr>';
+												echo '<tr> <td align=center><p2>Shift</p2></td> <td align=center><p2>'.$shift.'</p2></td> <td rowspan=2 align=center valign=top><b>Location</b><br><font size=2>'.$lokasi.'</font></td> </tr>';
+												echo '<tr> <td align=center><p2>QC Check</p2></td> <td align=center><p2>'.$qcc.'</b></p2></td> </tr>';
+											echo '</table>';
+											echo '</td>';
+										}
+									} //end else
+								} // end if($i % 2!=0)
+								if ($i % 2==0){
+									//	soucrdb ( suppQR : P | ediweb : B | 48JEIN : I ) 
+										$srcdb_kanan2   		= 'P';
+										$supp_kanan2	   		= str_pad($vsupp,6," ", STR_PAD_RIGHT);
+										$partno_kanan2 			= str_pad($partno,15," ", STR_PAD_RIGHT);
+										$date_kanan2			= date("YmdHis");
+										$micro_date_kanan2		= microtime();
+										$date_array_temp_kanan2	= explode(" ",$micro_date_kanan2);
+										$date_array_kanan2		= substr($date_array_temp_kanan2[0], 2, -4);
+										$orderCodeDate_kanan2	= $date_kanan2.$date_array_kanan2;
+										$datetime_kanan2 		= $orderCodeDate_kanan2;
+										$printcode_kanan2 		= str_pad($i,6,"0", STR_PAD_LEFT);
+										$unique_kanan2	  		= $srcdb_kanan2 . $supp_kanan2 . $partno_kanan2 . $datetime_kanan2 . $printcode_kanan2;
+
+									//	generate label
+									$b_kanan2	= trim($vsupp).'_'.trim($partno).'_'.trim($po).'_'.trim($stdpack) . '_' . trim($unique_kanan2) . '.jpg';
+									$barcode 	= $partno . ' ' . $po . ' ' . $stdpack2 . ' ' . $unique_kanan2;
+									$tempDir 	= '../../printqr/injc/';
+									QRcode::png($barcode, $tempDir . $b_kanan2, QR_ECLEVEL_L, 2);
+
+
+					echo '<td align=right >';
 									echo '<table border=1 cellspacing=0 width=300>';
-										echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="../../printqr/injc/' . $a . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
+										echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="../../printqr/injc/' . $b_kanan2 . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
 										echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
 										echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
 										echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
@@ -873,128 +962,44 @@ if(isset($_GET['partno']))
 										echo '<tr> <td align=center><p2>Shift</p2></td> <td align=center><p2>'.$shift.'</p2></td> <td rowspan=2 align=center valign=top><b>Location</b><br><font size=2>'.$lokasi.'</font></td> </tr>';
 										echo '<tr> <td align=center><p2>QC Check</p2></td> <td align=center><p2>'.$qcc.'</b></p2></td> </tr>';
 									echo '</table>';
-									echo '</td>';
-								}else{
-									//echo("<tr><td>". $sisa ."</td>");
-									//	soucrdb ( suppQR : P | ediweb : B | 48JEIN : I ) 
-										$srcdb16   			= 'P';
-										$supp16	   			= str_pad($vsupp,6," ", STR_PAD_RIGHT);
-										$partno16 			= str_pad($partno,15," ", STR_PAD_RIGHT);
-										$date16				= date("YmdHis");
-										$micro_date16		= microtime();
-										$date_array_temp16	= explode(" ",$micro_date16);
-										$date_array16		= substr($date_array_temp16[0], 2, -4);
-										$orderCodeDate16	= $date16.$date_array16;
-										$datetime16 		= $orderCodeDate16;
-										$printcode16 		= str_pad($i,6,"0", STR_PAD_LEFT);
-										$unique16	  		= $srcdb16 . $supp16 . $partno16 . $datetime16 . $printcode16;
-									
-									//	generate label
-									$extfile	= $sisa;
-									$namafile 	= trim($vsupp).'_'.trim($partno).'_'.trim($po).'_'.trim($sisa) . '_' . trim($unique16) . '.jpg';
-									$barcode 	= $partno . ' ' . $po . ' ' . $sisa3 . ' ' . $unique16;
-									$tempDir 	= '../../printqr/injc/';
-									QRcode::png($barcode, $tempDir . $namafile, QR_ECLEVEL_L, 2);
+									echo '</td></tr>';
+								} // if ($i % 2==0)
+							} // end for ($i=1;$i<=$jml;$i++)
+						} // end if($jml>2)
+					echo '</table>';
+				break;
+				// End Format barcode kategori  --- >>>  Injection Part
 
-									if(($i+1) % 6==0){
-										echo '<tr style="page-break-after: always;"><td>';
-									}elseif($i % 3==0)	{
-										echo '<tr><td height=380>';
-									}else{
-										echo '<tr><td>';
-									}
-									echo '<table border=1 cellspacing=0 width=300>';
-										echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="../../printqr/injc/' . $namafile . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
-										echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-										echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></tr>';
-										echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
-										echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
-										echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
-										echo '<tr> <td align=center><p2>PO No.</p2></td> <td align=center><p2>'.$po.'</p2></td> </tr>';
-										echo '<tr> <td align=center><p2>Qty</p2></td> <td align=center><p2><b>'.$sisa.' PCS</b></p2></td> </tr>';
-										echo '<tr> <td align=center><p2>Del. Date</p2></td> <td align=center><p2>'.$deldate.'</b></p2></td> </tr>';
-										echo '<tr> <td align=center><p2>Prod. Date</p2></td> <td align=center><p2>'.$proddate.'</b></p2></td> </tr>';
-										echo '<tr> <td align=center><p2>Shift</p2></td> <td align=center><p2>'.$shift.'</p2></td> <td rowspan=2 align=center valign=top><b>Location</b><br><font size=2>'.$lokasi.'</font></td> </tr>';
-										echo '<tr> <td align=center><p2>QC Check</p2></td> <td align=center><p2>'.$qcc.'</b></p2></td> </tr>';
-									echo '</table>';
-									echo '</td>';
-								}
-							} //end else
-						} // end if($i % 2!=0)
-						if ($i % 2==0){
-							//	soucrdb ( suppQR : P | ediweb : B | 48JEIN : I ) 
-								$srcdb_kanan2   		= 'P';
-								$supp_kanan2	   		= str_pad($vsupp,6," ", STR_PAD_RIGHT);
-								$partno_kanan2 			= str_pad($partno,15," ", STR_PAD_RIGHT);
-								$date_kanan2			= date("YmdHis");
-								$micro_date_kanan2		= microtime();
-								$date_array_temp_kanan2	= explode(" ",$micro_date_kanan2);
-								$date_array_kanan2		= substr($date_array_temp_kanan2[0], 2, -4);
-								$orderCodeDate_kanan2	= $date_kanan2.$date_array_kanan2;
-								$datetime_kanan2 		= $orderCodeDate_kanan2;
-								$printcode_kanan2 		= str_pad($i,6,"0", STR_PAD_LEFT);
-								$unique_kanan2	  		= $srcdb_kanan2 . $supp_kanan2 . $partno_kanan2 . $datetime_kanan2 . $printcode_kanan2;
+				case '3':  // Format barcode kategori  --- >>>  Printing Part
+					$mtrl 		= $_GET['mtrl'];
+					$shift 		= $_GET['shift'];
+					$qcc 		= $_GET['qcc'];
 
-							  //	generate label
-							  $b_kanan2	= trim($vsupp).'_'.trim($partno).'_'.trim($po).'_'.trim($stdpack) . '_' . trim($unique_kanan2) . '.jpg';
-							  $barcode 	= $partno . ' ' . $po . ' ' . $stdpack2 . ' ' . $unique_kanan2;
-							  $tempDir 	= '../../printqr/injc/';
-							  QRcode::png($barcode, $tempDir . $b_kanan2, QR_ECLEVEL_L, 2);
-
-
-              echo '<td align=right >';
-							echo '<table border=1 cellspacing=0 width=300>';
-								echo '<tr> <td width=70 align=center rowspan=2><img style="max-height: 60px;" src="../../printqr/injc/' . $b_kanan2 . '" alt="gambar barcode" /></td> <td align=center><p2><b>'.$suppname.'</b></p2></td> <td width=70 align=center rowspan=2><p2><b>RoHS <br> OK</b></p2></td> </tr>';
-								echo '<tr> <td align=center><p2><b>'.$ulcode.'</b></p2></td> </tr>';
-								echo '<tr> <td align=center><p2>Customer</p2></td> <td align=center colspan=2><p2>PT. JVC ELECTRONICS INDONESIA</p2></td> </tr>';
-								echo '<tr> <td align=center><p2>Part Name.</p2></td> <td align=center><p2>'.$partnm.'</p2></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
-								echo '<tr> <td align=center><p2>Part No.</p2></td> <td align=center><p2><b>'.$partno.'</b></p2></td> </tr>';
-								echo '<tr> <td align=center><p2>Material</p2></td> <td align=center><p2>'.$mtrl.'</p2></td> </tr>';
-								echo '<tr> <td align=center><p2>PO No.</p2></td> <td align=center><p2>'.$po.'</p2></td> </tr>';
-								echo '<tr> <td align=center><p2>Qty</p2></td> <td align=center><p2><b>'.$stdpack.' PCS</b></p2></td> </tr>';
-								echo '<tr> <td align=center><p2>Del. Date</p2></td> <td align=center><p2>'.$deldate.'</b></p2></td> </tr>';
-								echo '<tr> <td align=center><p2>Prod. Date</p2></td> <td align=center><p2>'.$proddate.'</b></p2></td> </tr>';
-								echo '<tr> <td align=center><p2>Shift</p2></td> <td align=center><p2>'.$shift.'</p2></td> <td rowspan=2 align=center valign=top><b>Location</b><br><font size=2>'.$lokasi.'</font></td> </tr>';
-								echo '<tr> <td align=center><p2>QC Check</p2></td> <td align=center><p2>'.$qcc.'</b></p2></td> </tr>';
-							echo '</table>';
-							echo '</td></tr>';
-						} // if ($i % 2==0)
-					} // end for ($i=1;$i<=$jml;$i++)
-				} // end if($jml>2)
-			echo '</table>';
-		break;
-		// End Format barcode kategori  --- >>>  Injection Part
-
-		case '3':  // Format barcode kategori  --- >>>  Printing Part
-			$mtrl 		= $_GET['mtrl'];
-			$shift 		= $_GET['shift'];
-			$qcc 		= $_GET['qcc'];
-
-			$stdpack 	= $pack; // standard packing tiap palet
-			$totalqty 	= $qty; // total production quantity
-			$sisa 		= $totalqty % $stdpack; // sisa hasil bagi
-			$jml 		=ceil($totalqty / $stdpack); //hasil bagi dibulatkan ke atas
-			$kurang 	= 1;
-			//$jml =floor($totalqty / $stdpack); //hasil bagi dibulatkan ke bawah
-			//echo $jml ." dan " .$sisa;
-      $sisa4 = $sisa;
-      $pjgsisa4 = strlen($sisa);
-      switch ($pjgsisa4)
-      {
-        case 1:
-        $sisa4 .= '    ';
-        break;
-        case 2:
-        $sisa4 .= '   ';
-        break;
-        case 3:
-        $sisa4 .= '  ';
-        break;
-        case 4:
-        $sisa4 .= ' ';
-        break;
-        default:
-      }
+					$stdpack 	= $pack; // standard packing tiap palet
+					$totalqty 	= $qty; // total production quantity
+					$sisa 		= $totalqty % $stdpack; // sisa hasil bagi
+					$jml 		=ceil($totalqty / $stdpack); //hasil bagi dibulatkan ke atas
+					$kurang 	= 1;
+					//$jml =floor($totalqty / $stdpack); //hasil bagi dibulatkan ke bawah
+					//echo $jml ." dan " .$sisa;
+			$sisa4 = $sisa;
+			$pjgsisa4 = strlen($sisa);
+			switch ($pjgsisa4)
+			{
+				case 1:
+				$sisa4 .= '    ';
+				break;
+				case 2:
+				$sisa4 .= '   ';
+				break;
+				case 3:
+				$sisa4 .= '  ';
+				break;
+				case 4:
+				$sisa4 .= ' ';
+				break;
+				default:
+			}
 
 
 
@@ -1500,47 +1505,47 @@ if(isset($_GET['partno']))
 				} 	//end else
 			} 	// end if($i % 2!=0)
 			
-		if ($i % 2==0){
-			// echo'<br>13) i%2==0 '.($i%2).'==0 --- 12.'.$i.'<br>';
+			if ($i % 2==0){
+				// echo'<br>13) i%2==0 '.($i%2).'==0 --- 12.'.$i.'<br>';
 
-			//	soucrdb ( suppQR : P | ediweb : B | 48JEIN : I ) 
-				$srcdb_kanan   		= 'P';
-				$supp_kanan 	   		= str_pad($vsupp,6," ", STR_PAD_RIGHT);
-				$partno_kanan   		= str_pad($partno,15," ", STR_PAD_RIGHT);
-				$date_kanan 			= date("YmdHis");
-				$micro_date_kanan		= microtime();
-				$date_array_temp_kanan	= explode(" ",$micro_date_kanan);
-				$date_array_kanan		= substr($date_array_temp_kanan[0], 2, -4);
-				$orderCodeDate_kanan	= $date_kanan . $date_array_kanan;
-				$datetime_kanan			= $orderCodeDate_kanan;
-				$printcode_kanan		= str_pad($i,6,"0", STR_PAD_LEFT);
-				$unique_kanan			= $srcdb_kanan . $supp_kanan . $partno_kanan . $datetime_kanan . $printcode_kanan;
+				//	soucrdb ( suppQR : P | ediweb : B | 48JEIN : I ) 
+					$srcdb_kanan   		= 'P';
+					$supp_kanan 	   		= str_pad($vsupp,6," ", STR_PAD_RIGHT);
+					$partno_kanan   		= str_pad($partno,15," ", STR_PAD_RIGHT);
+					$date_kanan 			= date("YmdHis");
+					$micro_date_kanan		= microtime();
+					$date_array_temp_kanan	= explode(" ",$micro_date_kanan);
+					$date_array_kanan		= substr($date_array_temp_kanan[0], 2, -4);
+					$orderCodeDate_kanan	= $date_kanan . $date_array_kanan;
+					$datetime_kanan			= $orderCodeDate_kanan;
+					$printcode_kanan		= str_pad($i,6,"0", STR_PAD_LEFT);
+					$unique_kanan			= $srcdb_kanan . $supp_kanan . $partno_kanan . $datetime_kanan . $printcode_kanan;
 
-				$a_kanan = trim($vsupp).'_'.trim($partno).'_'.trim($po).'_'.trim($stdpack) . '_' . trim($unique_kanan) . '.jpg';
-				$barcode 	= $partno . ' ' . $po . ' ' . $stdpack2 . ' ' . $unique_kanan;
-				$tempDir 	= '../../printqr/prin/';
-				QRcode::png($barcode, $tempDir . $a_kanan, QR_ECLEVEL_L, 2);
+					$a_kanan = trim($vsupp).'_'.trim($partno).'_'.trim($po).'_'.trim($stdpack) . '_' . trim($unique_kanan) . '.jpg';
+					$barcode 	= $partno . ' ' . $po . ' ' . $stdpack2 . ' ' . $unique_kanan;
+					$tempDir 	= '../../printqr/prin/';
+					QRcode::png($barcode, $tempDir . $a_kanan, QR_ECLEVEL_L, 2);
 
 
-							echo '<td align=right >';
-							echo '<table border=1 cellspacing=0 width=300>';
-								echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="../../printqr/prin/' . $a_kanan . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
-								echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
-								echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
-								echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
-								echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
-								echo '<tr> <td align=center><p>PO No.</p></td> <td align=center><p>'.$po.'</p></td> </tr>';
-								echo '<tr> <td align=center><p>Qty</p></td> <td align=center><p><b>'.$stdpack.' PCS</b></p></td> </tr>';
-								echo '<tr> <td align=center><p>Del. Date</p></td> <td align=center><p>'.$deldate.'</b></p></td> </tr>';
-								echo '<tr> <td align=center><p>Prod. Date</p></td> <td align=center><p>'.$proddate.'</b></p></td> </tr>';
-								echo '<tr> <td align=center><p>Shift</p></td> <td align=center><p>'.$shift.'</p></td> <td rowspan=2 align=center valign=top><b>Location</b><br><font size=2>'.$lokasi.'</font></td> </tr>';
-								echo '<tr> <td align=center><p>QC Check</p></td> <td align=center><p>'.$qcc.'</b></p></td> </tr>';
-							echo '</table>';
-							echo '</td></tr>';
-						} // if ($i % 2==0)
-					} // end for ($i=1;$i<=$jml;$i++)
-				} // end if($jml>2)
-			echo '</table>';
+								echo '<td align=right >';
+								echo '<table border=1 cellspacing=0 width=300>';
+									echo '<tr> <td width=70 align=center><img style="max-height: 60px;" src="../../printqr/prin/' . $a_kanan . '" alt="gambar barcode" /></td> <td align=center><p><b>'.$suppname.'</b></p></td> <td width=70 align=center><p><b>RoHS <br> OK</b></p></td> </tr>';
+									echo '<tr> <td align=center><p>Customer</p></td> <td align=center colspan=2><p>PT. JVC ELECTRONICS INDONESIA</p></td> </tr>';
+									echo '<tr> <td align=center><p>Part Name.</p></td> <td align=center><p>'.$partnm.'</p></td> <td rowspan=7 align=center valign=bottom><h2>'.$stsinsp.'</h2></td> </tr>';
+									echo '<tr> <td align=center><p>Part No.</p></td> <td align=center><p><b>'.$partno.'</b></p></td> </tr>';
+									echo '<tr> <td align=center><p>Material</p></td> <td align=center><p>'.$mtrl.'</p></td> </tr>';
+									echo '<tr> <td align=center><p>PO No.</p></td> <td align=center><p>'.$po.'</p></td> </tr>';
+									echo '<tr> <td align=center><p>Qty</p></td> <td align=center><p><b>'.$stdpack.' PCS</b></p></td> </tr>';
+									echo '<tr> <td align=center><p>Del. Date</p></td> <td align=center><p>'.$deldate.'</b></p></td> </tr>';
+									echo '<tr> <td align=center><p>Prod. Date</p></td> <td align=center><p>'.$proddate.'</b></p></td> </tr>';
+									echo '<tr> <td align=center><p>Shift</p></td> <td align=center><p>'.$shift.'</p></td> <td rowspan=2 align=center valign=top><b>Location</b><br><font size=2>'.$lokasi.'</font></td> </tr>';
+									echo '<tr> <td align=center><p>QC Check</p></td> <td align=center><p>'.$qcc.'</b></p></td> </tr>';
+								echo '</table>';
+								echo '</td></tr>';
+							} // if ($i % 2==0)
+						} // end for ($i=1;$i<=$jml;$i++)
+					} // end if($jml>2)
+				echo '</table>';
 		break;
 		// End Format barcode kategori  --- >>>  Printing Part
 

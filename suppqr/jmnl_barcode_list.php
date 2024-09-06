@@ -22,8 +22,11 @@
 		$supp = $_POST['suppcode'];
 	
 	}
+	include('../../adodb5/adodb.inc.php');
+	include('../../adodb5/adodb-exceptions.inc.php');
+	include('../../adodb5/adodb-errorpear.inc.php');
 	
-	include('koneksimysql.php');
+	include('../contents/koneksimysql.php');
 	$rs = $db->Execute("select kategori from supplier where suppcode = '". $supp ."'");
 	$kategori = $rs->fields[0];
 	$rs->Close();

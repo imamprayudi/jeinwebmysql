@@ -14,7 +14,11 @@
 </table>
 <br><br>
 <?php
-	include 'koneksimysql.php';
+include_once('../../../ADODB/adodb5/adodb.inc.php');
+	include_once('../../../ADODB/adodb5/toexport.inc.php');
+	include_once('../../../ADODB/adodb5/adodb-exceptions.inc.php');
+	include_once('../../../ADODB/adodb5/adodb-errorpear.inc.php');
+	include '../../contents/koneksimysql.php';
 	date_default_timezone_set('Asia/Jakarta');
 
 	if(isset($_GET['partno']))

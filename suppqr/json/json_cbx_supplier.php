@@ -1,11 +1,14 @@
 <?php
-	include('koneksimysql.php');
+	include('../../../adodb5/adodb.inc.php');
+	include('../../../adodb5/adodb-exceptions.inc.php');
+	include('../../../adodb5/adodb-errorpear.inc.php');
+	include('../../contents/koneksimysql.php');
 	
 	
 	
 	 $supp	= isset($_REQUEST['supp']) ? trim( str_replace("'", "#", $_REQUEST['supp']) ) : "xx";
-	
-	$rs 	= $db->Execute("select suppcode, suppname from supplier where suppcode = '" . $supp . "' order by suppname");
+	$stmt = "select suppcode, suppname from supplier where suppcode = '" . $supp . "' order by suppname";
+	$rs 	= $db->Execute($stmt);
   // $rs 	= $db->Execute("select suppcode, suppname from supplier order by suppname");
 	$return = array();
 
