@@ -15,7 +15,7 @@ else
 	 <?php  
 }
 
-include('../contents/koneksimysql.php');
+include('koneksimysql.php');
 ?>
 <!DOCTYPE HTML>
 <html>

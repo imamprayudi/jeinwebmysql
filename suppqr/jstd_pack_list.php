@@ -16,7 +16,7 @@
 		$supp = $_POST['suppcode'];
 	}
 	
-	include('../contents/koneksimysql.php');
+	include('koneksimysql.php');
 	$rs		 	= $db->Execute("select suppname from usersupp where suppcode = $supp");
 	$suppname 	= $rs->fields[0];
 	$rs->Close();

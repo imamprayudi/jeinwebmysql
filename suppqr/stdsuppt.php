@@ -28,7 +28,7 @@ else
 <body>
 
 <?php
-include("../contents/koneksimysql.php");
+include("koneksimysql.php");
 include("jmenusuppcss.php");
 echo '<br />';
 echo '<img src="../assets/gambar/jvc.gif" alt="JVC KENWOOD CORPORATION" style="float:left;width:220px;height:35px;">';

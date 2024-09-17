@@ -38,11 +38,7 @@ echo '<br /><br />';
 echo '</div>';
 echo '<div id="section">';
 
-	include_once('../../ADODB/adodb5/adodb.inc.php');
-	include_once('../../ADODB/adodb5/toexport.inc.php');
-	include_once('../../ADODB/adodb5/adodb-exceptions.inc.php');
-	include_once('../../ADODB/adodb5/adodb-errorpear.inc.php');
-include_once('../contents/koneksimysql.php');
+include_once('koneksimysql.php');
 
 // include('koneksimysql.php');
 //include('con_qrinvoice.php');

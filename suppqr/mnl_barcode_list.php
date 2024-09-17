@@ -22,7 +22,8 @@
 		$supp = $_POST['suppcode'];
 	}
 	
-	include('con_svrdbn.php');
+	// include('con_svrdbn.php');
+	include('connection_odbc_mssql.php');
 	$rs = $db->Execute("select kategori from supplier where suppcode = '". $supp ."'");
 	$kategori = $rs->fields[0];
 	$rs->Close();

@@ -10,7 +10,7 @@
 <body>
 
 <?php
-include("../contents/koneksimysql.php");
+include("koneksimysql.php");
 include("jmenusuppcss.php");
 
 if(isset($_GET['supp']))  

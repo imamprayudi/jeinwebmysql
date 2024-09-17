@@ -1,8 +1,8 @@
 <?php
-	include('../../../ADODB/adodb5/adodb.inc.php');
-//	include_once('../../../ADODB/adodb5/toexport.inc.php');
-	//include('../../../adodb5/ADODB/adodb-exceptions.inc.php');
-	//include('../../../adodb5/ADODB/adodb-errorpear.inc.php');
+include('../../../ADODB/adodb5/adodb.inc.php');
+include_once('../../../ADODB/adodb5/toexport.inc.php');
+include('../../../ADODB/adodb5/adodb-exceptions.inc.php');
+include('../../../ADODB/adodb5/adodb-errorpear.inc.php');
 	
 	
 	/* koneksi ke MSSQL 
@@ -17,7 +17,10 @@
 	$db->Connect($dsn,'sa','password');
     */
     /* koneksi ke mysql */
-    $db = ADONewConnection("mysql");
-	$db->Connect('localhost', 'root', 'Git@1410', 'ediweb');
+    $db = ADONewConnection("mysqli");
+	// $db->Connect('localhost', 'root', 'Git@1410', 'ediweb');
+	// $db->Connect('10.230.30.125', 'sa', 'JvcSql@123', 'ediweb');
+	$db->Connect('localhost', 'root', '', 'ediweb');
+	
     
 ?>

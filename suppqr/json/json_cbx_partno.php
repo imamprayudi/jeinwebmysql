@@ -1,9 +1,5 @@
 <?php
-	include_once('../../../ADODB/adodb5/adodb.inc.php');
-	include_once('../../../ADODB/adodb5/toexport.inc.php');
-	include_once('../../../ADODB/adodb5/adodb-exceptions.inc.php');
-	include_once('../../../ADODB/adodb5/adodb-errorpear.inc.php');
-include_once('../../contents/koneksimysql.php');
+	include('koneksimysql.php');
 	
 	
 	$suppcode	= isset($_REQUEST['suppcode']) ? trim( str_replace("'", "#", $_REQUEST['suppcode']) ) : "";

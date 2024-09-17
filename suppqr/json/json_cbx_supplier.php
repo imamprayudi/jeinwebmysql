@@ -1,8 +1,5 @@
 <?php
-	include('../../../adodb5/adodb.inc.php');
-	include('../../../adodb5/adodb-exceptions.inc.php');
-	include('../../../adodb5/adodb-errorpear.inc.php');
-	include('../../contents/koneksimysql.php');
+	include('koneksimysql.php');
 	
 	
 	

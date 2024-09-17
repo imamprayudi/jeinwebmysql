@@ -1,5 +1,5 @@
 <?php
-include("../contents/koneksimysql.php");
+include("koneksimysql.php");
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST')   
   {    

@@ -2,7 +2,8 @@
 	session_start();
 	$session_userid = $_SESSION['s_userid'];
 	
-	include('../con_svrdbn.php');
+	// include('../con_svrdbn.php');
+	include('../connection_odbc_mssql.php');
 	
 	
 	
